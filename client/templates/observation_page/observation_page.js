@@ -1,7 +1,14 @@
 Template.observationPage.events({
-  'click .testObsItem': function(e) {
-    e.preventDefault();
-    console.log("testing obs item");
-    Router.go('observationItem');
-  }
+   'click .editObsItem': function(e) {
+      e.preventDefault();
+      Router.go('editSpec');
+   },
+   'click .viewObsItem': function(e) {
+      e.preventDefault();
+      Router.go('viewObservation');
+   },
+   'click .newObs': function(e) {
+      e.preventDefault();
+      Router.go('newObservation');
+   }
 });
