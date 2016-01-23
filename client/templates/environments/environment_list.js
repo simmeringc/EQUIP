@@ -5,7 +5,7 @@ Template.environmentList.events({
    },
    'click .viewObsItem': function(e) {
       e.preventDefault();
-      Router.go('viewObservation');
+      Router.go('observationsPage', {_id: this._id});
    },
    'click .newObs': function(e) {
       e.preventDefault();
@@ -19,7 +19,6 @@ Template.environmentList.events({
 
 Template.environmentList.helpers({
   environment: function() {
-    console.log("Template.environmentList.helpers");
     return Environments.find({}, {sort: {submitted: -1}});
   }
 });
