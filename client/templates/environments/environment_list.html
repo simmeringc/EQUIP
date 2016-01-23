@@ -1,20 +1,46 @@
 <template name="environmentList">
   <head>
-    <div class="container-fluid top-spacer card">
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+  </head>
+  <body>
+    <div id="container" class="container-fluid top-spacer card">
         <h1>Saved Environments
-           <button type="button" class="btn btn-success createNewSpec">Create</button>
+           <button type="button" id="add_env" class="btn btn-success createNewSpec">Create</button>
         </h1>
       <div class="alert-custom" role="alert">
         These are your saved environments. You can create, view, or delete them.
       </div>
-      <div class="alert-custom">
-         <p>
-            This is a sample observation
-         </p>
-         <button type="button" class="btn btn-warning editObsItem">Edit Spec</button>
-         <button type="button" class="btn btn-warning viewObsItem">View Observations</button>
-         <button type="button" class="btn btn-warning newObs">New Environment</button>
-      </div>
     </div>
-  </head>
+  </body>
+  <script>
+   var sample_data = ["Math", "Science", "History", "English"];
+	$(document).ready(function() {
+        $.each(sample_data, function (index, value) {
+           var container = $(document.createElement('div'));
+           $(container).append('<div class="alert-custom"><div>' + value + '</div>  <button type="button" class="btn btn-warning editObsItem">Edit Spec</button>  <button type="button" class="btn btn-warning viewObsItem">View Observations</button>  <button type="button" class="btn btn-warning newObs">New Enviornment</button></div>');
+           $('#container').append(container);
+        });
+
+        var container = $(document.createElement('div'));
+        //onclick action for add enviornment
+        $('#add_env').click(function() {
+           //check to make sure there is not already a new enviornment waiting to be named
+           if($('.enter_name').length ==  0){
+              $(container).append('<div class="alert-custom"><div class="enter_name"><input type=text class="input" id="tb" value="Text Element"/>  <button class="bt" onclick="submit_env_name()"' + 'id=btSubmit>ok</button></div><button type="button" class="btn btn-warning editObsItem">Edit Spec</button>  <button type="button" class="btn btn-warning viewObsItem">View Observations</button>  <button type="button" class="btn btn-warning newObs">New Environment</button></div>');
+            }
+                  })
+                  $('#container').append(container);
+               });
+
+       function submit_env_name(){
+           env_name_value = '';
+
+           $('.input').each(function() {
+               env_name_value = this.value;
+           });
+         $('.enter_name').replaceWith('<div>' +env_name_value + '</div>');
+         sample_data.push(env_name_value);
+    }
+  </script>
 </template>
