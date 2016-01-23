@@ -4,27 +4,76 @@
       <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
 </head>
 <body>
-   <div class="edit-spec-form">
-
+   <div class="edit_spec_form">
+      <button class="add-subject" onclick="add_subject()">Add Subject</button>
    </div>
+   <div class="layout-container resize-container"></div>
 </body>
 
 <script>
-   function num_subjects_create()
+   function add_subject()
    {
-      $('.edit-spec-form').append('<div class="num-subjects-container"><h3>How many subjects?</h3><input class="add_subjects" type="text" size="2"/><br><button class="next" onclick="num_subjects_next()">next</button></div>');
+      $('.add-subject').after('<div class="form-container"></div>');
+      $('.form-container').append('\
+            <h3>Subjects Name</h3>\
+            <input type="text" class="name" name="name"/><br>\
+            <h3>Subjects Gender</h3>\
+            <input type="radio" name="gender" value="Male">Male<br>\
+            <input type="radio" name="gender" value="Female">Female<br>\
+            <h3>Subjects Race</h3>\
+            <input type="radio" name="race" value="Master">Master<br>\
+            <input type="radio" name="race" value="Latino">Latino<br>\
+            <input type="radio" name="race" value="Asian">Asian<br>\
+            <input type="radio" name="race" value="Asian">African American<br>\
+            <input type="radio" name="race" value="Other">Other<br>\
+            <input type="submit" value="Submit" btn btn-primary" onclick="remove_form()"/>\
+         ');
    }
 
-   function num_subjects_next()
-   {
-     $('.num-subjects-container').remove();
-     $('.edit-spec-form').append('<div class="subject-locations"><h1>Arrange Subject Locations</h1><button class="next" onclick="subject_location_next()">Next</button><div>');
+function remove_form(){
+      name=$('.name').val();
+      $('.layout-container').append('<div id="drag-1" class="draggable resize-drag">' + name + ' </div>');
+	$('#drag-1').css({
+	  'margin': '10%',
+
+	  'background-color': '#29e',
+	  'color': 'white',
+
+	  'border-radius': '0.75em',
+	  'padding': '4%',
+
+	  '-webkit-transform': 'translate(0px, 0px)',
+		  'transform': 'translate(0px, 0px)'
+	});
+$('#drag-me').css({
+  'content': '"#" attr(id)',
+  'font-weight': 'bold'
+});
+
+
+   $('.resize-drag').css({
+      'background-color': '#29e',
+      'color':'white',
+      'font-size': '20px',
+     'font-family': 'sans-serif',
+      'border-radius': '8px',
+     'padding': '20px',
+     'margin': '30px 20px',
+      'width': '120px',
+      'box-sizing': 'border-box'
+   });
+
+   $('.resize-container').css({
+     'width': '100%',
+      'height': '100%'
+   });
+      $('.form-container').remove();
    }
 
    function subject_location_next()
    {
-      $('.subject-locations').remove();
-      $('.edit-spec-form').append('<div class="data-input-container"><h3>Create your data input fields.</h3><button class="add-input-container" onclick="add_input_field()">Add another input field</button><div class="form-container alert-custom"><h5>Question</h5><input class="question" type="text"/><br><button class="add-another-response" onclick="add_another_response()">Add another response</button><div class="responses-container"><h5>Response</h5><input class="response" type="text"/></div></div></div><button class="finished" onclick="submit_page()">Done</button>');
+      $('.form-container').remove();
+      $('.edit_spec_form').append('<div class="data-input-container"><h3>Create your data input fields.</h3><button class="add-input-container" onclick="add_input_field()">Add another input field</button><div class="form-container alert-custom"><h5>Question</h5><input class="question" type="text"/><br><button class="add-another-response" onclick="add_another_response()">Add another response</button><div class="responses-container"><h5>Response</h5><input class="response" type="text"/></div></div></div><button class="finished" onclick="submit_page()">Done</button>');
    }
 
    function add_input_field()
@@ -36,6 +85,95 @@
    {
       $('.responses-container').append('<br><input class="response" type="text">');
    }
-num_subjects_create();
+interact('.draggable')
+  .draggable({
+    // enable inertial throwing
+    inertia: true,
+    // keep the element within the area of it's parent
+    restrict: {
+      restriction: "parent",
+      endOnly: true,
+      elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
+    },
+    // enable autoScroll
+    autoScroll: true,
+
+    // call this function on every dragmove event
+    onmove: dragMoveListener,
+    // call this function on every dragend event
+    onend: function (event) {
+      var textEl = event.target.querySelector('p');
+
+      textEl && (textEl.textContent =
+        'moved a distance of '
+        + (Math.sqrt(event.dx * event.dx +
+                     event.dy * event.dy)|0) + 'px');
+    }
+  });
+
+  function dragMoveListener (event) {
+    var target = event.target,
+        // keep the dragged position in the data-x/data-y attributes
+        x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+        y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+    // translate the element
+    target.style.webkitTransform =
+    target.style.transform =
+      'translate(' + x + 'px, ' + y + 'px)';
+
+    // update the posiion attributes
+    target.setAttribute('data-x', x);
+    target.setAttribute('data-y', y);
+  }
+
+  // this is used later in the resizing and gesture demos
+  window.dragMoveListener = dragMoveListener;
+
+  function dragMoveListener (event) {
+         var target = event.target,
+             // keep the dragged position in the data-x/data-y attributes
+             x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+                 y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+             // translate the element
+             target.style.webkitTransform =
+                    target.style.transform =
+                          'translate(' + x + 'px, ' + y + 'px)';
+
+                 // update the posiion attributes
+                 target.setAttribute('data-x', x);
+                     target.setAttribute('data-y', y);
+                       }
+
+  // this is used later in the resizing and gesture demos
+  window.dragMoveListener = dragMoveListener;
+interact('.resize-drag')
+  .draggable({
+    onmove: window.dragmovelistener
+  })
+  .resizable({
+    preserveAspectRatio: true,
+    edges: { left: true, right: true, bottom: true, top: true }
+  })
+  .on('resizemove', function (event) {
+    var target = event.target,
+        x = (parseFloat(target.getAttribute('data-x')) || 0),
+        y = (parseFloat(target.getAttribute('data-y')) || 0);
+
+    // update the element's style
+    target.style.width  = event.rect.width + 'px';
+    target.style.height = event.rect.height + 'px';
+
+    // translate when resizing from top or left edges
+    x += event.deltaRect.left;
+    y += event.deltaRect.top;
+
+    target.style.webkitTransform = target.style.transform =
+        'translate(' + x + 'px,' + y + 'px)';
+
+    target.setAttribute('data-x', x);
+    target.setAttribute('data-y', y);
+  });
 </script>
 </template>
