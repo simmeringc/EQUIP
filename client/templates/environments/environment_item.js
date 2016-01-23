@@ -1,4 +1,4 @@
-Template.environmentList.events({
+Template.environmentItem.events({
   'click .viewEnvItem': function(e) {
      e.preventDefault();
      Router.go('observationsList', this);
@@ -8,3 +8,17 @@ Template.environmentList.events({
      Router.go('editSpec');
   }
 });
+
+Template.environmentItem.rendered=function() {
+    $('.deleteEnvironment').confirmation({
+      onConfirm : function(){
+
+      //console.log("hey");
+      }
+    });
+    // $('.deleteEnvironment').confirmation({
+    //   onCancel : function(){
+    //   console.log("ok");
+    //   }
+    // });
+}
