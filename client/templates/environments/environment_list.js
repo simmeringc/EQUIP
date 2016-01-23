@@ -1,4 +1,4 @@
-Template.observationPage.events({
+Template.environmentList.events({
    'click .editObsItem': function(e) {
       e.preventDefault();
       Router.go('editSpec');
@@ -9,6 +9,6 @@ Template.observationPage.events({
    },
    'click .newObs': function(e) {
       e.preventDefault();
-      Router.go('newObservation');
+      Router.go('environmentCreate');
    }
 });
