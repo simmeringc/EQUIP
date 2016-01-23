@@ -9,16 +9,16 @@ Template.environmentItem.events({
   }
 });
 
+Template.environmentItem.events({
+  'click .deleteEnvironment': function(e) {
+     console.log(this);
+  }
+});
+
 Template.environmentItem.rendered=function() {
+  console.log(this);
     $('.deleteEnvironment').confirmation({
       onConfirm : function(){
-
-      //console.log("hey");
-      }
-    });
-    // $('.deleteEnvironment').confirmation({
-    //   onCancel : function(){
-    //   console.log("ok");
-    //   }
-    // });
+    }
+  });
 }
