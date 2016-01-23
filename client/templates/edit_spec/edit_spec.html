@@ -1,18 +1,41 @@
 <template name="editSpec">
 <head>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
       <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
 </head>
 <body>
    <div class="edit_spec_form">
+      <div class="sb-slidebar sb-left">
+      <br>
+      <br>
+      <br>
+      <br>
       <button class="add-subject" onclick="add_subject()">Add Subject</button>
+      </div>
    </div>
+   <button class="my-button">SHLIDEBAR</button>
    <div class="layout-container resize-container"></div>
 </body>
 
 <script>
+var open_form=false;
+(function($) {
+$(document).ready(function() {
+var mySlidebars = new $.slidebars();
+$('.my-button').on('click', function() {
+      mySlidebars.slidebars.open('left');
+            });
+ $('.my-other-button').on('click', function() {
+            mySlidebars.slidebars.toggle('right');
+                  });
+       $('.my-third-button').click(mySlidebars.slidebars.close);
+           });
+}) (jQuery);
    function add_subject()
    {
+      if(!open_form){
+      open_form=true;
       $('.add-subject').after('<div class="form-container"></div>');
       $('.form-container').append('\
             <h3>Subjects Name</h3>\
@@ -21,16 +44,18 @@
             <input type="radio" name="gender" value="Male">Male<br>\
             <input type="radio" name="gender" value="Female">Female<br>\
             <h3>Subjects Race</h3>\
-            <input type="radio" name="race" value="Master">Master<br>\
+            <input type="radio" name="race" value="White">White<br>\
             <input type="radio" name="race" value="Latino">Latino<br>\
             <input type="radio" name="race" value="Asian">Asian<br>\
             <input type="radio" name="race" value="Asian">African American<br>\
             <input type="radio" name="race" value="Other">Other<br>\
             <input type="submit" value="Submit" btn btn-primary" onclick="remove_form()"/>\
          ');
+      }
    }
 
 function remove_form(){
+      open_form=false;
       name=$('.name').val();
       $('.layout-container').append('<div id="drag-1" class="draggable resize-drag">' + name + ' </div>');
 	$('#drag-1').css({
@@ -85,31 +110,6 @@ $('#drag-me').css({
    {
       $('.responses-container').append('<br><input class="response" type="text">');
    }
-/*interact('.draggable')
-  .draggable({
-    // enable inertial throwing
-    inertia: true,
-    // keep the element within the area of it's parent
-    restrict: {
-      restriction: "parent",
-      endOnly: true,
-      elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
-    },
-    // enable autoScroll
-    autoScroll: true,
-
-    // call this function on every dragmove event
-    onmove: dragMoveListener,
-    // call this function on every dragend event
-    onend: function (event) {
-      var textEl = event.target.querySelector('p');
-
-      textEl && (textEl.textContent =
-        'moved a distance of '
-        + (Math.sqrt(event.dx * event.dx +
-                     event.dy * event.dy)|0) + 'px');
-    }
-  });*/
 interact('.resize-drag')
   .draggable({
     onmove: window.dragMoveListener,
