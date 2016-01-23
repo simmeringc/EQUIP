@@ -40,9 +40,9 @@ Template.environmentItem.events({
        });
        }
      });
-     // $('.deleteEnvironment').confirmation({
-     //   onCancel : function(){
-     //   console.log("ok");
-     //   }
-     // });
+     $('.deleteEnvironment').confirmation({
+       onCancel : function(){
+       console.log("ok");
+       }
+     });
  }
