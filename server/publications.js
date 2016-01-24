@@ -5,3 +5,7 @@ Meteor.publish('environments', function() {
 Meteor.publish('observations', function() {
   return Observations.find({userId: this.userId});
 });
+
+Meteor.publish('subjects', function() {
+  return Subjects.find({userId: this.userId});
+});
