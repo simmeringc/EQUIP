@@ -8,8 +8,13 @@ Template.observationItem.rendered=function() {
 Template.observationItem.events({
    'click .deleteObsItem': function(e) {
      Session.set('observationId', this);
+   },
+   'click .enterObsItem': function(e) {
+     Router.go('editSpec')
    }
  });
+
+
 
  Template.observationItem.rendered=function() {
      $('.deleteObsItem').confirmation({
