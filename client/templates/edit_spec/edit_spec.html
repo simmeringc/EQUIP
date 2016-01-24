@@ -1,4 +1,5 @@
 <template name="editSpec">
+<<<<<<< HEAD
   <div id="container" class="container-fluid top-spacer card">
       <h1>
          <button type="button" class="btn btn-success addSubject">+</button>  <button type="button" class="btn btn-warning specDone">Done</button>
@@ -9,4 +10,199 @@
       {{> subjectItem}}
     {{/each}}
   </div>
+=======
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+      <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+      <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>-->
+</head>
+<body>
+   <div class="edit_spec_form">
+      <div class="ui sidebar inverted vertical menu">
+      <a class="item">
+        <button class="next" onclick="finish_form()">Finish</button>
+      </a>
+      <a class="item">
+      <button class="add-subject" onclick="add_subject()">Add Subject</button>
+      </a>
+      <a class="item">
+        3
+      </a>
+    </div>
+  <div class="pusher">
+    </div>
+    <!--<script>
+    $('.navbar').append('<button class="my-button">Edit Spec</button>');
+    var open_form=false;
+    var menu_open=false;
+    function finish_form()
+    {
+       $('.sb-slidebar').hide();
+       $('.my-button').replaceWith('<button class="finish" onclick="subject_location_next()" ></button>');
+    }
+    function add_subject()
+    {
+          if(!open_form){
+          open_form=true;
+          $('.add-subject').after('<div class="form-container"></div>');
+          $('.form-container').append('\
+                <h3>Subjects Name</h3>\
+                <input type="text" class="subject_name" name="subject_name"/><br>\
+                <h3>Subjects Gender</h3>\
+                <input type="radio" name="gender" value="Male">Male<br>\
+                <input type="radio" name="gender" value="Female">Female<br>\
+                <h3>Subjects Race</h3>\
+                <input type="radio" name="race" value="White">White<br>\
+                <input type="radio" name="race" value="Latino">Latino<br>\
+                <input type="radio" name="race" value="Asian">Asian<br>\
+                <input type="radio" name="race" value="Asian">African American<br>\
+                <input type="radio" name="race" value="Other">Other<br>\
+                <input type="submit" value="Submit" btn btn-primary" onclick="submit_form()"/>\
+             ');
+          }
+       }
+    var subjects=[];
+    function submit_form(){
+       subjects.push({'name':$('.subject_name').val(),'gender':$('[name="gender"]').val(),'race':$('[name="race"]').val()});
+       console.log(subjects);
+          $('.layout-container').append('<div class="draggable subject resize-drag">' + $('.subject_name').val() + ' </div>');
+          $('.subject').each(function(key,elem){
+                count++;
+                 $(elem).attr('id', 'drag_' + key)
+          })
+    	$('.subject').css({
+    	  'margin': '10%',
+
+    	  'background-color': '#29e',
+    	  'color': 'white',
+
+    	  'border-radius': '0.75em',
+    	  'padding': '4%',
+
+    	  '-webkit-transform': 'translate(0px, 0px)',
+    		  'transform': 'translate(0px, 0px)'
+    	});
+    $('#drag-me').css({
+      'content': '"#" attr(id)',
+      'font-weight': 'bold'
+    });
+
+
+       $('.resize-drag').css({
+          'background-color': '#29e',
+          'color':'white',
+          'font-size': '20px',
+         'font-family': 'sans-serif',
+          'border-radius': '8px',
+          'position':'absoulte',
+         'padding': '20px',
+         'margin': '30px 20px',
+          'width':'75px',
+            'height':'75px',
+          'box-sizing':'border-box'
+       });
+
+       $('.resize-container').css({
+         'width': '100%',
+          'height': '240px'
+       });
+         // $('.form-container').remove();
+       }
+       var observatory = [];
+       var sub_top, sub_left, sub_width, sub_height, sub_number;
+       function subject_location_next()
+       {
+          $('.subject').each(function(key) {
+             sub_top=($('#drag_' + key).position().top+30);
+             sub_left=$('#drag_' + key).position().left;
+             sub_width=$('#drag_' + key).width();
+             sub_height=$('#drag_' + key).height();
+             observatory.push({"sub_top":sub_top,"sub_left":sub_left,"sub_width":sub_width,"sub_height":sub_height, "sub_number":key});
+          });
+
+          $('.subject').remove();
+          $('.form-container').remove();
+          $('.edit_spec_form').append('<div class="data-input-container"><h3>Create your data input fields.</h3><button class="add-input-container" onclick="add_input_field()">Add another input field</button><div class="form-container alert-custom"><h5>Question</h5><input class="question" type="text"/><br><button class="add-another-response" onclick="add_another_response()">Add another response</button><div class="responses-container"><h5>Response</h5><input class="response" type="text"/></div></div></div><button class="finished" onclick="submit_page()">Done</button>');
+       }
+
+       function add_input_field()
+       {
+          $('.data-input-container').append('<div class="form-container alert-custom"><h5>Question</h5><input class="question" type="text"/><br><button class="add-another-response" onclick="add_another_response()">Add another response</button><div class="responses-container"><h5>Response</h5><input class="response" type="text"/></div></div>');
+       }
+
+      /* function submit_sequence()
+       {
+       $.each( $('.data-input-container'), function(i, data-input-container){
+             $('div', data-input-container).each(function() {
+
+               });
+       })
+       }*/
+
+       function add_another_response()
+       {
+          $('.responses-container').append('<br><input class="response" type="text">');
+       }
+    interact('.resize-drag')
+      .draggable({
+        onmove: window.dragMoveListener,
+        autoScroll: true,
+        onmove: dragMoveListener,
+    	onend: function (event) {
+          var textEl = event.target.querySelector('p');
+          textEl && (textEl.textContent =
+            'moved a distance of '
+            + (Math.sqrt(event.dx * event.dx +
+                         event.dy * event.dy)|0) + 'px');
+        }
+      })
+      /*.resizable({
+        preserveAspectRatio: true,
+        edges: { left: true, right: true, bottom: true, top: true }
+      })*/
+      .on('resizemove', function (event) {
+        var target = event.target,
+            x = (parseFloat(target.getAttribute('data-x')) || 0),
+            y = (parseFloat(target.getAttribute('data-y')) || 0);
+
+        // update the element's style
+        target.style.width  = event.rect.width + 'px';
+        target.style.height = event.rect.height + 'px';
+
+        // translate when resizing from top or left edges
+        x += event.deltaRect.left;
+        y += event.deltaRect.top;
+
+        target.style.webkitTransform = target.style.transform =
+            'translate(' + x + 'px,' + y + 'px)';
+
+        target.setAttribute('data-x', x);
+        target.setAttribute('data-y', y);
+      });
+      function dragMoveListener (event) {
+        var target = event.target,
+            // keep the dragged position in the data-x/data-y attributes
+            x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+            y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+        // translate the element
+        target.style.webkitTransform =
+        target.style.transform =
+          'translate(' + x + 'px, ' + y + 'px)';
+
+        // update the posiion attributes
+        target.setAttribute('data-x', x);
+        target.setAttribute('data-y', y);
+      }
+
+      // this is used later in the resizing and gesture demos
+      window.dragMoveListener = dragMoveListener;
+      var sequence=[];
+      var spec={"subjects":subjects,"observatory":observatory,"sequence":sequence};
+      console.log(spec);
+    </script>-->
+   </div>
+   <div class="layout-container resize-container"></div>
+</body>
+>>>>>>> origin/lotsofdata
 </template>

@@ -11,7 +11,6 @@ Template.environmentObsItem.events({
 
 Template.environmentObsItem.events({
    'click .createNewObservation': function(e) {
-     console.log("test");
     $('#createObsPopup').modal({
       keyboard: true,
       show: true
@@ -28,7 +27,7 @@ Template.environmentObsItem.events({
     };
 
     Meteor.call('observationInsert', observation, function(error, result) {
-      Router.go('observationList', this);
+      Router.go('observationList');
     });
 
     $('#createObsPopup').modal('hide') && $('#observationName').val('');
