@@ -17,7 +17,7 @@ Template.environmentList.events({
   'click #saveName': function(e) {
 
     var environment = {
-      nameOfEnvironment: $('#environmentText').val()
+      nameOfEnvironment: $('#environmentName').val()
     };
 
     Meteor.call('environmentInsert', environment, function(error, result) {
