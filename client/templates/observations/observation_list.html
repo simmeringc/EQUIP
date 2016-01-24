@@ -1,14 +1,17 @@
-<template name="observationsList">
+<template name="observationList">
   <div id="container" class="container-fluid top-spacer card">
-      <h1>Observations for Environment: {{nameOfEnvironment}}
-         <button type="button" id="add_env" class="btn btn-success createNewEnvironment">Create</button>
-      </h1>
+      <h1>Observations for Environment: {{nameOfEnvironment}}</h1>
     <div class="alert-custom-obsInfo" role="alert">
       These are your observations for this environment. You can create, view, or delete them.
     </div>
     <div>
       {{#each environment}}
         {{> environmentObsItem}}
+      {{/each}}
+    </div>
+    <div>
+      {{#each observation}}
+        {{> observationItem}}
       {{/each}}
     </div>
   </div>
