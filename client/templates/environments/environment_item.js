@@ -1,7 +1,7 @@
 Template.environmentItem.events({
   'click .viewEnvItem': function(e) {
      e.preventDefault();
-     Router.go('observationsList', this);
+     Router.go('observationList', this);
   },
   'click .editObsItem': function(e) {
      e.preventDefault();
