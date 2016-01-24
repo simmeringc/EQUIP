@@ -1,29 +1,29 @@
-Template.observationList.helpers({
+Template.environmentList.helpers({
   environment: function() {
     return Environments.find({}, {sort: {submitted: -1}});
   }
 });
 
-Template.observationList.events({
-   'click .createNewObservation': function(e) {
-    $('createPopup').modal({
+Template.environmentList.events({
+   'click .createNewEnvironment': function(e) {
+    $('#createEnvPopup').modal({
       keyboard: true,
       show: true
     });
    }
 });
 
-Template.observationList.events({
+Template.environmentList.events({
   'click #saveName': function(e) {
 
     var environment = {
-      nameOfEnvironment: $('#nameOfObservation').val()
+      nameOfEnvironment: $('#environmentText').val()
     };
 
     Meteor.call('environmentInsert', environment, function(error, result) {
       Router.go('environmentList');
     });
 
-    $('#createPopup').modal('hide');
+    $('#createEnvPopup').modal('hide');
   }
 });
