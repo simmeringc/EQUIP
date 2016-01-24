@@ -24,6 +24,6 @@ Template.environmentList.events({
       Router.go('environmentList');
     });
 
-    $('#createEnvPopup').modal('hide');
+    $('#createEnvPopup').modal('hide') && $('#environmentText').val('');
   }
 });
