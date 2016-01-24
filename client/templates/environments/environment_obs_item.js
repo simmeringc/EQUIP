@@ -10,7 +10,7 @@ Template.environmentObsItem.events({
 });
 
 Template.environmentObsItem.events({
-   'click .createNewObservation': function(e) {
+   'click #createNewObservation': function(e) {
     $('#createObsPopup').modal({
       keyboard: true,
       show: true
