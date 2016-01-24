@@ -6,6 +6,24 @@ Template.environmentList.helpers({
 
 Template.environmentList.events({
    'click .createNewEnvironment': function(e) {
-    Router.go('environmentCreate')
+    $('createPopup').modal({
+      keyboard: true,
+      show: true
+    });
+
    }
+});
+
+Template.environmentList.events({
+  'click #saveName': function(e) {
+
+    var environment = {
+      nameOfEnvironment: $('#environmentText').val()
+    };
+
+    Meteor.call('environmentInsert', environment, function(error, result) {
+      Router.go('environmentList');
+    });
+    $('#createPopup').modal('hide');
+  }
 });
