@@ -31,6 +31,6 @@ Template.environmentObsItem.events({
       Router.go('observationList', this);
     });
 
-    $('#createObsPopup').modal('hide');
+    $('#createObsPopup').modal('hide') && $('#observationName').val('');
   }
 });
