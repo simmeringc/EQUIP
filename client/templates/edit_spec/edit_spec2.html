@@ -1,0 +1,130 @@
+<template name="editSpec2">
+
+<div class="classroom"></div>
+<style>
+.subject {border-style:solid;
+      border-color:black;
+      padding: 10px 10px 10px 10px;
+      margin:25px 25px 25px 25px;
+      background-color:#b19cd9;
+      font-size':'150%;
+      }
+#drag-1, #drag-2 {
+      min-height: 6.5em;
+      border-radius: 0.75em;
+
+-webkit-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);
+      }
+ #drag-me::before {
+      content: "#" attr(id);
+      font-weight: bold;
+   }
+</style>
+<script>
+var data = {"spec": {
+		"subject": [{
+			"name": "Wayne",
+			"race": "White",
+			"gender": "Male",
+			"subject_num": 0
+		}, {
+			"name": "Sarah",
+			"race": "White",
+			"gender": "Female",
+			"student_no": 1
+		}, {
+			"name": "Amy",
+			"race": "White",
+			"gender": "Male",
+			"subject_num": 2
+		}, {
+			"name": "John",
+			"race": "Hispanic",
+			"gender": "Male",
+			"subject_num": 3
+		}],
+		"Observatory": [{
+			"width": 150,
+			"height": 150,
+			"left": 0,
+			"top": 0,
+			"student": 0
+		}, {
+			"width": 150,
+			"height": 150,
+			"left": 200,
+			"top": 0,
+			"student": 1
+		}, {
+			"width": 150,
+			"height": 150,
+			"left": 0,
+			"top": 200,
+			"student": 2
+		}, {
+			"width": 150,
+			"height": 150,
+			"left": 200,
+			"top": 200,
+			"student": 3
+		}],
+		"Sequence": [{
+			"question": "How long did the student take to answer the question",
+			"responses": ["10 seconds", "20 seconds", "30 seconds"]
+		}, {
+			"question": "How was the student selected?",
+			"responses": ["Called on randomly", "Raised hand ", "Blurted out"]
+		}]
+	}
+};
+$.each(data.spec.subject, function (index,value) {
+   $('.classroom').append('<div class="subject draggable">'+value["name"]+'</div>');
+   $('.subject').css({height:data.spec.Observatory[index].height});
+   $('.subject').css({width:data.spec.Observatory[index].width});
+   $('.subject').css({left:data.spec.Observatory[index].left});
+   $('.subject').css({top:data.spec.Observatory[index].top});
+
+});
+
+interact('.draggable')
+  .draggable({
+    // enable inertial throwing
+    inertia: true,
+    // keep the element within the area of it's parent
+    // enable autoScroll
+    autoScroll: true,
+
+    // call this function on every dragmove event
+    onmove: dragMoveListener,
+    // call this function on every dragend event
+    onend: function (event) {
+      var textEl = event.target.querySelector('p');
+
+      textEl && (textEl.textContent =
+        'moved a distance of '
+        + (Math.sqrt(event.dx * event.dx +
+                     event.dy * event.dy)|0) + 'px');
+    }
+  });
+
+  function dragMoveListener (event) {
+    var target = event.target,
+        // keep the dragged position in the data-x/data-y attributes
+        x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+        y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+    // translate the element
+    target.style.webkitTransform =
+    target.style.transform =
+      'translate(' + x + 'px, ' + y + 'px)';
+
+    // update the posiion attributes
+    target.setAttribute('data-x', x);
+    target.setAttribute('data-y', y);
+  }
+
+  // this is used later in the resizing and gesture demos
+  window.dragMoveListener = dragMoveListener;
+</script>
+</template>

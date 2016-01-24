@@ -10,7 +10,7 @@ Template.observationItem.events({
      Session.set('observationId', this);
    },
    'click .enterObsItem': function(e) {
-     Router.go('editSpec')
+     Router.go('editSpec2')
    }
  });
 
