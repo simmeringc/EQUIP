@@ -3,6 +3,5 @@ Template.landingPage.events({
     e.stopPropagation();
     $('#login-dropdown-list').addClass('open');
     $('#login-username-or-email').focus();
-    console.log("sweeet");
   }
 });
