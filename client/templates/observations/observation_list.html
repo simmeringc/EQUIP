@@ -1,6 +1,25 @@
 <template name="observationList">
   <div id="container" class="container-fluid top-spacer card">
       <h1>Observations for Environment: {{nameOfEnvironment}}</h1>
+      <div class="modal fade" id="createPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Observation</h4>
+            </div>
+            <div class="modal-body">
+              <div class="controls">
+                  <input name="nameOfObservation"  type="text" value="" id="nameOfObservation" placeholder="Name Your Observation Here" class="form-control"/>
+              </div>
+            </div>
+            <div class="modal-footer" onKeyPress="return checkSubmit(event)">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" id="saveName" >Save Changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
     <div class="alert-custom-obsInfo" role="alert">
       These are your observations for this environment. You can create, view, or delete them.
     </div>
