@@ -11,15 +11,18 @@
       <br>
       <br>
       <br>
+      <button class="next" onclick="finish_form()">Finish</button>
       <button class="add-subject" onclick="add_subject()">Add Subject</button>
       </div>
    </div>
-   <button class="my-button">SHLIDEBAR</button>
    <div class="layout-container resize-container"></div>
 </body>
 
 <script>
+$('.navbar').append('<button class="my-button">Edit Spec</button>');
 var open_form=false;
+var menu_open=false;
+var count=0;
 (function($) {
 $(document).ready(function() {
 var mySlidebars = new $.slidebars();
@@ -32,14 +35,19 @@ $('.my-button').on('click', function() {
        $('.my-third-button').click(mySlidebars.slidebars.close);
            });
 }) (jQuery);
-   function add_subject()
-   {
+function finish_form()
+{
+   $('.sb-slidebar').hide();
+   $('.my-button').replaceWith('<button class="finish" onclick="subject_location_next()" ></button>');
+}
+function add_subject()
+{
       if(!open_form){
       open_form=true;
       $('.add-subject').after('<div class="form-container"></div>');
       $('.form-container').append('\
             <h3>Subjects Name</h3>\
-            <input type="text" class="name" name="name"/><br>\
+            <input type="text" class="subject_name" name="subject_name"/><br>\
             <h3>Subjects Gender</h3>\
             <input type="radio" name="gender" value="Male">Male<br>\
             <input type="radio" name="gender" value="Female">Female<br>\
@@ -49,16 +57,20 @@ $('.my-button').on('click', function() {
             <input type="radio" name="race" value="Asian">Asian<br>\
             <input type="radio" name="race" value="Asian">African American<br>\
             <input type="radio" name="race" value="Other">Other<br>\
-            <input type="submit" value="Submit" btn btn-primary" onclick="remove_form()"/>\
+            <input type="submit" value="Submit" btn btn-primary" onclick="submit_form()"/>\
          ');
       }
    }
-
-function remove_form(){
-      open_form=false;
-      name=$('.name').val();
-      $('.layout-container').append('<div id="drag-1" class="draggable resize-drag">' + name + ' </div>');
-	$('#drag-1').css({
+var subjects=[];
+function submit_form(){
+   subjects.push({'name':$('.subject_name').val(),'gender':$('[name="gender"]').val(),'race':$('[name="race"]').val()});
+   console.log(subjects);
+      $('.layout-container').append('<div class="draggable subject resize-drag">' + $('.subject_name').val() + ' </div>');
+      $('.subject').each(function(key,elem){
+            count++;
+             $(elem).attr('id', 'drag_' + key)
+      })
+	$('.subject').css({
 	  'margin': '10%',
 
 	  'background-color': '#29e',
@@ -82,21 +94,33 @@ $('#drag-me').css({
       'font-size': '20px',
      'font-family': 'sans-serif',
       'border-radius': '8px',
+      'position':'absoulte',
      'padding': '20px',
      'margin': '30px 20px',
-      'width': '120px',
-      'box-sizing': 'border-box'
+      'width':'75px',
+        'height':'75px',
+      'box-sizing':'border-box'
    });
 
    $('.resize-container').css({
      'width': '100%',
       'height': '240px'
    });
-      $('.form-container').remove();
+     // $('.form-container').remove();
    }
-
+   var observatory = [];
+   var sub_top, sub_left, sub_width, sub_height, sub_number;
    function subject_location_next()
    {
+      $('.subject').each(function(key) {
+         sub_top=($('#drag_' + key).position().top+30);
+         sub_left=$('#drag_' + key).position().left;
+         sub_width=$('#drag_' + key).width();
+         sub_height=$('#drag_' + key).height();
+         observatory.push({"sub_top":sub_top,"sub_left":sub_left,"sub_width":sub_width,"sub_height":sub_height, "sub_number":key});
+      });
+
+      $('.subject').remove();
       $('.form-container').remove();
       $('.edit_spec_form').append('<div class="data-input-container"><h3>Create your data input fields.</h3><button class="add-input-container" onclick="add_input_field()">Add another input field</button><div class="form-container alert-custom"><h5>Question</h5><input class="question" type="text"/><br><button class="add-another-response" onclick="add_another_response()">Add another response</button><div class="responses-container"><h5>Response</h5><input class="response" type="text"/></div></div></div><button class="finished" onclick="submit_page()">Done</button>');
    }
@@ -106,6 +130,15 @@ $('#drag-me').css({
       $('.data-input-container').append('<div class="form-container alert-custom"><h5>Question</h5><input class="question" type="text"/><br><button class="add-another-response" onclick="add_another_response()">Add another response</button><div class="responses-container"><h5>Response</h5><input class="response" type="text"/></div></div>');
    }
 
+  /* function submit_sequence()
+   {
+   $.each( $('.data-input-container'), function(i, data-input-container){
+         $('div', data-input-container).each(function() {
+
+           });
+   })
+   }*/
+
    function add_another_response()
    {
       $('.responses-container').append('<br><input class="response" type="text">');
@@ -113,11 +146,6 @@ $('#drag-me').css({
 interact('.resize-drag')
   .draggable({
     onmove: window.dragMoveListener,
-	restrict: {
-      restriction: "parent",
-      endOnly: true,
-      elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
-    },
     autoScroll: true,
     onmove: dragMoveListener,
 	onend: function (event) {
@@ -128,10 +156,10 @@ interact('.resize-drag')
                      event.dy * event.dy)|0) + 'px');
     }
   })
-  .resizable({
+  /*.resizable({
     preserveAspectRatio: true,
     edges: { left: true, right: true, bottom: true, top: true }
-  })
+  })*/
   .on('resizemove', function (event) {
     var target = event.target,
         x = (parseFloat(target.getAttribute('data-x')) || 0),
@@ -169,6 +197,8 @@ interact('.resize-drag')
 
   // this is used later in the resizing and gesture demos
   window.dragMoveListener = dragMoveListener;
-
+  var sequence=[];
+  var spec={"subjects":subjects,"observatory":observatory,"sequence":sequence};
+  console.log(spec);
 </script>
 </template>
