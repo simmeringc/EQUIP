@@ -30,9 +30,5 @@ Template.environmentItem.events({
          Router.go('environmentList')
        });
        }
-     });
-     $('.deleteEnvironment').confirmation({
-       onCancel : function(){
-       }
-     });
+    });
  }
