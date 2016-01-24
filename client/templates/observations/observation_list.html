@@ -9,10 +9,12 @@
         {{> environmentObsItem}}
       {{/each}}
     </div>
+    {{#contentFor "observation"}}
     <div>
       {{#each observation}}
         {{> observationItem}}
       {{/each}}
     </div>
+    {{/contentFor}}
   </div>
 </template>

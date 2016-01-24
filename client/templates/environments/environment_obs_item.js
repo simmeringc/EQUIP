@@ -22,7 +22,6 @@ Template.environmentObsItem.events({
 Template.environmentObsItem.events({
   'click #saveName': function(e) {
 
-console.log(this._id);
     var observation = {
       nameOfObservation: $('#observationName').val(),
       environmentId: this._id
