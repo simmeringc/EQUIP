@@ -8,7 +8,7 @@
         </div>
         <div class="modal-body">
           <div class="controls">
-              <input name="nameOfObservation"  type="text" value="" id="observationName" placeholder="Name Your Observation Here" class="form-control"/>
+              <input name="nameOfObservation"  type="text" value="" id="obsName" placeholder="Name Your Observation Here" class="form-control"/>
           </div>
         </div>
         <div class="modal-footer" onKeyPress="return checkSubmit(event)">
@@ -19,10 +19,10 @@
     </div>
   </div>
   <div class="alert-custom-envItem">
-    <div>{{nameOfEnvironment}}</div>
+    <div>{{envName}}</div>
     <div>Created On: {{submitted}}</div>
       <button type="button" class="btn btn-warning editObsItem">Edit Spec</button>
       <button type="button" class="btn btn-warning obsGoBack">Go Back</button>
-      <button type="button" class="btn btn-success" id = "createNewObservation">New Observation</button>
+      <button type="button" class="btn btn-success" id="createNewObservation">New Observation</button>
   </div>
 </template>

@@ -22,12 +22,12 @@ Template.environmentObsItem.events({
   'click #saveName': function(e) {
 
     var observation = {
-      nameOfObservation: $('#observationName').val(),
+      name: $('#obsName').val(),
       environmentId: this._id
     };
 
     Meteor.call('observationInsert', observation, function(error, result) {
-      Router.go('observationList');
+      return 0;
     });
 
     $('#createObsPopup').modal('hide') && $('#observationName').val('');

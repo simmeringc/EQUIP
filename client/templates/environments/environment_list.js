@@ -5,7 +5,7 @@ Template.environmentList.helpers({
 });
 
 Template.environmentList.events({
-   'click .createNewEnvironment': function(e) {
+   'click #createNewEnvironment': function(e) {
     $('#createEnvPopup').modal({
       keyboard: true,
       show: true
@@ -17,7 +17,7 @@ Template.environmentList.events({
   'click #saveName': function(e) {
 
     var environment = {
-      nameOfEnvironment: $('#environmentName').val()
+      envName: $('#environmentName').val()
     };
 
     Meteor.call('environmentInsert', environment, function(error, result) {

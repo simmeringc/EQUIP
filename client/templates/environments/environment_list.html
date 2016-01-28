@@ -1,7 +1,7 @@
 <template name="environmentList">
     <div id="container" class="container-fluid top-spacer card">
         <h1>Saved Environments
-           <button type="button" class="btn btn-success createNewEnvironment" data-toggle="modal" data-target="#createPopup">Create</button>
+           <button type="button" class="btn btn-success" id="createNewEnvironment" data-toggle="modal" data-target="#createPopup">Create</button>
         </h1>
         <div class="modal fade" id="createEnvPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
@@ -12,7 +12,7 @@
               </div>
               <div class="modal-body">
                 <div class="controls">
-                    <input name="nameOfEnvironment"  type="text" value="" id="environmentText" placeholder="Name Your Environment Here" class="form-control"/>
+                    <input name="nameOfEnvironment"  type="text" value="" id="environmentName" placeholder="Name Your Environment Here" class="form-control"/>
                 </div>
               </div>
               <div class="modal-footer" onKeyPress="return checkSubmit(event)">

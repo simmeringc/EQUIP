@@ -14,8 +14,6 @@ Template.observationItem.events({
    }
  });
 
-
-
  Template.observationItem.rendered=function() {
      $('.deleteObsItem').confirmation({
        onConfirm : function(){
