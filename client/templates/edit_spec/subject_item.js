@@ -6,10 +6,4 @@ Template.subjectItem.events({
        Router.go('editSpec');
      });
   }
-});
-
-Template.observationList.helpers({
-  count: function() {
-    return Subjects.find({_id: this._id});
-  }
-});
+})

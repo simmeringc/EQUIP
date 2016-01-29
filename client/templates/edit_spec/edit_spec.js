@@ -10,6 +10,7 @@ Template.editSpec.events({
 
 Template.editSpec.helpers({
   subject: function() {
+    console.log(this);
     return Subjects.find({});
   }
 });
