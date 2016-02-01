@@ -3,22 +3,22 @@ Template.environmentObsItem.events({
      e.preventDefault();
      Router.go('environmentList');
   },
+
   'click .editObsItem': function(e) {
      e.preventDefault();
-     Router.go('editSpec');
-  }
-});
+     Router.go('editSpec', this);
+  },
 
-Template.environmentObsItem.events({
-   'click #createNewObservation': function(e) {
+  'click #createNewObservation': function(e) {
     $('#createObsPopup').modal({
       keyboard: true,
       show: true
     });
-   }
-});
+    $('#createObsPopup').on('shown.bs.modal', function () {
+      $('#obsName').focus();
+    })
+  },
 
-Template.environmentObsItem.events({
   'click #saveName': function(e) {
 
     var observation = {
@@ -30,6 +30,7 @@ Template.environmentObsItem.events({
       return 0;
     });
 
-    $('#createObsPopup').modal('hide') && $('#observationName').val('');
+    $('#createObsPopup').modal('hide');
+    $('#observationName').val('');
   }
 });

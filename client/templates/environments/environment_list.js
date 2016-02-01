@@ -10,10 +10,11 @@ Template.environmentList.events({
       keyboard: true,
       show: true
     });
-   }
-});
+    $('#createEnvPopup').on('shown.bs.modal', function () {
+      $('#environmentName').focus();
+    })
+  },
 
-Template.environmentList.events({
   'click #saveName': function(e) {
 
     var environment = {
@@ -21,9 +22,10 @@ Template.environmentList.events({
     };
 
     Meteor.call('environmentInsert', environment, function(error, result) {
-      Router.go('environmentList');
+      return 0;
     });
 
-    $('#createEnvPopup').modal('hide') && $('#environmentName').val('');
+    $('#createEnvPopup').modal('hide');
+    $('#environmentName').val('');
   }
 });

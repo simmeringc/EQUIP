@@ -5,7 +5,7 @@ Template.environmentItem.events({
   },
   'click .editObsItem': function(e) {
      e.preventDefault();
-     Router.go('editSpec');
+     Router.go('editSpec', this);
   }
 });
 
