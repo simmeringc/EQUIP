@@ -1,9 +1,9 @@
 Template.editSpec.events({
   'click .specDone': function(e) {
-    Router.go('observationList', {_id:Router.current().params._id});
+    Router.go('observationList', {_envId:Router.current().params._envId});
   },
 
-  'click #createNewSubject': function n(e) {
+  'click #createNewSubject': function(e) {
    $('#createSubjPopup').modal({
      keyboard: true,
      show: true
@@ -13,13 +13,14 @@ Template.editSpec.events({
    })
  },
 
-  'click #saveName': function s(e) {
+  'click #saveName': function(e) {
 
    var subject = {
      subjName: $('#subjectName').val(),
      subjAge: $('#subjectAge').val(),
      subjGender: $('#subjectGender').val(),
-     subjRace: $('#SubjectRace').val()
+     subjRace: $('#SubjectRace').val(),
+     envId: this._id
    };
 
    Meteor.call('subjectInsert', subject, function(error, result) {
@@ -36,6 +37,6 @@ Template.editSpec.events({
 
 Template.editSpec.helpers({
   subject: function() {
-    return Subjects.find({});
+    return Subjects.find({envId: this._id});
   }
 });

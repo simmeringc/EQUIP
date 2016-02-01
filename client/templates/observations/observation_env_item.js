@@ -6,7 +6,7 @@ Template.environmentObsItem.events({
 
   'click .editObsItem': function(e) {
      e.preventDefault();
-     Router.go('editSpec', this);
+     Router.go('editSpec', {_envId:this._id});
   },
 
   'click #createNewObservation': function(e) {
@@ -23,7 +23,7 @@ Template.environmentObsItem.events({
 
     var observation = {
       name: $('#obsName').val(),
-      environmentId: this._id
+      envId: this._id
     };
 
     Meteor.call('observationInsert', observation, function(error, result) {
