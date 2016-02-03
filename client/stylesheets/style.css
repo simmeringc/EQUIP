@@ -24,6 +24,8 @@ body {
   	box-shadow: 0 0 8px rgba(0, 0, 0, .4);
 }
 
+/* interactJS Start */
+
 .subject {border-style:solid;
       border-color:black;
       padding: 10px 10px 10px 10px;
@@ -44,7 +46,9 @@ body {
       font-weight: bold;
    }
 
-/* custom container size for classroom page */
+/* interactJS End */
+
+/* custom container size for environemnt page */
 
 @media (min-width:992px)
     {

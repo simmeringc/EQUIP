@@ -1,3 +1,5 @@
+/* InteractJS Start */
+
 Template.editSpec.rendered = function() {
    interact('.draggable')
      .draggable({
@@ -41,31 +43,33 @@ Template.editSpec.rendered = function() {
 }
 
 Template.editSpec.events({
-  'click .specDone': function(e) {
+  'click .esGoBack': function(e) {
     Router.go('observationList', {_envId:Router.current().params._envId});
   },
 
-   'click #save_subjects': function(e) {
+  'click #moveSubjects': function(e) {
+    $.each( $('.subjects'), function(i, subjects) {
+       $('.subject', subjects).each(function() {
+          $(".subject").addClass("draggable");
+          xpos=0;
+          ypos=0;
+       });
+     })
+    $("#moveSubjects").remove();
+    $("#control_bar").append('<button type="button" id=saveSubjects class="btn btn-warning">Save Subject Locations</button>')
+  },
+  
+   'click #saveSubjects': function(e) {
      $.each( $('.subjects'), function(i, subjects) {
         $('.subject', subjects).each(function() {
            $(".subject").removeClass("draggable");
         });
       })
-     $("#save_subjects").remove();
-     $("#control_bar").append('<button type="button" id=move_subjects class="btn btn-warning">Move Subjects</button>')
+     $("#saveSubjects").remove();
+     $("#control_bar").append('<button type="button" id=moveSubjects class="btn btn-warning">Move Subjects</button>')
    },
 
-   'click #move_subjects': function(e) {
-     $.each( $('.subjects'), function(i, subjects) {
-        $('.subject', subjects).each(function() {
-           $(".subject").addClass("draggable");
-           xpos=0;
-           ypos=0;
-        });
-      })
-     $("#move_subjects").remove();
-     $("#control_bar").append('<button type="button" id=save_subjects class="btn btn-warning">Save Subject Locations</button>')
-   },
+/* InteractJS End */
 
   'click #createNewSubject': function(e) {
    $('#createSubjPopup').modal({
