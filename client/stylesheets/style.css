@@ -24,7 +24,31 @@ body {
   	box-shadow: 0 0 8px rgba(0, 0, 0, .4);
 }
 
-/* custom container size for classroom page */
+/* interactJS Start */
+
+.subject {border-style:solid;
+      border-color:black;
+      padding: 10px 10px 10px 10px;
+      margin:25px 25px 25px 25px;
+      background-color:#b19cd9;
+      font-size:150%;
+      height:75px;
+      width:75px;
+      }
+#drag-1, #drag-2 {
+      min-height: 6.5em;
+      border-radius: 0.75em;
+-webkit-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);
+      }
+ #drag-me::before {
+      content: "#" attr(id);
+      font-weight: bold;
+   }
+
+/* interactJS End */
+
+/* custom container size for environemnt page */
 
 @media (min-width:992px)
     {

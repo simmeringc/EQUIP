@@ -1,25 +1,26 @@
+/* InteractJS Start */
+
 Template.editSpec.rendered = function() {
+   interact('.draggable')
+     .draggable({
+       // enable inertial throwing
+       inertia: true,
+       // keep the element within the area of it's parent
+       // enable autoScroll
+       autoScroll: true,
 
-interact('.draggable')
-  .draggable({
-    // enable inertial throwing
-    inertia: true,
-    // keep the element within the area of it's parent
-    // enable autoScroll
-    autoScroll: true,
+       // call this function on every dragmove event
+       onmove: dragMoveListener,
+       // call this function on every dragend event
+       onend: function (event) {
+         var textEl = event.target.querySelector('p');
 
-    // call this function on every dragmove event
-    onmove: dragMoveListener,
-    // call this function on every dragend event
-    onend: function (event) {
-      var textEl = event.target.querySelector('p');
-
-      textEl && (textEl.textContent =
-        'moved a distance of '
-        + (Math.sqrt(event.dx * event.dx +
-                     event.dy * event.dy)|0) + 'px');
-    }
-  });
+         textEl && (textEl.textContent =
+           'moved a distance of '
+           + (Math.sqrt(event.dx * event.dx +
+                        event.dy * event.dy)|0) + 'px');
+       }
+     });
 
   function dragMoveListener (event) {
     var target = event.target,
@@ -39,15 +40,36 @@ interact('.draggable')
 
   // this is used later in the resizing and gesture demos
   window.dragMoveListener = dragMoveListener;
-
 }
 
-
-
+/* InteractJS End */
 Template.editSpec.events({
-  'click .specDone': function(e) {
+  'click .esGoBack': function(e) {
     Router.go('observationList', {_envId:Router.current().params._envId});
   },
+
+  'click #moveSubjects': function(e) {
+    $.each( $('.subjects'), function(i, subjects) {
+       $('.subject', subjects).each(function() {
+          $(".subject").addClass("draggable");
+          xpos=0;
+          ypos=0;
+       });
+     })
+    $("#moveSubjects").remove();
+    $("#control_bar").append('<button type="button" id=saveSubjects class="btn btn-warning">Save Subject Locations</button>')
+  },
+
+   'click #saveSubjects': function(e) {
+     $.each( $('.subjects'), function(i, subjects) {
+        $('.subject', subjects).each(function() {
+           $(".subject").removeClass("draggable");
+        });
+      })
+     $("#saveSubjects").remove();
+     $("#control_bar").append('<button type="button" id=moveSubjects class="btn btn-warning">Move Subjects</button>')
+   },
+
 
   'click #createNewSubject': function(e) {
    $('#createSubjPopup').modal({
