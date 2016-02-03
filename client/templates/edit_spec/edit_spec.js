@@ -59,10 +59,12 @@ Template.editSpec.events({
      $.each( $('.subjects'), function(i, subjects) {
         $('.subject', subjects).each(function() {
            $(".subject").addClass("draggable");
+           xpos=0;
+           ypos=0;
         });
       })
      $("#move_subjects").remove();
-     $("#control_bar").append('<button type="button" id=save_subjects class="btn btn-warning">Save Subjects</button>')
+     $("#control_bar").append('<button type="button" id=save_subjects class="btn btn-warning">Save Subject Locations</button>')
    },
 
   'click #createNewSubject': function(e) {
