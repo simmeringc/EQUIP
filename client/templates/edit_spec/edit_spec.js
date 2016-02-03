@@ -42,6 +42,7 @@ Template.editSpec.rendered = function() {
   window.dragMoveListener = dragMoveListener;
 }
 
+/* InteractJS End */
 Template.editSpec.events({
   'click .esGoBack': function(e) {
     Router.go('observationList', {_envId:Router.current().params._envId});
@@ -58,7 +59,7 @@ Template.editSpec.events({
     $("#moveSubjects").remove();
     $("#control_bar").append('<button type="button" id=saveSubjects class="btn btn-warning">Save Subject Locations</button>')
   },
-  
+
    'click #saveSubjects': function(e) {
      $.each( $('.subjects'), function(i, subjects) {
         $('.subject', subjects).each(function() {
@@ -69,7 +70,6 @@ Template.editSpec.events({
      $("#control_bar").append('<button type="button" id=moveSubjects class="btn btn-warning">Move Subjects</button>')
    },
 
-/* InteractJS End */
 
   'click #createNewSubject': function(e) {
    $('#createSubjPopup').modal({
