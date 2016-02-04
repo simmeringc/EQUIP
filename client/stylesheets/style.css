@@ -25,7 +25,6 @@ body {
 }
 
 /* interactJS Start */
-
 .subject {border-style:solid;
       border-color:black;
       padding: 10px 10px 10px 10px;
@@ -45,11 +44,10 @@ body {
       content: "#" attr(id);
       font-weight: bold;
    }
-
 /* interactJS End */
 
-/* custom container size for environemnt page */
 
+/* custom container size for environemnt page */
 @media (min-width:992px)
     {
         .container{width:960px}
