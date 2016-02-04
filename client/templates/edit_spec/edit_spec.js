@@ -52,8 +52,6 @@ Template.editSpec.events({
     $.each( $('.subjects'), function(i, subjects) {
        $('.subject', subjects).each(function() {
           $(".subject").addClass("draggable");
-          xpos=0;
-          ypos=0;
        });
      })
     $("#moveSubjects").remove();
@@ -64,10 +62,21 @@ Template.editSpec.events({
      $.each( $('.subjects'), function(i, subjects) {
         $('.subject', subjects).each(function() {
            $(".subject").removeClass("draggable");
+           var subjectPositionSize = {
+             subjXPos: 20, //FOR EXAMPLE: $('#subjXPos').val() On some hidden field
+             subjYPos: 20,  //FOR EXAMPLE: $('#subjYPos').val() On some hidden field
+             _id: this.id
+           };
+
+           Meteor.call('subjectPositionUpdate', subjectPositionSize, function(error, result) {
+             return 0;
+           });
+
         });
       })
      $("#saveSubjects").remove();
      $("#control_bar").append('<button type="button" id=moveSubjects class="btn btn-warning">Move Subjects</button>')
+
    },
 
 
@@ -88,6 +97,8 @@ Template.editSpec.events({
      subjAge: $('#subjectAge').val(),
      subjGender: $('#subjectGender').val(),
      subjRace: $('#SubjectRace').val(),
+     subjXPos: 0,
+     subjYPos: 0,
      envId: this._id
    };
 
