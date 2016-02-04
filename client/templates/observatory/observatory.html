@@ -1,23 +1,17 @@
 <template name="observatory">
-   <style>
-   .subject {border-style:solid;
-         border-color:black;
-         padding: 10px 10px 10px 10px;
-         margin:25px 25px 25px 25px;
-         background-color:#b19cd9;
-         font-size:150%;
-         width:75px;
-         height:75px;
-         }
-   </style>
-  <div id="container" class="container-fluid top-spacer card">
-      <h1>
-         Observatory Page  <button type="button" class="btn btn-warning obsDone">Go Back</button>
-      </h1>
-  </div>
-  <div>
-    {{#each subject}}
-      {{> subjectItem}}
-    {{/each}}
+  <div id="animation">
+    <div id="container" class="container-fluid top-spacer card">
+        <h1>
+           Observatory Page  <button type="button" class="btn btn-warning obsDone">Go Back</button>
+        </h1>
+    </div>
+    <div id="obsContainer" class="container-fluid card">
+      {{#each subject}}
+        {{> subjectItem}}
+      {{/each}}
+    </div>
+    <div id="seqContainer" class="container-fluid card">
+      <h2>Control Panel</h2>
+    </div>
   </div>
 </template>
