@@ -1,17 +1,15 @@
 <template name="observatory">
-  <div id="animation">
-    <div id="container" class="container-fluid top-spacer card">
-        <h1>
-           Observatory Page  <button type="button" class="btn btn-warning obsDone">Go Back</button>
-        </h1>
-    </div>
-    <div id="obsContainer" class="container-fluid card">
-      {{#each subject}}
-        {{> subjectItem}}
-      {{/each}}
-    </div>
-    <div id="seqContainer" class="container-fluid card">
-      <h2>Control Panel</h2>
-    </div>
+  <div id="container" class="container-fluid top-spacer card">
+      <h1>
+         Observatory Page  <button type="button" class="btn btn-warning obsDone">Go Back</button>
+      </h1>
+  </div>
+  <div id="obsContainer" class="container-fluid card">
+    {{#each subject}}
+      {{> subjectItem}}
+    {{/each}}
+  </div>
+  <div id="seqContainer" class="container-fluid card">
+    <h2>Control Panel</h2>
   </div>
 </template>
