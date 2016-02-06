@@ -1,9 +1,11 @@
 /* InteractJS Start */
 
 Template.editSpec.rendered = function() {
-   interact('.draggable')
-     .draggable({
-       // enable inertial throwing
+
+interact('.draggable')
+  .draggable({
+    onmove: window.dragMoveListener,
+	// enable inertial throwing
        inertia: true,
        // keep the element within the area of it's parent
        // enable autoScroll
@@ -20,7 +22,18 @@ Template.editSpec.rendered = function() {
            + (Math.sqrt(event.dx * event.dx +
                         event.dy * event.dy)|0) + 'px');
        }
-     });
+  })
+  .resizable({
+    preserveAspectRatio: true,
+    edges: { left: true, right: true, bottom: true, top: true }
+  })
+  .on('resizemove', function (event) {
+    // update the element's style
+    $('.subject').each(function(index){
+      this.style.width  = event.rect.width + 'px';
+      this.style.height = event.rect.height + 'px';
+      });
+  });
 
   function dragMoveListener (event) {
     var target = event.target,
