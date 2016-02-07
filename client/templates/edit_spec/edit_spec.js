@@ -1,9 +1,11 @@
 /* InteractJS Start */
 
 Template.editSpec.rendered = function() {
-   interact('.draggable')
-     .draggable({
-       // enable inertial throwing
+
+interact('.draggable')
+  .draggable({
+    onmove: window.dragMoveListener,
+	// enable inertial throwing
        inertia: true,
        // keep the element within the area of it's parent
        // enable autoScroll
@@ -20,7 +22,18 @@ Template.editSpec.rendered = function() {
            + (Math.sqrt(event.dx * event.dx +
                         event.dy * event.dy)|0) + 'px');
        }
-     });
+  })
+  .resizable({
+    preserveAspectRatio: true,
+    edges: { left: true, right: true, bottom: true, top: true }
+  })
+  .on('resizemove', function (event) {
+    // update the element's style
+    $('.subject').each(function(index){
+      this.style.width  = event.rect.width + 'px';
+      this.style.height = event.rect.height + 'px';
+      });
+  });
 
   function dragMoveListener (event) {
     var target = event.target,
@@ -62,9 +75,15 @@ Template.editSpec.events({
      $.each( $('.subjects'), function(i, subjects) {
         $('.subject', subjects).each(function() {
            $(".subject").removeClass("draggable");
+           width=$(this).css('width');
+           width=width.substring(0,width.length-2);
+           height=$(this).css('height');
+           height=height.substring(0,height.length-2);
            var subjectPositionSize = {
-             subjXPos: 20, //FOR EXAMPLE: $('#subjXPos').val() On some hidden field
-             subjYPos: 20,  //FOR EXAMPLE: $('#subjYPos').val() On some hidden field
+             subjXPos: $(this).attr('data-x'), //FOR EXAMPLE: $('#subjXPos').val() On some hidden field
+             subjYPos: $(this).attr('data-y'),  //FOR EXAMPLE: $('#subjYPos').val() On some hidden field
+             subjXSize: width,
+             subjYSize: height,
              _id: this.id
            };
 
@@ -99,6 +118,8 @@ Template.editSpec.events({
      subjRace: $('#SubjectRace').val(),
      subjXPos: 0,
      subjYPos: 0,
+     subjXSize: 75,
+     subjYsize: 75,
      envId: this._id
    };
 
