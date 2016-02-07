@@ -75,9 +75,15 @@ Template.editSpec.events({
      $.each( $('.subjects'), function(i, subjects) {
         $('.subject', subjects).each(function() {
            $(".subject").removeClass("draggable");
+           width=$(this).css('width');
+           width=width.substring(0,width.length-2);
+           height=$(this).css('height');
+           height=height.substring(0,height.length-2);
            var subjectPositionSize = {
              subjXPos: $(this).attr('data-x'), //FOR EXAMPLE: $('#subjXPos').val() On some hidden field
              subjYPos: $(this).attr('data-y'),  //FOR EXAMPLE: $('#subjYPos').val() On some hidden field
+             subjXSize: width,
+             subjYSize: height,
              _id: this.id
            };
 
@@ -112,6 +118,8 @@ Template.editSpec.events({
      subjRace: $('#SubjectRace').val(),
      subjXPos: 0,
      subjYPos: 0,
+     subjXSize: 75,
+     subjYsize: 75,
      envId: this._id
    };
 
