@@ -1,4 +1,4 @@
-Template.editSpec.rendered = function() {
+Template.observatory.rendered = function() {
   $('#animation').addClass('animated bounceOutLeft');
 }
 
