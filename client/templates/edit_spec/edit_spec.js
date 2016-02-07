@@ -63,8 +63,8 @@ Template.editSpec.events({
         $('.subject', subjects).each(function() {
            $(".subject").removeClass("draggable");
            var subjectPositionSize = {
-             subjXPos: $('.subject').attr('data-x'), //FOR EXAMPLE: $('#subjXPos').val() On some hidden field
-             subjYPos: $('.subject').attr('data-y'),  //FOR EXAMPLE: $('#subjYPos').val() On some hidden field
+             subjXPos: $(this).attr('data-x'), //FOR EXAMPLE: $('#subjXPos').val() On some hidden field
+             subjYPos: $(this).attr('data-y'),  //FOR EXAMPLE: $('#subjYPos').val() On some hidden field
              _id: this.id
            };
 
