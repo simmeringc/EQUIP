@@ -4,7 +4,66 @@
          Observatory Page  <button type="button" class="btn btn-warning obsDone">Go Back</button>
       </h1>
   </div>
-  <div id="obsContainer" class="container-fluid card">
+  <div class="modal fade" id="createSequence" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">EQUIP - Sequence</h4>
+        </div>
+        <div class="modal-body">
+          <div class="control">
+              <select name="wcdType" class="form-control" id="wcdType">
+                <option selected="selected">WCD Type</option>
+                <option value="0">Math</option>
+                <option value="1">Non-Math</option>
+              </select><br>
+              <select name="solicitationMethod" class="form-control" id="solicitationMethod">
+                <option selected="selected">Solicitation Method</option>
+                <option value="0">Called On</option>
+                <option value="1">Not Called On</option>
+              </select><br>
+              <select name="waitTime" class="form-control" id="waitTime">
+                <option selected="selected">Wait Time</option>
+                <option value="0">Math</option>
+                <option value="1">Non-Math</option>
+                <option value="2">N/A</option>
+              </select><br>
+              <select name="lengthOfTalk" class="form-control" id="lengthOfTalk">
+                <option selected="selected">Length of Talk</option>
+                <option value="0">Less than 3 seconds</option>
+                <option value="1">More than 3 seconds</option>
+                <option value="2">N/A</option>
+              </select><br>
+              <select name="studentTalk" class="form-control" id="studentTalk">
+                <option selected="selected">Student Talk</option>
+                <option value="0">How</option>
+                <option value="1">What</option>
+                <option value="2">Why</option>
+                <option value="3">Other</option>
+              </select><br>
+              <select name="teacherQuestion" class="form-control" id="teacherQuestion">
+                <option selected="selected">Teacher Soliciation</option>
+                <option value="0">How</option>
+                <option value="1">What</option>
+                <option value="2">Why</option>
+                <option value="3">Other</option>
+              </select><br>
+              <select name="explicitEvaluation" class="form-control" id="explicitEvaluation">
+                <option selected="selected">Explicit Evaluation</option>
+                <option value="0">Yes</option>
+                <option value="1">No</option>
+              </select>
+          </div>
+        </div>
+        <div class="modal-footer" onKeyPress="return checkSubmit(event)">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="saveSequence">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
     {{#each subject}}
       {{> subjectItem}}
     {{/each}}
