@@ -1,7 +1,3 @@
-Template.editSpec.rendered = function() {
-  $('#animation').addClass('animated bounceOutLeft');
-}
-
 Template.observatory.helpers({
   subject: function() {
     return Subjects.find({envId: this.envId});
