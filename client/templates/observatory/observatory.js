@@ -21,7 +21,7 @@ Template.observatory.events({
      teacherQuestion: $('#teacherQuestion').val(),
      explicitEvaluation: $('#explicitEvaluation').val(),
      subjId: subjId,
-     obsId: Router.current().params._envId,
+     envId: Router.current().params._envId,
      obsId: Router.current().params._obsId
    };
 
@@ -30,9 +30,5 @@ Template.observatory.events({
    });
 
    $('#createSequence').modal('hide');
-  //  $('#subjectName').val('');
-  //  $('#subjectAge').val('');
-  //  $('#subjectGender').val('');
-  //  $('#SubjectRace').val('');
  }
 });
