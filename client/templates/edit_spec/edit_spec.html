@@ -14,11 +14,15 @@
           <h4 class="modal-title">Subject Information</h4>
         </div>
         <div class="modal-body">
-          <div class="controls">
-              <input name="nameOfSubject"  type="text" value="" id="subjectName" placeholder="Name" class="form-control"/><br>
-              <input name="ageOfSubject"  type="text" value="" id="subjectAge" placeholder="Age" class="form-control"/><br>
-              <input name="genderOfSubject"  type="text" value="" id="subjectGender" placeholder="Gender" class="form-control"/><br>
-              <input name="raceOfSubject"  type="text" value="" id="SubjectRace" placeholder="Race" class="form-control"/>
+          <div class="control">
+              <input name="nameOfSubject" type="text" value="" id="subjectName" placeholder="Name" class="form-control"/><br>
+              <select name="ageOfSubject" id="subjectAge" placeholder="Age" class="form-control"/>
+              <option selected="selected">Age</option>
+              <option value="0">0 - 10</option>
+              <br>
+              <select name="genderOfSubject" id="subjectGender" placeholder="Gender" class="form-control"/>
+              <br>
+              <select name="raceOfSubject" id="SubjectRace" placeholder="Race" class="form-control"/>
           </div>
         </div>
         <div class="modal-footer" onKeyPress="return checkSubmit(event)">
