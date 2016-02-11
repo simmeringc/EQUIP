@@ -16,13 +16,28 @@
         <div class="modal-body">
           <div class="control">
               <input name="nameOfSubject" type="text" value="" id="subjectName" placeholder="Name" class="form-control"/><br>
-              <select name="ageOfSubject" id="subjectAge" placeholder="Age" class="form-control"/>
-              <option selected="selected">Age</option>
-              <option value="0">0 - 10</option>
-              <br>
-              <select name="genderOfSubject" id="subjectGender" placeholder="Gender" class="form-control"/>
-              <br>
-              <select name="raceOfSubject" id="SubjectRace" placeholder="Race" class="form-control"/>
+              <select name="ageOfSubject" id="subjectAge" placeholder="Age" class="form-control">
+                <option selected="selected">Age</option>
+                <option value="0">0 - 10</option>
+                <option value="1">10 - 15</option>
+                <option value="2">15 - 20</option>
+                <option value="3">20 - 25</option>
+              </select><br>
+              <select name="genderOfSubject" id="subjectGender" placeholder="Gender" class="form-control">
+                <option selected="selected">Gender</option>
+                <option value="0">Male</option>
+                <option value="1">Female</option>
+                <option value="2">Other</option>
+              </select><br>
+              <select name="raceOfSubject" id="SubjectRace" placeholder="Race" class="form-control">
+                <option selected="selected">Race</option>
+                <option value="0">American Indian or Alaska Native</option>
+                <option value="1">Asian</option>
+                <option value="2">Black or African American</option>
+                <option value="3">Native Hawaiian or Other Pacific Islander</option>
+                <option value="4">White</option>
+                <option value="5">Hispanic or Latino</option>
+              </select>
           </div>
         </div>
         <div class="modal-footer" onKeyPress="return checkSubmit(event)">
