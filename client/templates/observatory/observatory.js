@@ -30,5 +30,6 @@ Template.observatory.events({
    });
 
    $('#createSequence').modal('hide');
+
  }
 });

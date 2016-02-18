@@ -116,10 +116,10 @@ Template.editSpec.events({
      subjAge: $('#subjectAge').val(),
      subjGender: $('#subjectGender').val(),
      subjRace: $('#SubjectRace').val(),
-     subjXPos: 0,
-     subjYPos: 0,
-     subjXSize: 75,
-     subjYsize: 75,
+     subjXPos: '',
+     subjYPos: '',
+     subjXSize: '',
+     subjYsize: '',
      envId: this._id
    };
 
