@@ -1,24 +1,68 @@
 <template name="viewData">
   <div id="container" class="container-fluid top-spacer card">
-    <h1>Compare Observations</h1>
-    <div>
-      <h3 id="studentChar">Student Characteristic</h3>
-      <h3 id="sequenceChar">Sequence Characteristic</h3>
+    <h1 id="viewDataTitle">Compare Data</h1>
+    <br>
+    <div id="selections">
+      <div id="selectEnvironmentContainer">
+        <h3>Select Environment</h3>
+        <select id="selectEnvironment" class="form-control">
+          <option value="age">Age</option>
+          <option value="gender">Gender</option>
+          <option value="race">Race</option>
+        </select>
+      </div>
+      <div id="studentChar">
+        <h3>Student Characteristic</h3>
+        <br>
+        <select id="studentCharSelect" class="form-control">
+          <option value="age">Age</option>
+          <option value="gender">Gender</option>
+          <option value="race">Race</option>
+        </select>
+      </div>
+      <div id="sequenceChar">
+        <h3>Sequence Characteristic</h3>
+        <br>
+        <select id="sequenceCharSelect" class="form-control">
+          <option value="wcd_type">WCD Type</option>
+          <option value="solicitation_method">Solicitation Method</option>
+          <option value="wait_time">Wait Time</option>
+          <option value="length_of_talk">Length of Talk</option>
+          <option value="student_talk">Student Talk</option>
+          <option value="teacher_soliciation">Teacher Solicitation</option>
+          <option value="explicit_evalutation">Explicit Evaluation</option>
+        </select>
+      </div>
+    </div>
+    <br>
+    <div id="graphButton">
+      <button type="button" class="btn btn-info viewEnvItem">Graph</button>
     </div>
   </div>
 <style>
-  h1 {
+  #viewDataTitle {
     text-align: center;
   }
-  #studentChar {
+  h3{
     display: inline;
+  }
+  #selectEnvironmentContainer{
     position: relative;
-    left: 3em;
+    display: inline-block;
+    padding-right: 7.72em;
+  }
+  #studentChar {
+    display: inline-block;
+    position: relative;
+    padding-right: 2.7em;
   }
   #sequenceChar {
-    display: inline;
+    display: inline-block;
     position: relative;
-    left: 13em;
+  }
+  #graphButton {
+    position: relative;
+    left: 29.13em;
   }
 </style>
 
