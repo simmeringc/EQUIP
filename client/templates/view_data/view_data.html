@@ -6,9 +6,10 @@
       <div id="selectEnvironmentContainer">
         <h3>Select Environment</h3>
         <select id="selectEnvironment" class="form-control">
-          <option value="age">Age</option>
-          <option value="gender">Gender</option>
-          <option value="race">Race</option>
+          {{#each environment}}
+            <option value="{{envName}}">{{envName}}</option>
+          {{/each}}
+          <option value="all">All</option>
         </select>
       </div>
       <div id="studentChar">
@@ -39,6 +40,7 @@
       <button type="button" class="btn btn-info viewEnvItem">Graph</button>
     </div>
   </div>
+
 <style>
   #viewDataTitle {
     text-align: center;
