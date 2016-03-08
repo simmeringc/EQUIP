@@ -40,7 +40,10 @@
       <button type="button" id="graph_button" class="btn btn-info viewEnvItem">Graph</button>
     </div>
     {{#each sequences}}
-    <p>{{wcdType}}</p>
+    <script>
+      var hello={{_id}};
+      console.log(hello);
+   </script>
     {{/each}}
   </div>
 

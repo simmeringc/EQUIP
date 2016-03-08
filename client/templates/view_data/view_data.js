@@ -12,7 +12,7 @@ Template.viewData.helpers({
 
 Template.viewData.events({
    'click #graph_button': function(e) {
-      console.log(Sequences.find({"obsId" : "qKgZ8hdEQuZcuRcAQ"},{"wcdType":true}));
+      data=Sequences.find().fetch();
    }
 });
 
