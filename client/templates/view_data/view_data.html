@@ -37,8 +37,11 @@
     </div>
     <br>
     <div id="graphButton">
-      <button type="button" class="btn btn-info viewEnvItem">Graph</button>
+      <button type="button" id="graph_button" class="btn btn-info viewEnvItem">Graph</button>
     </div>
+    {{#each sequences}}
+    <p>{{wcdType}}</p>
+    {{/each}}
   </div>
 
 <style>
