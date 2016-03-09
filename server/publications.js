@@ -9,3 +9,7 @@ Meteor.publish('observations', function() {
 Meteor.publish('subjects', function() {
   return Subjects.find({userId: this.userId});
 });
+
+Meteor.publish('sequences', function() {
+   return Sequences.find({userId: this.userId});
+});
