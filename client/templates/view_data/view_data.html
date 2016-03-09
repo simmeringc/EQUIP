@@ -30,8 +30,8 @@
           <option value="wait_time">Wait Time</option>
           <option value="length_of_talk">Length of Talk</option>
           <option value="student_talk">Student Talk</option>
-          <option value="teacher_soliciation">Teacher Solicitation</option>
-          <option value="explicit_evalutation">Explicit Evaluation</option>
+          <option value="teacher_solicitation">Teacher Solicitation</option>
+          <option value="explicit_evaluation">Explicit Evaluation</option>
         </select>
       </div>
     </div>
@@ -39,12 +39,7 @@
     <div id="graphButton">
       <button type="button" id="graph_button" class="btn btn-info viewEnvItem">Graph</button>
     </div>
-    {{#each sequences}}
-    <script>
-      var hello={{_id}};
-      console.log(hello);
-   </script>
-    {{/each}}
+   <div class="ct-chart"></div>
   </div>
 
 <style>
