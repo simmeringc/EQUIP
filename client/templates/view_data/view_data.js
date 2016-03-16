@@ -19,19 +19,19 @@ Template.viewData.helpers({
 Template.viewData.events({
    'click #graph_button': function(e) {
       var subject_info = {
-         "age":["0-10","10-15","15-20","20-25"],
-         "gender":["Male","Female","Other"],
-         "race":["American Indian or Alaska Native","Asian","Black or African American","Native Hawaiin or Other Pacific Islander","White","Hispanic or Latino"]
+         "subjAge":["0-10","10-15","15-20","20-25"],
+         "subjGender":["Male","Female","Other"],
+         "subjRace":["American Indian or Alaska Native","Asian","Black or African American","Native Hawaiin or Other Pacific Islander","White","Hispanic or Latino"]
       };
 
       var sequence_info = {
-         "wcd_type":["Math","Non-Math"],
-         "solicitation_method":["Called On","Not Called On"],
-         "wait_time":["Less than 3 seconds","3 or more seconds","N/A"],
-         "length_of_talk":["1-4 Words","5-20 Words","21 or more Words"],
-         "student_talk":["How","What","Why","Other"],
-         "teacher_solicitation":["How","What","Why","Other"],
-         "explicit_evaluation":["Yes","No"]
+         "wcdType":["Math","Non-Math"],
+         "solicitationMethod":["Called On","Not Called On"],
+         "waitTime":["Less than 3 seconds","3 or more seconds","N/A"],
+         "lengthOfTalk":["1-4 Words","5-20 Words","21 or more Words"],
+         "studentTalk":["How","What","Why","Other"],
+         "teacherSolicitation":["How","What","Why","Other"],
+         "explicitEvaluation":["Yes","No"]
       };
       var options = {
          "environment":$('#selectEnvironment').val(),
@@ -49,44 +49,36 @@ Template.viewData.events({
       {
          sequences=Sequences.find().fetch();
       }
-      if(options["student_char"]=="age")
-      {
-         target="subjAge";
-      }
-      else if(options["student_char"]=="gender")
-      {
-         target="subjGender";
-      }
-      else
-      {
-         target="subjRace";
-      }
-      var datas=[];
-      for(i=0;i<subject_info[options["student_char"]].length;i++) //loop for each bar
-      {
-         var data2=[];
-         for(j=0;j<sequence_info[options["sequence_val"]].length;j++) //loop for each bar
-         {
-            data2.push(j-i+7);
-         }
-         datas.push(data2);
-      }
-
-
-/*
+      var sequence_props = sequence_info[options["sequence_val"]];
+      var subject_props = subject_info[options["student_char"]];
+      var sequence_data=[]
       for(i=0;i<sequences.length;i++)
       {
-         subj_id = sequences[i]["subjId"];
-         subject = Subjects.find({"_id":subj_id}).fetch();
-         console.log(subject);
-         for(j=0;j<subject_info[options["student_char"]].length;j++)
+         temp={};
+         temp_subj_id=sequences[i]["subjId"];
+         temp.subj_data=((Subjects.find({"_id":temp_subj_id}).fetch())[0])[options["student_char"]];
+         temp.seq_data=sequences[i][options["sequence_val"]];
+         sequence_data.push(temp);
+      }
+      var graph_data=[];
+      for(i=0;i<subject_info[options["student_char"]].length;i++)
+      {
+         var temp_data=[];
+         for(j=0;j<sequence_info[options["sequence_val"]].length;j++)
          {
-          //  console.log(subject_info[options["student_char"]][subject[0][target]]);
+            temp_data.push(0);
          }
-      }*/
+         graph_data.push(temp_data);
+      }
+      for(i=0;i<sequence_data.length;i++)
+      {
+         var x = sequence_data[i]["seq_data"];
+         var z = sequence_data[i]["subj_data"];
+         graph_data[x][z]++;
+      }
       var data = {
         labels: sequence_info[options["sequence_val"]],
-        series: datas
+        series: graph_data
       };
 
       var options = {
@@ -94,7 +86,7 @@ Template.viewData.events({
       };
 
       new Chartist.Bar('.ct-chart', data, options);
-         }
+    }
 
 });
 
