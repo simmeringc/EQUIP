@@ -74,7 +74,7 @@ Template.viewData.events({
       {
          var x = sequence_data[i]["seq_data"];
          var z = sequence_data[i]["subj_data"];
-         graph_data[x][z]++;
+         graph_data[z][x]++;
       }
       var data = {
         labels: sequence_info[options["sequence_val"]],
