@@ -63,10 +63,10 @@ Template.viewData.events({
       var graph_data=[];
       for(i=0;i<subject_info[options["student_char"]].length;i++)
       {
-         var temp_data=[];
+         var temp_data={"name":subject_info[options["student_char"]][i], "data":[]};
          for(j=0;j<sequence_info[options["sequence_val"]].length;j++)
          {
-            temp_data.push(0);
+            temp_data["data"].push(0);
          }
          graph_data.push(temp_data);
       }
@@ -74,7 +74,7 @@ Template.viewData.events({
       {
          var x = sequence_data[i]["seq_data"];
          var z = sequence_data[i]["subj_data"];
-         graph_data[z][x]++;
+         graph_data[z]["data"][x]++;
       }
       var data = {
         labels: sequence_info[options["sequence_val"]],
@@ -83,9 +83,12 @@ Template.viewData.events({
 
       var options = {
         seriesBarDistance: 10
-      };
-
-      new Chartist.Bar('.ct-chart', data, options);
+      }
+      new Chartist.Bar('.ct-chart-bar', data, {
+            plugins: [
+                Chartist.plugins.legend()
+            ]
+        });
     }
 
 });
