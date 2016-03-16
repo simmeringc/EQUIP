@@ -18,7 +18,7 @@ Template.observatory.events({
      waitTime: $('#waitTime').val(),
      lengthOfTalk: $('#lengthOfTalk').val(),
      studentTalk: $('#studentTalk').val(),
-     teacherQuestion: $('#teacherQuestion').val(),
+     teacherSolicitation: $('#teacherSolicitation').val(),
      explicitEvaluation: $('#explicitEvaluation').val(),
      subjId: subjId,
      envId: Router.current().params._envId,
