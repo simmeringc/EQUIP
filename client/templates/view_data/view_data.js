@@ -85,7 +85,7 @@ Template.viewData.events({
         seriesBarDistance: 10
       };
 
-      new Chartist.Bar('.ct-chart', data, options]);
+      new Chartist.Bar('.ct-chart', data, options);
     }
 
 });
