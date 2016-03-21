@@ -17,12 +17,13 @@ Template.viewData.helpers({
 });
 
 Template.viewData.events({
-
    'click #graph_button': function(e) {
+      //clear the graph section before adding new ones
       $("#graph_container").children().each(function (){
          this.remove()
       });
 
+      //lookup tables for the subject and sequence codes
       var subject_info = {
          "subjAge":["0-10","10-15","15-20","20-25"],
          "subjGender":["Male","Female","Other"],
@@ -38,11 +39,15 @@ Template.viewData.events({
          "teacherSolicitation":["How","What","Why","Other"],
          "explicitEvaluation":["Yes","No"]
       };
+
+      //get values from dropdown menus
       var options = {
          "environment":$('#selectEnvironment').val(),
          "student_char":$('#studentCharSelect').val(),
          "sequence_val":$('#sequenceCharSelect').val()
       };
+
+      //fetch a specific enviornment
       if(options["environment"]!="all")
       {
          var environment=Environments.find({"envName":options["environment"]}).fetch();
@@ -50,13 +55,19 @@ Template.viewData.events({
          var sequences=Sequences.find({"envId":environment_id}).fetch();
          var subjects=Subjects.find({"envId":environment_id}).fetch();
       }
+      // fetch all enviornments
       else
       {
          var sequences=Sequences.find().fetch();
          var subjects=Subjects.find().fetch();
       }
+
+      //grab array of sequence and subject info for easier refrencing
       var sequence_props = sequence_info[options["sequence_val"]];
       var subject_props = subject_info[options["student_char"]];
+
+      //loop through every sequence and grab the selected sequence value and the subject id
+      //then use the subject ID to look up the selected students characteristic
       var sequence_data=[]
       for(i=0;i<sequences.length;i++)
       {
@@ -69,6 +80,7 @@ Template.viewData.events({
 
       function graph_standard(options)
       {
+         //parse and format the data for chartist
          var graph_data=[];
          for(i=0;i<subject_info[options["student_char"]].length;i++)
          {
@@ -102,6 +114,7 @@ Template.viewData.events({
 
       function graph_demographics(options, subjects)
       {
+         //loop through and tally the number of students in each category of the selected characteristic
          var temp_graph_data=[];
          for(i=0;i<subject_info[options["student_char"]].length;i++)
          {
@@ -126,7 +139,68 @@ Template.viewData.events({
 
       function graph_scaled(options, subjects)
       {
-
+         //get demographic tally
+         var demographic_data=[];
+         for(i=0;i<subject_info[options["student_char"]].length;i++)
+         {
+            demographic_data.push(0);
+         }
+         for(i=0;i<subjects.length;i++)
+         {
+            demographic_data[subjects[i][[options["student_char"]]]]++;
+         }
+         var num_of_students=0;
+         var equity_factor = []
+         for(i=0;i<demographic_data.length;i++)
+         {
+            num_of_students+=demographic_data[i];
+         }
+         for(i=0;i<demographic_data.length;i++)
+         {
+            if(num_of_students==0){
+               equity_factor[i]=0;
+            }
+            else
+            {
+            equity_factor[i]=demographic_data[i]/num_of_students;
+            }
+         }
+         var graph_data=[];
+         for(i=0;i<subject_info[options["student_char"]].length;i++)
+         {
+            var temp_data={"name":subject_info[options["student_char"]][i], "data":[]};
+            for(j=0;j<sequence_info[options["sequence_val"]].length;j++)
+            {
+               temp_data["data"].push(0);
+            }
+            graph_data.push(temp_data);
+         }
+         for(i=0;i<sequence_data.length;i++)
+         {
+            var x = sequence_data[i]["seq_data"];
+            var z = sequence_data[i]["subj_data"];
+            graph_data[z]["data"][x]++;
+         }
+         for(i=0;i<graph_data.length;i++)
+         {
+            for(j=0;j<graph_data[i]["data"].length;j++)
+            {
+               graph_data[i]["data"][j]*=equity_factor[i];
+            }
+         }
+         var data = {
+           labels: sequence_info[options["sequence_val"]],
+           series: graph_data
+         };
+         console.log(data);
+         var options = {
+           seriesBarDistance: 10
+         }*
+         new Chartist.Bar('#ct-chart-equity', data, {
+               plugins: [
+                   Chartist.plugins.legend()
+               ]
+           });
       }
 
       if($("input:checkbox[id=graph_standard]:checked").val()=="on")
@@ -142,7 +216,7 @@ Template.viewData.events({
          graph_demographics(options, subjects);
       }
 
-      if($("input:checkbox[id=graph_scaled]:checked").val()=="on")
+      if($("input:checkbox[id=graph_equity]:checked").val()=="on")
       {
          $("#graph_container").append("<h3>Equity View</h3>");
          $("#graph_container").append("<div id='ct-chart-equity' class='ct-chart ct-chart-bar'></div>")
