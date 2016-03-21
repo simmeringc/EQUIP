@@ -25,19 +25,19 @@ Template.viewData.events({
 
       //lookup tables for the subject and sequence codes
       var subject_info = {
-         "subjAge":["0-10","10-15","15-20","20-25"],
-         "subjGender":["Male","Female","Other"],
-         "subjRace":["American Indian or Alaska Native","Asian","Black or African American","Native Hawaiin or Other Pacific Islander","White","Hispanic or Latino"]
+         "subjAge":["0-10","10-15","15-20","20-25","Unknown"],
+         "subjGender":["Male","Female","Other","Unknown"],
+         "subjRace":["American Indian or Alaska Native","Asian","Black or African American","Native Hawaiin or Other Pacific Islander","White","Hispanic or Latino","Unknown"]
       };
 
       var sequence_info = {
-         "wcdType":["Math","Non-Math"],
-         "solicitationMethod":["Called On","Not Called On"],
+         "wcdType":["Math","Non-Math","Unknown"],
+         "solicitationMethod":["Called On","Not Called On","Unknown"],
          "waitTime":["Less than 3 seconds","3 or more seconds","N/A"],
-         "lengthOfTalk":["1-4 Words","5-20 Words","21 or more Words"],
-         "studentTalk":["How","What","Why","Other"],
+         "lengthOfTalk":["1-4 Words","5-20 Words","21 or more Words","Unknown"],
+         "studentTalk":["How","What","Why","Other","Unknown"],
          "teacherSolicitation":["How","What","Why","Other"],
-         "explicitEvaluation":["Yes","No"]
+         "explicitEvaluation":["Yes","No","Unknown"]
       };
 
       //get values from dropdown menus
