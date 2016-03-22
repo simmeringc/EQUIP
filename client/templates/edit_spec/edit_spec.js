@@ -57,7 +57,7 @@ interact('.draggable')
 
 /* InteractJS End */
 Template.editSpec.events({
-  'click .esGoBack': function(e) {
+  'click #esGoBack': function(e) {
     Router.go('observationList', {_envId:Router.current().params._envId});
   },
 
@@ -132,7 +132,15 @@ Template.editSpec.events({
    $('#subjectAge').val('');
    $('#subjectGender').val('');
    $('#SubjectRace').val('');
- }
+ },
+
+ 'click #editSubjects': function(e) {
+  $('#editSubjPopup').modal({
+    keyboard: true,
+    show: true
+  });
+}
+
 });
 
 Template.editSpec.helpers({

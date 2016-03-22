@@ -2,7 +2,8 @@
   <div id="container" class="container-fluid top-spacer card">
       <h1 id="control_bar">
          <button type="button" class="btn btn-success" id="createNewSubject">+</button>
-         <button type="button" class="btn btn-warning esGoBack">Go Back</button>
+         <button type="button" class="btn btn-warning" id="esGoBack">Go Back</button>
+         <button type="button" class="btn btn-warning" id="editSubjects">Edit Subjects</button>
          <button type="button" class="btn btn-warning" id="moveSubjects">Move Subjects</button>
       </h1>
   </div>
@@ -46,6 +47,25 @@
         <div class="modal-footer" onKeyPress="return checkSubmit(event)">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary" id="saveName">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="editSubjPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Subject Information</h4>
+        </div>
+        <div class="modal-body">
+          {{#each subject}}
+            {{> subjectItem}}
+          {{/each}}
+        </div>
+        <div class="modal-footer" onKeyPress="return checkSubmit(event)">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="saveSubjChanges">Save Changes</button>
         </div>
       </div>
     </div>
