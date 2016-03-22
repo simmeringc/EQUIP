@@ -225,4 +225,3 @@ Template.viewData.events({
    }
 
 });
-
