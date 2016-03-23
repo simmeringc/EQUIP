@@ -74,9 +74,29 @@
                 <tr>
                   <td>{{emptyChild}}</td>
                   <td>{{subjName}}</td>
-                  <td>{{subjAge}}</td>
-                  <td>{{subjGender}}</td>
-                  <td>{{subjRace}}</td>
+                  <td>
+                    {{#if _0_10 subjAge}}0-10{{/if}}
+                    {{#if _10_15 subjAge}}10-15{{/if}}
+                    {{#if _15_20 subjAge}}15-20{{/if}}
+                    {{#if _20_25 subjAge}}20-25{{/if}}
+                    {{#if _ageUnknown subjAge}}Unknown{{/if}}
+                  </td>
+                  <td>
+                    {{#if _male subjGender}}Male{{/if}}
+                    {{#if _female subjGender}}Female{{/if}}
+                    {{#if _genderOther subjGender}}Other{{/if}}
+                    {{#if _genderUnknown subjGender}}Unknown{{/if}}
+                  </td>
+                  <td>
+                    {{#if _native subjRace}}American Indian or Alaska Native{{/if}}
+                    {{#if _asian subjRace}}Asian{{/if}}
+                    {{#if _black subjRace}}Black or African American{{/if}}
+                    {{#if _pacific subjRace}}Native Hawaiian or Other Pacific Islander{{/if}}
+                    {{#if _white subjRace}}White{{/if}}
+                    {{#if _latino subjRace}}Hispanic or Latino{{/if}}
+                    {{#if _raceUnknown subjRace}}Unknown{{/if}}
+                  </td>
+                  <td><button type="button" class="btn btn-xs btn-danger deleteSubject">X</button></td>
                 </tr>
               {{/each}}
             </tbody>
