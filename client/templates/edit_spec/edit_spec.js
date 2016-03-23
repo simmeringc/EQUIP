@@ -143,6 +143,10 @@ Template.editSpec.events({
 
 'click .deleteSubject': function(e) {
   Session.set('subjId', this._id);
+},
+
+'click #saveSubjEdits': function(e) {
+  $('#editSubjPopup').modal('hide');
 }
 
 });
