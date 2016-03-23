@@ -7,6 +7,22 @@
   -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15); }
 
+  /*Begin table row numbering*/
+  .ftable {
+      counter-reset: rowNumber;
+  }
+
+  .ftable tr:not(.ftable_head) {
+      counter-increment: rowNumber;
+  }
+
+  .ftable tr:not(.ftable_head) td:first-child::before {
+      content: counter(rowNumber);
+      min-width: 1em;
+      margin-right: 0.5em;
+  }
+  /*End table row numbering*/
+
 body {
   background: #eee;
   color: #666666;

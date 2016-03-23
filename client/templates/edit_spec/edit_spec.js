@@ -140,7 +140,6 @@ Template.editSpec.events({
     show: true
   });
 }
-
 });
 
 Template.editSpec.helpers({

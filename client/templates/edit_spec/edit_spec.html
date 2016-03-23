@@ -59,9 +59,28 @@
           <h4 class="modal-title">Subject Information</h4>
         </div>
         <div class="modal-body">
-          {{#each subject}}
-            {{> subjectItem}}
-          {{/each}}
+          <table class="table table-hover table-striped ftable">
+            <thead>
+              <tr class="ftable_head">
+                <td>#</td>
+                <td>Name</td>
+                <td>Age</td>
+                <td>Gender</td>
+                <td>Race</td>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each subject}}
+                <tr>
+                  <td>{{emptyChild}}</td>
+                  <td>{{subjName}}</td>
+                  <td>{{subjAge}}</td>
+                  <td>{{subjGender}}</td>
+                  <td>{{subjRace}}</td>
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
         </div>
         <div class="modal-footer" onKeyPress="return checkSubmit(event)">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
