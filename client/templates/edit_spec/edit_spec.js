@@ -54,8 +54,8 @@ interact('.draggable')
   // this is used later in the resizing and gesture demos
   window.dragMoveListener = dragMoveListener;
 }
-
 /* InteractJS End */
+
 Template.editSpec.events({
   'click #esGoBack': function(e) {
     Router.go('observationList', {_envId:Router.current().params._envId});
@@ -139,12 +139,91 @@ Template.editSpec.events({
     keyboard: true,
     show: true
   });
+},
+
+'click .deleteSubject': function(e) {
+  Session.set('subjId', this._id);
 }
 
 });
 
+/*Start Subject Delete Block, Confirmation is a package*/
+Template.editSpec.rendered=function() {
+    $('.deleteSubject').confirmation({
+      onConfirm : function(){
+    }
+  });
+}
+
+Template.editSpec.events({
+   'click .deleteSubject': function(e) {
+     Session.set('subjId', this._id);
+   }
+ });
+
+ Template.editSpec.rendered=function() {
+     $('.deleteSubject').confirmation({
+       onConfirm : function(){
+         var subjId = Session.get('subjId');
+       Meteor.call('subjectDelete', subjId, function(error, result) {
+         return 0;
+       });
+       }
+    });
+ }
+ /*End Subject Delete Block*/
+
+
 Template.editSpec.helpers({
   subject: function() {
     return Subjects.find({envId: this._id});
+  },
+  _0_10: function(subjAge){
+    return subjAge == 0;
+  },
+  _10_15: function(subjAge){
+    return subjAge == 1;
+  },
+  _15_20: function(subjAge){
+    return subjAge == 2;
+  },
+  _20_25: function(subjAge){
+    return subjAge == 3;
+  },
+  _ageUnknown: function(subjAge){
+    return subjAge == 4;
+  },
+  _male: function(subjGender){
+    return subjGender == 0;
+  },
+  _female: function(subjGender){
+    return subjGender == 1;
+  },
+  _genderOther: function(subjGender){
+    return subjGender == 2;
+  },
+  _genderUnknown: function(subjGender){
+    return subjGender == 3;
+  },
+  _native: function(subjRace){
+    return subjRace == 0;
+  },
+  _asian: function(subjRace){
+    return subjRace == 1;
+  },
+  _black: function(subjRace){
+    return subjRace == 2;
+  },
+  _pacific: function(subjRace){
+    return subjRace == 3;
+  },
+  _white: function(subjRace){
+    return subjRace == 4;
+  },
+  _latino: function(subjRace){
+    return subjRace == 5;
+  },
+  _raceUnknown: function(subjRace){
+    return subjRace == 6;
   }
 });
