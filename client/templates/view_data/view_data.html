@@ -1,9 +1,11 @@
 <template name="viewData">
   <div id="container" class="container-fluid top-spacer card">
-    <h1 id="viewDataTitle">Compare Data</h1>
-    <br>
-    <div id="selections">
-      <div id="selectEnvironmentContainer">
+    <h1 id="viewDataTitle">View Data</h1>
+    <div class="alert-custom-info" role="alert">
+      Here you can visualize your data and export it as a CSV.
+    </div>
+    <div class="row">
+       <div class="col-md-4">
         <h3>Select Environment</h3>
         <select id="selectEnvironment" class="form-control">
           {{#each environment}}
@@ -12,18 +14,16 @@
           <option value="all">All</option>
         </select>
       </div>
-      <div id="studentChar">
+      <div class="col-md-4">
         <h3>Student Characteristic</h3>
-        <br>
         <select id="studentCharSelect" class="form-control">
           <option value="subjAge">Age</option>
           <option value="subjGender">Gender</option>
           <option value="subjRace">Race</option>
         </select>
       </div>
-      <div id="sequenceChar">
+      <div class="col-md-4">
         <h3>Sequence Characteristic</h3>
-        <br>
         <select id="sequenceCharSelect" class="form-control">
           <option value="wcdType">WCD Type</option>
           <option value="solicitationMethod">Solicitation Method</option>
@@ -36,92 +36,12 @@
       </div>
     </div>
     <br>
-   <input type="checkbox" id="graph_standard">Standard
-   <input type="checkbox" id="graph_demographic">Demographic
-   <input type="checkbox" id="graph_equity">Equity
-    <div id="graphButton">
-      <button type="button" id="graph_button" class="btn btn-info viewEnvItem">Graph</button>
+    <div>
+        <button type="button" id="graph_button" class="btn btn-info">Graph</button> <button type="button" id="export_CSV_button" class="btn btn-warning">Export CSV</button>
     </div>
-    <div id="graph_container">
-    </div>
+    <input type="checkbox" id="graph_standard">Standard
+    <input type="checkbox" id="graph_demographic">Demographic
+    <input type="checkbox" id="graph_equity">Equity
+    <div id="graph_container"></div>
   </div>
-
-<style>
-    .ct-chart {
-        position: relative;
-    }
-    .ct-legend {
-        position: relative;
-        z-index: 10;
-        list-style: none;
-    }
-    .ct-legend li {
-        position: relative;
-        padding-left: 23px;
-        margin-bottom: 3px;
-        cursor: pointer;
-    }
-    .ct-legend li:before {
-        width: 12px;
-        height: 12px;
-        position: absolute;
-        left: 0;
-        content: '';
-        border: 3px solid transparent;
-        border-radius: 2px;
-    }
-    .ct-legend li.inactive:before {
-        background: transparent;
-    }
-    .ct-legend.ct-legend-inside {
-        position: absolute;
-        top: 0;
-        right: 0;
-    }
-    .ct-legend .ct-series-0:before {
-        background-color: #d70206;
-        border-color: #d70206;
-    }
-    .ct-legend .ct-series-1:before {
-        background-color: #f05b4f;
-        border-color: #f05b4f;
-    }
-    .ct-legend .ct-series-2:before {
-        background-color: #f4c63d;
-        border-color: #f4c63d;
-    }
-    .ct-legend .ct-series-3:before {
-        background-color: #d17905;
-        border-color: #d17905;
-    }
-    .ct-legend .ct-series-4:before {
-        background-color: #453d3f;
-        border-color: #453d3f;
-    }
-  #viewDataTitle {
-    text-align: center;
-  }
-  h3{
-    display: inline;
-  }
-  #selectEnvironmentContainer{
-    position: relative;
-    display: inline-block;
-    padding-right: 7.72em;
-  }
-  #studentChar {
-    display: inline-block;
-    position: relative;
-    padding-right: 2.7em;
-  }
-  #sequenceChar {
-    display: inline-block;
-    position: relative;
-  }
-  #graphButton {
-    position: relative;
-    left: 29.13em;
-  }
-</style>
-
 </template>

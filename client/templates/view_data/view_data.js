@@ -205,20 +205,20 @@ Template.viewData.events({
 
       if($("input:checkbox[id=graph_standard]:checked").val()=="on")
       {
-         $("#graph_container").append("<h3>Standard View</h3>");
+         $("#graph_container").append("<h3>Standard Graph:</h3>");
          $("#graph_container").append("<div id='ct-chart-standard' class='ct-chart ct-chart-bar'></div>")
          graph_standard(options);
       }
       if($("input:checkbox[id=graph_demographic]:checked").val()=="on")
       {
-         $("#graph_container").append("<h3>Demographic View</h3>");
+         $("#graph_container").append("<h3>Demographic Graph:</h3>");
          $("#graph_container").append("<div id='ct-chart-demographic' class='ct-chart ct-chart-bar'></div>")
          graph_demographics(options, subjects);
       }
 
       if($("input:checkbox[id=graph_equity]:checked").val()=="on")
       {
-         $("#graph_container").append("<h3>Equity View</h3>");
+         $("#graph_container").append("<h3>Equity Graph:</h3>");
          $("#graph_container").append("<div id='ct-chart-equity' class='ct-chart ct-chart-bar'></div>")
          graph_scaled(options, subjects);
       }
