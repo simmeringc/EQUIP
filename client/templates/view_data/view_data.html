@@ -1,7 +1,7 @@
 <template name="viewData">
   <div id="container" class="container-fluid top-spacer card">
     <h1 id="viewDataTitle">View Data</h1>
-    <div class="alert-custom-info" role="alert">
+    <div class="alert-custom-viewData" role="alert">
       Visualize your data and export it as a CSV.
     </div>
     <div class="row">
@@ -42,6 +42,9 @@
     <input type="checkbox" id="graph_standard">Standard
     <input type="checkbox" id="graph_demographic">Demographic
     <input type="checkbox" id="graph_equity">Equity
+    <div class="alert-custom-viewDataGraphOptions" role="alert">
+      Select graphs to display.
+    </div>
     <div id="graph_container"></div>
   </div>
 </template>

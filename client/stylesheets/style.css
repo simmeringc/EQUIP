@@ -86,6 +86,32 @@ body {
     border-radius: 4px;
 }
 
+.alert-custom-viewData{
+    padding: 8px 35px 8px 14px;
+    width: 35%;
+    margin-bottom: 18px;
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.alert-custom-viewDataGraphOptions{
+    padding: 8px 35px 8px 14px;
+    width: 23%;
+    margin-bottom: 18px;
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
 .alert-custom-envItem{
     padding: 8px 35px 8px 14px;
     width: 57%;
