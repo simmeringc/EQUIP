@@ -89,7 +89,7 @@ body {
 .alert-custom-viewData{
     padding: 8px 35px 8px 14px;
     width: 35%;
-    margin-bottom: 18px;
+    margin-bottom: 5px;
     color: #31708f;
     background-color: #d9edf7;
     border-color: #bce8f1;
@@ -100,9 +100,10 @@ body {
 }
 
 .alert-custom-viewDataGraphOptions{
-    padding: 8px 35px 8px 14px;
+    padding: 3px 35px 3px 14px;
     width: 23%;
-    margin-bottom: 18px;
+    margin-top: 10px;
+    margin-bottom: 3px;
     color: #31708f;
     background-color: #d9edf7;
     border-color: #bce8f1;
