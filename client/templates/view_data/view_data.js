@@ -240,6 +240,9 @@ Template.viewData.events({
         alert("Alert Test         " + CSV);
         // var subjects=Subjects.find({"envId":environment_id}).fetch();
      }
+     else {
+       alert("Not Working");
+     }
 
     //  else
     //  {
