@@ -237,7 +237,7 @@ Template.viewData.events({
           fields: ["subjName", "wcdTypeLiteral", "solicitationMethodLiteral", "waitTimeLiteral", "lengthOfTalkLiteral", "studentTalkLiteral", "teacherSolicitationLiteral", "explicitEvaluationliteral"],
           data: sequences
         });
-        console.log(CSV);
+        alert("Alert Test         " + CSV);
         // var subjects=Subjects.find({"envId":environment_id}).fetch();
      }
 
