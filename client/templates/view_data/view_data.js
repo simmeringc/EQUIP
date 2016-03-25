@@ -234,9 +234,10 @@ Template.viewData.events({
         var envId=environment[0]["_id"];
         var sequences=Sequences.find({"envId":envId}).fetch();
         var csv = Papa.unparse({
-          fields: ["subjName", "wcdTypeLiteral", "solicitationMethodLiteral", "waitTimeLiteral", "lengthOfTalkLiteral", "studentTalkLiteral", "teacherSolicitationLiteral", "explicitEvaluationliteral"],
+          fields: ["subjName", "wcdTypeLiteral", "solicitationMethodLiteral", "waitTimeLiteral", "lengthOfTalkLiteral", "studentTalkLiteral", "teacherSolicitationLiteral", "explicitEvaluationLiteral"],
           data: sequences,
         });
+        console.log(csv);
         //Blob object for IE download
         var csvData = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
         var csvURL =  null;
