@@ -237,8 +237,6 @@ Template.viewData.events({
           fields: ["subjName", "wcdTypeLiteral", "solicitationMethodLiteral", "waitTimeLiteral", "lengthOfTalkLiteral", "studentTalkLiteral", "teacherSolicitationLiteral", "explicitEvaluationLiteral"],
           data: sequences,
         });
-        console.log(csv);
-        //Blob object for IE download
         var csvData = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
         var csvURL =  null;
         //IE download API for saving files client side
@@ -259,7 +257,6 @@ Template.viewData.events({
           fields: ["subjName", "wcdTypeLiteral", "solicitationMethodLiteral", "waitTimeLiteral", "lengthOfTalkLiteral", "studentTalkLiteral", "teacherSolicitationLiteral", "explicitEvaluationliteral"],
           data: sequences,
         });
-        //Blob object for IE download
         var csvData = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
         var csvURL =  null;
         //IE download API for saving files client side
