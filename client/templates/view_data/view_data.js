@@ -222,6 +222,32 @@ Template.viewData.events({
          $("#graph_container").append("<div id='ct-chart-equity' class='ct-chart ct-chart-bar'></div>")
          graph_scaled(options, subjects);
       }
+   },
+
+   'click #export_CSV_button': function(e) {
+
+     var selectEnvironment = $('#selectEnvironment').val();
+
+     if(selectEnvironment!="all")
+     {
+        var environment=Environments.find({"envName":selectEnvironment}).fetch();
+        var envId=environment[0]["_id"];
+        var sequences=Sequences.find({"envId":envId}).fetch();
+        var CSV = Papa.unparse({
+          fields: ["subjName", "wcdTypeLiteral", "solicitationMethodLiteral", "waitTimeLiteral", "lengthOfTalkLiteral", "studentTalkLiteral", "teacherSolicitationLiteral", "explicitEvaluationliteral"],
+          data: sequences
+        });
+        console.log(CSV);
+        // var subjects=Subjects.find({"envId":environment_id}).fetch();
+     }
+
+    //  else
+    //  {
+    //     var sequences=Sequences.find().fetch();
+    //     var subjects=Subjects.find().fetch();
+    //  }
+
+     //Papa.unparse(data[, config])
    }
 
 });
