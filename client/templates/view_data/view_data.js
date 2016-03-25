@@ -233,24 +233,45 @@ Template.viewData.events({
         var environment=Environments.find({"envName":selectEnvironment}).fetch();
         var envId=environment[0]["_id"];
         var sequences=Sequences.find({"envId":envId}).fetch();
-        var CSV = Papa.unparse({
+        var csv = Papa.unparse({
           fields: ["subjName", "wcdTypeLiteral", "solicitationMethodLiteral", "waitTimeLiteral", "lengthOfTalkLiteral", "studentTalkLiteral", "teacherSolicitationLiteral", "explicitEvaluationliteral"],
-          data: sequences
+          data: sequences,
         });
-        alert("Alert Test         " + CSV);
-        // var subjects=Subjects.find({"envId":environment_id}).fetch();
-     }
-     else {
-       alert("Not Working");
-     }
-
-    //  else
-    //  {
-    //     var sequences=Sequences.find().fetch();
-    //     var subjects=Subjects.find().fetch();
-    //  }
-
-     //Papa.unparse(data[, config])
-   }
-
+        //Blob object for IE download
+        var csvData = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
+        var csvURL =  null;
+        //IE download API for saving files client side
+        if (navigator.msSaveBlob) {
+            csvURL = navigator.msSaveBlob(csvData, 'download.cv');
+        } else {
+        //Everything else
+            csvURL = window.URL.createObjectURL(csvData);
+        }
+        var tempLink = document.createElement('a');
+        tempLink.href = csvURL;
+        tempLink.setAttribute('download', 'download.cv');
+        tempLink.click();
+      }
+      else{
+        var sequences=Sequences.find({}).fetch();
+        var csv = Papa.unparse({
+          fields: ["subjName", "wcdTypeLiteral", "solicitationMethodLiteral", "waitTimeLiteral", "lengthOfTalkLiteral", "studentTalkLiteral", "teacherSolicitationLiteral", "explicitEvaluationliteral"],
+          data: sequences,
+        });
+        //Blob object for IE download
+        var csvData = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
+        var csvURL =  null;
+        //IE download API for saving files client side
+        if (navigator.msSaveBlob) {
+            csvURL = navigator.msSaveBlob(csvData, 'download.cv');
+        } else {
+        //Everything else
+            csvURL = window.URL.createObjectURL(csvData);
+        }
+        var tempLink = document.createElement('a');
+        tempLink.href = csvURL;
+        tempLink.setAttribute('download', 'download.cv');
+        tempLink.click();
+      }
+    }
 });

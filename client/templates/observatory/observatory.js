@@ -137,8 +137,6 @@ Template.observatory.events({
    Meteor.call('sequenceInsert', sequence, function(error, result) {
      return 0;
    });
-
    $('#createSequence').modal('hide');
-
  }
 });
