@@ -241,14 +241,14 @@ Template.viewData.events({
         var csvURL =  null;
         //IE download API for saving files client side
         if (navigator.msSaveBlob) {
-            csvURL = navigator.msSaveBlob(csvData, 'download.cv');
+            csvURL = navigator.msSaveBlob(csvData, 'download.csv');
         } else {
         //Everything else
             csvURL = window.URL.createObjectURL(csvData);
         }
         var tempLink = document.createElement('a');
         tempLink.href = csvURL;
-        tempLink.setAttribute('download', 'download.cv');
+        tempLink.setAttribute('download', 'download.csv');
         tempLink.click();
       }
       else{
@@ -261,14 +261,14 @@ Template.viewData.events({
         var csvURL =  null;
         //IE download API for saving files client side
         if (navigator.msSaveBlob) {
-            csvURL = navigator.msSaveBlob(csvData, 'download.cv');
+            csvURL = navigator.msSaveBlob(csvData, 'download.csv');
         } else {
         //Everything else
             csvURL = window.URL.createObjectURL(csvData);
         }
         var tempLink = document.createElement('a');
         tempLink.href = csvURL;
-        tempLink.setAttribute('download', 'download.cv');
+        tempLink.setAttribute('download', 'download.csv');
         tempLink.click();
       }
     }
