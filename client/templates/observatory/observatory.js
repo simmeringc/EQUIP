@@ -1,6 +1,13 @@
 Template.observatory.helpers({
   subject: function() {
     return Subjects.find({envId: this.envId});
+  },
+  obsSequence: function() {
+    return Sequences.find({obsId: Router.current().params._obsId});
+  },
+  obsName: function() {
+    var observation = Observations.find({_id: Router.current().params._obsId}).fetch();
+    return observation[0]["name"];
   }
 });
 
@@ -21,6 +28,8 @@ Template.observatory.events({
    var studentTalkLiteral;
    var teacherSolicitationLiteral;
    var explicitEvaluationLiteral;
+   var observation=Observations.find({"_id":Router.current().params._obsId}).fetch();
+   var obsName=observation[0]["name"];
    switch ($('#wcdType').val()) {
     case "0":
         wcdTypeLiteral = "Math";
@@ -131,12 +140,47 @@ Template.observatory.events({
      subjId: subjId,
      subjName: subjName,
      envId: Router.current().params._envId,
-     obsId: Router.current().params._obsId
+     obsId: Router.current().params._obsId,
+     obsName: obsName
    };
-
    Meteor.call('sequenceInsert', sequence, function(error, result) {
      return 0;
    });
    $('#createSequence').modal('hide');
- }
+  },
+   'click .editSequences': function(e) {
+    $('#editSequencesPopup').modal({
+      keyboard: true,
+      show: true
+    });
+  },
+  'click #saveSequenceEdits': function(e) {
+    $('#editSequencesPopup').modal('hide');
+  }
 });
+
+/*Start Sequence Delete Block, Confirmation is a package*/
+Template.observatory.rendered=function() {
+    $('.deleteSequence').confirmation({
+      onConfirm : function(){
+    }
+  });
+}
+
+Template.observatory.events({
+   'click .deleteSequence': function(e) {
+     Session.set('sequenceId', this._id);
+   }
+ });
+
+ Template.observatory.rendered=function() {
+     $('.deleteSequence').confirmation({
+       onConfirm : function(){
+         var sequenceId = Session.get('sequenceId');
+       Meteor.call('sequenceDelete', sequenceId, function(error, result) {
+         return 0;
+       });
+       }
+    });
+ }
+ /*End Sequence Delete Block*/
