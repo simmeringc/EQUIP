@@ -45,6 +45,13 @@ body {
   	box-shadow: 0 0 8px rgba(0, 0, 0, .4);
 }
 
+.editButtonEnvironmentName
+{
+    background-color:#d9edf7;
+    border: none;
+    outline:none;
+}
+
 /* interactJS Start */
 .subject {border-style:solid;
       border-color:black;

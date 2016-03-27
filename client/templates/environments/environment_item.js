@@ -6,7 +6,7 @@ Template.environmentItem.events({
   'click .editObsItem': function(e) {
      e.preventDefault();
      Router.go('editSpec', {_envId:this._id});
-  }
+  },
 });
 
 Template.environmentItem.rendered=function() {
