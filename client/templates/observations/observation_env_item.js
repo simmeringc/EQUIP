@@ -47,22 +47,11 @@ Template.environmentObsItem.events({
  },
  'click #saveAllSequences': function(e) {
    $('#allSequencesPopup').modal('hide');
+ },
+ 'click .deleteSequence': function(e) {
+   Session.set('sequenceId', this._id);
  }
 });
-
-/*Start allSequence Delete Block, Confirmation is a package*/
-Template.environmentObsItem.rendered=function() {
-    $('.deleteSequence').confirmation({
-      onConfirm : function(){
-    }
-  });
-}
-
-Template.environmentObsItem.events({
-   'click .deleteSequence': function(e) {
-     Session.set('sequenceId', this._id);
-   }
- });
 
  Template.environmentObsItem.rendered=function() {
      $('.deleteSequence').confirmation({

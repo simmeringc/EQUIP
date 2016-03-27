@@ -1,10 +1,3 @@
-Template.observationItem.rendered=function() {
-    $('.deleteObsItem').confirmation({
-      onConfirm : function(){
-    }
-  });
-}
-
 Template.observationItem.events({
    'click .deleteObsItem': function(e) {
      Session.set('obsId', this._id);

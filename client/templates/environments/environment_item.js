@@ -7,20 +7,10 @@ Template.environmentItem.events({
      e.preventDefault();
      Router.go('editSpec', {_envId:this._id});
   },
-});
-
-Template.environmentItem.rendered=function() {
-    $('.deleteEnvironment').confirmation({
-      onConfirm : function(){
-    }
-  });
-}
-
-Template.environmentItem.events({
    'click .deleteEnvironment': function(e) {
      Session.set('envId', this._id);
    }
- });
+});
 
  Template.environmentItem.rendered=function() {
      $('.deleteEnvironment').confirmation({
