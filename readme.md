@@ -9,7 +9,7 @@ curl https://install.meteor.com/ | sh
 ```
 Run in the project directiory:
 ```
-meteor
+meteor --version 1.2
 ```
 
 ## Project docs:
