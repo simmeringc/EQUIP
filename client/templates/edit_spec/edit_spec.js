@@ -1,16 +1,7 @@
-Template.editSpec.rendered = function() {
-/*Start Subject Delete Block, Confirmation is a package*/
-$('.deleteSubject').confirmation({
-  onConfirm : function(){
-    var subjId = Session.get('subjId');
-  Meteor.call('subjectDelete', subjId, function(error, result) {
-    return 0;
-  });
-  }
-});
- /*End Subject Delete Block*/
+/* InteractJS Start */
 
- /* InteractJS Start */
+Template.editSpec.rendered = function() {
+
 interact('.draggable')
   .draggable({
     onmove: window.dragMoveListener,
@@ -68,10 +59,6 @@ interact('.draggable')
 Template.editSpec.events({
   'click #esGoBack': function(e) {
     Router.go('observationList', {_envId:Router.current().params._envId});
-  },
-
-  'click .deleteSubject': function(e) {
-    Session.set('subjId', this._id);
   },
 
   'click #moveSubjects': function(e) {
@@ -163,6 +150,32 @@ Template.editSpec.events({
 }
 
 });
+
+/*Start Subject Delete Block, Confirmation is a package*/
+Template.editSpec.rendered=function() {
+    $('.deleteSubject').confirmation({
+      onConfirm : function(){
+    }
+  });
+}
+
+Template.editSpec.events({
+   'click .deleteSubject': function(e) {
+     Session.set('subjId', this._id);
+   }
+ });
+
+ Template.editSpec.rendered=function() {
+     $('.deleteSubject').confirmation({
+       onConfirm : function(){
+         var subjId = Session.get('subjId');
+       Meteor.call('subjectDelete', subjId, function(error, result) {
+         return 0;
+       });
+       }
+    });
+ }
+ /*End Subject Delete Block*/
 
 
 Template.editSpec.helpers({
