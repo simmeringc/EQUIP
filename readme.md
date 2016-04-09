@@ -1,4 +1,4 @@
-# DataObs
+# DataObs: http://www.equip.ninja
 Conner and Justin helping Daniel to make EQUIP Observation App
 
 ## Installing and running from the terminal:
@@ -9,7 +9,7 @@ curl https://install.meteor.com/ | sh
 ```
 Run in the project directiory:
 ```
-meteor --release 1.2.1
+meteor
 ```
 
 ## Project docs:
