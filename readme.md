@@ -3,7 +3,7 @@ Conner and Justin helping Daniel to make EQUIP Observation App
 
 ## Installing and running from the terminal:
 
-Install meteor:
+Install meteor via the terminal:
 ```
 curl https://install.meteor.com/ | sh
 ```
