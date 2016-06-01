@@ -1,11 +1,12 @@
 <template name="editSpec">
   <div id="container" class="container-fluid top-spacer card">
       <h4 id="control_bar">
+        <button type="button" class="btn btn-default glyphicon glyphicon-arrow-left" id="esGoBack"></button>
          Edit Spec: <i>{{envName}}</i>
          <button type="button" class="btn btn-success" id="createNewSubject">+</button>
-         <button type="button" class="btn btn-warning" id="esGoBack">Go Back</button>
-         <button type="button" class="btn btn-warning" id="editSubjects">Edit Subjects</button>
-         <button type="button" class="btn btn-warning" id="moveSubjects">Move Subjects</button>
+        <button type="button" class="btn btn-default"     id="editCharacteristics">Edit Characteristics</button>
+         <button type="button" class="btn btn-default" id="editSubjects">Edit Subjects</button>
+         <button type="button" class="btn btn-default" id="moveSubjects">Move Subjects</button>
       </h4>
   </div>
   <div class="modal fade" id="createSubjPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -17,37 +18,94 @@
         </div>
         <div class="modal-body">
           <div class="control">
-              <input name="nameOfSubject" type="text" value="" id="subjectName" placeholder="Name" class="form-control"/><br>
-              <select name="ageOfSubject" id="subjectAge" placeholder="Age" class="form-control">
-                <option selected="selected">Age</option>
-                <option value="0">0 - 10</option>
-                <option value="1">10 - 15</option>
-                <option value="2">15 - 20</option>
-                <option value="3">20 - 25</option>
-                <option value="4">Unknown</option>
-              </select><br>
-              <select name="genderOfSubject" id="subjectGender" placeholder="Gender" class="form-control">
-                <option selected="selected">Gender</option>
-                <option value="0">Male</option>
-                <option value="1">Female</option>
-                <option value="2">Other</option>
-                <option value="3">Unknown</option>
-              </select><br>
-              <select name="raceOfSubject" id="SubjectRace" placeholder="Race" class="form-control">
-                <option selected="selected">Race</option>
-                <option value="0">American Indian or Alaska Native</option>
-                <option value="1">Asian</option>
-                <option value="2">Black or African American</option>
-                <option value="3">Native Hawaiian or Other Pacific Islander</option>
-                <option value="4">White</option>
-                <option value="5">Hispanic or Latino</option>
-                <option value="6">Unknown</option>
-              </select>
+            <div class="wrapper">
+              <nav class="flex-nav">
+                <button type="button" class="btn btn-warning" id="moveSubjects">Move Subjects</button>
+                <button type="button" class="btn btn-warning" id="moveSubjects">Move Subjects</button>
+                <button type="button" class="btn btn-warning" id="moveSubjects">Move Subjects</button>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <style>
+        .wrapper {
+          max-width: 1000px;
+          margin: 0 auto;
+          padding:50px;
+        }
+
+        /* Flex Box Starts Here! */
+
+
+        /* Flex Container */
+        .flex-nav ul {
+          border:1px solid black;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          display:flex;
+        }
+
+        /* Flex Item */
+        .flex-nav li {
+          flex:3;
+        }
+
+        .flex-nav .social {
+          flex:1;
+        }
+
+
+        @media all and (max-width:1000px) {
+
+          .flex-nav ul {
+            flex-wrap:wrap;
+          }
+
+          .flex-nav li {
+            flex:1 1 50%;
+          }
+
+          .flex-nav .social {
+            flex:1 1 25%;
+          }
+
+        }
+
+        @media all and (max-width:500px) {
+
+          .flex-nav li {
+            flex-basis:100%;
+          }
+
+        }
+        </style>
+        <div class="modal-footer" onKeyPress="return checkSubmit(event)">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="saveName">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="createCharPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Subject Characteristics</h4>
+        </div>
+        <div class="modal-body">
+          <div class="control">
+            <div class="wrapper">
+              <nav class="flex-nav">
+                <p> Insert stuff </p>
+              </nav>
+            </div>
           </div>
         </div>
         <div class="modal-footer" onKeyPress="return checkSubmit(event)">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="saveName">Save Changes</button>
+          <button type="button" class="btn btn-primary" id="saveChars">Save Changes</button>
         </div>
       </div>
     </div>
