@@ -1,7 +1,8 @@
-/* InteractJS Start */
+
 
 Template.editSpec.rendered = function() {
 
+/* InteractJS Start */
 interact('.draggable')
   .draggable({
     onmove: window.dragMoveListener,
@@ -53,8 +54,8 @@ interact('.draggable')
 
   // this is used later in the resizing and gesture demos
   window.dragMoveListener = dragMoveListener;
+  /* InteractJS End */
 }
-/* InteractJS End */
 
 Template.editSpec.events({
   'click #esGoBack': function(e) {

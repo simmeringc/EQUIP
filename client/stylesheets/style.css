@@ -52,6 +52,11 @@ body {
     outline:none;
 }
 
+ul
+{
+    list-style-type: none;
+}
+
 /* interactJS Start */
 .subject {border-style:solid;
       border-color:black;
