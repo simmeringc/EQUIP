@@ -45,11 +45,20 @@ body {
   	box-shadow: 0 0 8px rgba(0, 0, 0, .4);
 }
 
+.remove-button {
+  margin-left: 5px;
+}
+
 .editButtonEnvironmentName
 {
     background-color:#d9edf7;
     border: none;
     outline:none;
+}
+
+ul
+{
+    list-style-type: none;
 }
 
 /* interactJS Start */
@@ -140,7 +149,7 @@ body {
 
 .alert-custom-obsItem{
     padding: 8px 35px 8px 14px;
-    width: 66.5%;
+    width: 67.5%;
     margin-bottom: 18px;
     color: #3c763d;
     background-color: #dff0d8;

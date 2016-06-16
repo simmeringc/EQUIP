@@ -1,0 +1,19 @@
+<template name="editParameters">
+  <div id="container" class="container-fluid top-spacer card">
+    <h3>
+      <button type="button" class="btn btn-default glyphicon glyphicon-arrow-left paramsGoBack"></button> Subject Parameters for Environment: {{envName}}
+    </h3>
+    <div class="alert-custom-info" role="alert">
+      First, add parameters for your subjects. defualt parameters include name, age, race, and gender.
+    </div>
+    <div>
+        <button type="button" id="load_default_subject_params" class="btn btn-default">Load Defualts</button>
+        <button type="button" id="remove_all_params" class="btn btn-default">Remove All</button>
+        <button type="button" id="add_subject_params" class="btn btn-success">+</button>
+        <button type="button" id="save_subj_all" class="btn btn-success">Save All</button><p>//After save goto code parameters page</p>
+    </div>
+    <br>
+    <form id="formRow">
+    </form>
+  </div>
+</template>

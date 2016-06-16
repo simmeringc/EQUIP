@@ -1,11 +1,11 @@
 <template name="editSpec">
   <div id="container" class="container-fluid top-spacer card">
       <h4 id="control_bar">
+        <button type="button" class="btn btn-default glyphicon glyphicon-arrow-left" id="esGoBack"></button>
          Edit Spec: <i>{{envName}}</i>
          <button type="button" class="btn btn-success" id="createNewSubject">+</button>
-         <button type="button" class="btn btn-warning" id="esGoBack">Go Back</button>
-         <button type="button" class="btn btn-warning" id="editSubjects">Edit Subjects</button>
-         <button type="button" class="btn btn-warning" id="moveSubjects">Move Subjects</button>
+         <button type="button" class="btn btn-default" id="editSubjects">Edit Subjects</button>
+         <button type="button" class="btn btn-default" id="moveSubjects">Move Subjects</button>
       </h4>
   </div>
   <div class="modal fade" id="createSubjPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -17,37 +17,48 @@
         </div>
         <div class="modal-body">
           <div class="control">
-              <input name="nameOfSubject" type="text" value="" id="subjectName" placeholder="Name" class="form-control"/><br>
-              <select name="ageOfSubject" id="subjectAge" placeholder="Age" class="form-control">
-                <option selected="selected">Age</option>
-                <option value="0">0 - 10</option>
-                <option value="1">10 - 15</option>
-                <option value="2">15 - 20</option>
-                <option value="3">20 - 25</option>
-                <option value="4">Unknown</option>
-              </select><br>
-              <select name="genderOfSubject" id="subjectGender" placeholder="Gender" class="form-control">
-                <option selected="selected">Gender</option>
-                <option value="0">Male</option>
-                <option value="1">Female</option>
-                <option value="2">Other</option>
-                <option value="3">Unknown</option>
-              </select><br>
-              <select name="raceOfSubject" id="SubjectRace" placeholder="Race" class="form-control">
-                <option selected="selected">Race</option>
-                <option value="0">American Indian or Alaska Native</option>
-                <option value="1">Asian</option>
-                <option value="2">Black or African American</option>
-                <option value="3">Native Hawaiian or Other Pacific Islander</option>
-                <option value="4">White</option>
-                <option value="5">Hispanic or Latino</option>
-                <option value="6">Unknown</option>
-              </select>
+            <p>Stuff goes here</p>
           </div>
         </div>
         <div class="modal-footer" onKeyPress="return checkSubmit(event)">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary" id="saveName">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="createCharPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Subject Characteristics</h4>
+        </div>
+        <div class="modal-body">
+          <div class="control">
+            <ul>
+              <li>
+                <form>
+                  Characteristic Name:
+                  <input class="form-control" type="text" name="firstname">
+                  Characteristic Input:<br>
+                  <input class="form-control" type="text" name="lastname">
+                </form>
+              </li>
+              <li>
+                <form>
+                  First name:<br>
+                  <input type="text" name="firstname"><br>
+                  Last name:<br>
+                  <input type="text" name="lastname">
+                </form>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="modal-footer" onKeyPress="return checkSubmit(event)">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="saveChars">Save Changes</button>
         </div>
       </div>
     </div>
