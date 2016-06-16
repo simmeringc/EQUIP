@@ -1,0 +1,23 @@
+{
+  "name": "dataobs",
+  "version": "1.0.0",
+  "description": "Conner and Justin helping Daniel to make EQUIP Observation App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simmeringc/meteor-dataObs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/simmeringc/meteor-dataObs/issues"
+  },
+  "homepage": "https://github.com/simmeringc/meteor-dataObs#readme",
+  "devDependencies": {
+    "form-serialize": "^0.7.1",
+    "moment": "^2.13.0"
+  }
+}

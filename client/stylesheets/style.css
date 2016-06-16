@@ -45,6 +45,10 @@ body {
   	box-shadow: 0 0 8px rgba(0, 0, 0, .4);
 }
 
+.remove-button {
+  margin-left: 5px;
+}
+
 .editButtonEnvironmentName
 {
     background-color:#d9edf7;

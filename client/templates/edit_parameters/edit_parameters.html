@@ -7,10 +7,14 @@
       First, add parameters for your subjects. defualt parameters include name, age, race, and gender.
     </div>
     <div>
-        <button type="button" id="load_default_subject_params" class="btn btn-default">Load Defualts</button> <button type="button" id="add_subject_params" class="btn btn-success">+</button>
+        <button type="button" id="load_default_subject_params" class="btn btn-default">Load Defualts</button>
+        <button type="button" id="remove_all_params" class="btn btn-default">Remove All</button>
+        <button type="button" id="add_subject_params" class="btn btn-success">+</button>
+        <button type="button" id="save_subj_all" class="btn btn-success">Save All</button>
     </div>
     <br>
-    <div id="row" class="controls">
-    </div>
+    <form id="formRow">
+      <input type="hidden" name="envId" value={{_id}}>
+    </form>
   </div>
 </template>
