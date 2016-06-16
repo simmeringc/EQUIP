@@ -150,13 +150,6 @@ Template.editSpec.events({
   $('#editSubjPopup').modal('hide');
 },
 
-'click #editCharacteristics': function(e) {
- $('#createCharPopup').modal({
-   keyboard: true,
-   show: true
-  });
- },
-
  'click #saveChars': function(e) {
    $('#createCharPopup').modal('hide');
  }
