@@ -1,6 +1,12 @@
 var serialize = require('form-serialize');
 
-function loadDefaultParams(){
+Template.editParameters.helpers({
+  parameter: function() {
+    return Parameters.find({'children.envId':this._id})
+  }
+});
+
+function loadDefaultParams() {
   labels = ["Name", "Age", "Race", "Gender"]
   var container = document.getElementById("formRow");
   for (i=0;i<4;i++){
@@ -18,10 +24,10 @@ function loadDefaultParams(){
       container.appendChild(inputLabel);
       var inputParameters = document.createElement("input");
       inputParameters.type = "text";
-      inputParameters.name = "parameters" + (formCounter/2);
+      inputParameters.name = "parameter" + (formCounter/2);
       inputParameters.className = "form-control"
       if (labels[i] == "Name") {
-        inputParameters.placeholder = "Leave blank to allow for any text input"
+        inputParameters.placeholder = "Leave blank to allow for text input"
       }
       if (labels[i] == "Age") {
         inputParameters.value = "0 - 10,10 - 15,15 - 20,20 - 25,Unknown"
@@ -37,7 +43,7 @@ function loadDefaultParams(){
     }
 }
 
-function addFields(){
+function addFields() {
   var formCounter = $("#container input").length;
   var container = document.getElementById("formRow");
   var paramText = container.appendChild(document.createTextNode("Parameter " + (formCounter/2)));
@@ -53,9 +59,9 @@ function addFields(){
   container.appendChild(inputLabel);
   var inputParameters = document.createElement("input");
   inputParameters.type = "text";
-  inputParameters.name = "parameters" + ((formCounter/2));
+  inputParameters.name = "parameter" + ((formCounter/2));
   inputParameters.className = "form-control"
-  inputParameters.placeholder = "Enter selection options for the parameter"
+  inputParameters.placeholder = "Enter selection options for the parameter or leave blank to allow for text input"
   container.appendChild(inputParameters);
   container.appendChild(document.createElement("br"));
 }
@@ -80,14 +86,16 @@ Template.editParameters.events({
 },
 'click .remove-button': function(e) {
   e.preventDefault();
-  alert("Using raw JS instead of items");
+  alert("Not Working, Using raw JS instead of items");
 },
 'click #save_subj_all': function(e) {
   e.preventDefault();
+  var parameterPairs = (($("#container input").length)/2);
   var form = document.querySelector('#formRow');
   var obj = serialize(form, { hash: true });
-  var extendEnvId = _.extend(obj, {
-    envId : this._id
+  var extendObj = _.extend(obj, {
+    envId: this._id,
+    parameterPairs: parameterPairs
   });
   Meteor.call('subjParameters', obj, function(error, result) {
     if (error){

@@ -13,3 +13,7 @@ Meteor.publish('subjects', function() {
 Meteor.publish('sequences', function() {
    return Sequences.find({userId: this.userId});
 });
+
+Meteor.publish('parameters', function() {
+   return Parameters.find({userId: this.userId});
+});

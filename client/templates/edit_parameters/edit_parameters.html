@@ -10,11 +10,13 @@
         <button type="button" id="load_default_subject_params" class="btn btn-default">Load Defualts</button>
         <button type="button" id="remove_all_params" class="btn btn-default">Remove All</button>
         <button type="button" id="add_subject_params" class="btn btn-success">+</button>
-        <button type="button" id="save_subj_all" class="btn btn-success">Save All</button><p>//After save goto code parameters page</p>
-        <p>//comma separated values</p>
+        <button type="button" id="save_subj_all" class="btn btn-success">Save All</button><p>//After save goto code parameters page //comma separated values //duplicate saves aloud - bug</p>
     </div>
     <br>
     <form id="formRow">
+      {{#each parameter}}
+        {{> parameterItem}}
+      {{/each}}
     </form>
   </div>
 </template>

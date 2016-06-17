@@ -1,8 +1,7 @@
+Template.editSubjects.created = function() {
+Session.set('envId', Router.current().params._envId);
 
-
-Template.editSpec.rendered = function() {
-
-/* InteractJS Start */
+/* INTERACTJS START */
 interact('.draggable')
   .draggable({
     onmove: window.dragMoveListener,
@@ -54,12 +53,18 @@ interact('.draggable')
 
   // this is used later in the resizing and gesture demos
   window.dragMoveListener = dragMoveListener;
-  /* InteractJS End */
-}
+  /* INTERACTJS END */
+};
 
-Template.editSpec.events({
+Template.editSubjects.events({
   'click #esGoBack': function(e) {
     Router.go('observationList', {_envId:Router.current().params._envId});
+  },
+
+  'click .deleteSubject': function(e) {
+    Meteor.call('subjectDelete', this._id, function(error, result) {
+      return 0;
+    });
   },
 
   'click #moveSubjects': function(e) {
@@ -69,7 +74,7 @@ Template.editSpec.events({
        });
      })
     $("#moveSubjects").remove();
-    $("#control_bar").append('<button type="button" id=saveSubjects class="btn btn-warning">Save Subject Locations</button>')
+    $("#control_bar").append('<button type="button" id=saveSubjects class="btn btn-default">Save Subject Locations</button>')
   },
 
    'click #saveSubjects': function(e) {
@@ -95,7 +100,7 @@ Template.editSpec.events({
         });
       })
      $("#saveSubjects").remove();
-     $("#control_bar").append('<button type="button" id=moveSubjects class="btn btn-warning">Move Subjects</button>')
+     $("#control_bar").append('<button type="button" id=moveSubjects class="btn btn-default">Move Subjects</button>')
 
    },
 
@@ -152,25 +157,14 @@ Template.editSpec.events({
 
  'click #saveChars': function(e) {
    $('#createCharPopup').modal('hide');
+ },
+ 'click .deleteSubject': function(e) {
+   Session.set('subjId', this._id);
  }
-
 });
 
 /*Start Subject Delete Block, Confirmation is a package*/
-Template.editSpec.rendered=function() {
-    $('.deleteSubject').confirmation({
-      onConfirm : function(){
-    }
-  });
-}
-
-Template.editSpec.events({
-   'click .deleteSubject': function(e) {
-     Session.set('subjId', this._id);
-   }
- });
-
- Template.editSpec.rendered=function() {
+ Template.editSubjects.rendered=function() {
      $('.deleteSubject').confirmation({
        onConfirm : function(){
          var subjId = Session.get('subjId');
@@ -182,10 +176,12 @@ Template.editSpec.events({
  }
  /*End Subject Delete Block*/
 
-
-Template.editSpec.helpers({
+Template.editSubjects.helpers({
   subject: function() {
     return Subjects.find({envId: this._id});
+  },
+  subjParameter: function() {
+    return Parameters.find({'children.envId':this._id})
   },
   _0_10: function(subjAge){
     return subjAge == 0;
