@@ -6,7 +6,7 @@ Template.environmentItem.events({
   //edit spec button removed -> observatory page
   // 'click .editObsItem': function(e) {
   //    e.preventDefault();
-  //    Router.go('editSpec', {_envId:this._id});
+  //    Router.go('editSubjects', {_envId:this._id});
   // },
     'click .editParameters': function(e) {
        e.preventDefault();

@@ -1,8 +1,8 @@
-<template name="editSpec">
+<template name="editSubjects">
   <div id="container" class="container-fluid top-spacer card">
       <h4 id="control_bar">
         <button type="button" class="btn btn-default glyphicon glyphicon-arrow-left" id="esGoBack"></button>
-         Edit Spec: <i>{{envName}}</i>
+         Edit Subjects: <i>{{envName}}</i>
          <button type="button" class="btn btn-success" id="createNewSubject">+</button>
          <button type="button" class="btn btn-default" id="editSubjects">Edit Subjects</button>
          <button type="button" class="btn btn-default" id="moveSubjects">Move Subjects</button>
@@ -16,8 +16,10 @@
           <h4 class="modal-title">Subject Information</h4>
         </div>
         <div class="modal-body">
-          <div class="control">
-            <p>Stuff goes here</p>
+          <div class="control" id="parameter_modal">
+            {{#each subjParameter}}
+              {{> subjParameterItem}}
+            {{/each}}
           </div>
         </div>
         <div class="modal-footer" onKeyPress="return checkSubmit(event)">
@@ -71,6 +73,9 @@
           <h4 class="modal-title">Subject Information</h4>
         </div>
         <div class="modal-body">
+          <div class="alert-danger bug" role="alert">
+            Delete subject button bugged.
+          </div>
           <table class="table table-hover table-striped table-sm table-bordered ftable">
             <thead>
               <tr class="ftable_head">

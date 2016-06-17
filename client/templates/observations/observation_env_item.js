@@ -7,7 +7,7 @@ Template.environmentObsItem.helpers({
 Template.environmentObsItem.events({
   'click .editObsItem': function(e) {
      e.preventDefault();
-     Router.go('editSpec', {_envId:this._id});
+     Router.go('editSubjects', {_envId:this._id});
   },
 
   'click #createNewObservation': function(e) {

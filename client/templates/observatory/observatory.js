@@ -15,7 +15,9 @@ Template.observatory.events({
   'click .obsDone': function(e) {
     Router.go('observationList', {_envId:Router.current().params._envId});
   },
-
+  'click .deleteSequence': function(e) {
+    Session.set('sequenceId', this._id);
+  },
   //sequence started in subject_item.js
   'click #saveSequence': function(e) {
    var subjId = Session.get('subjId');
@@ -160,19 +162,6 @@ Template.observatory.events({
 });
 
 /*Start Sequence Delete Block, Confirmation is a package*/
-Template.observatory.rendered=function() {
-    $('.deleteSequence').confirmation({
-      onConfirm : function(){
-    }
-  });
-}
-
-Template.observatory.events({
-   'click .deleteSequence': function(e) {
-     Session.set('sequenceId', this._id);
-   }
- });
-
  Template.observatory.rendered=function() {
      $('.deleteSequence').confirmation({
        onConfirm : function(){
