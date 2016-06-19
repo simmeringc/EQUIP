@@ -1,0 +1,12 @@
+@-webkit-keyframes bluePulse {
+  from { background-color: #238896; -webkit-box-shadow: 0 0 3px #333; }
+  50% { background-color: #5bc0de; -webkit-box-shadow: 0 0 5px #5bc0de; }
+  to { background-color: #238896; -webkit-box-shadow: 0 0 3px #333; }
+}
+
+.blue-pulse {
+  -webkit-animation-name: bluePulse;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  color: white;
+}

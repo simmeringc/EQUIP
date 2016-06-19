@@ -3,15 +3,10 @@ Template.environmentItem.events({
      e.preventDefault();
      Router.go('observationList', {_envId:this._id});
   },
-  //edit spec button removed -> observatory page
-  // 'click .editObsItem': function(e) {
-  //    e.preventDefault();
-  //    Router.go('editSubjects', {_envId:this._id});
-  // },
-    'click .editParameters': function(e) {
-       e.preventDefault();
-       Router.go('editParameters', {_envId:this._id});
-    }
+  'click .setupParameters': function(e) {
+     e.preventDefault();
+     Router.go('setupParameters', {_envId:this._id});
+  }
   });
 
 Template.environmentItem.rendered=function() {
@@ -37,3 +32,9 @@ Template.environmentItem.events({
        }
     });
  }
+
+ Template.environmentItem.helpers({
+   parameter: function() {
+     return Parameters.find({'children.envId':this._id})
+   }
+ });

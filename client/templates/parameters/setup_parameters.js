@@ -1,8 +1,8 @@
 var serialize = require('form-serialize');
 
-Template.editParameters.helpers({
-  parameter: function() {
-    return Parameters.find({'children.envId':this._id})
+Template.setupParameters.helpers({
+  environment: function() {
+     return Environments.find({_id:Router.current().params._envId});
   }
 });
 
@@ -66,7 +66,7 @@ function addFields() {
   container.appendChild(document.createElement("br"));
 }
 
-Template.editParameters.events({
+Template.setupParameters.events({
 'click .paramsGoBack': function(e) {
    e.preventDefault();
    Router.go('environmentList');
@@ -79,14 +79,8 @@ Template.editParameters.events({
   e.preventDefault();
   loadDefaultParams();
 },
-'click #remove_all_params': function(e) {
-  e.preventDefault();
-  $("#formRow").remove();
-  $("#container").append("<form id=formRow></form>");
-},
 'click .remove-button': function(e) {
   e.preventDefault();
-  alert("Not Working, Using raw JS instead of items");
 },
 'click #save_subj_all': function(e) {
   e.preventDefault();

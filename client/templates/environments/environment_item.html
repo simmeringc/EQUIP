@@ -2,8 +2,12 @@
   <div class="alert-custom-envItem">
     <div>{{envName}}</div>
     <div>Created On: {{submitted}}</div>
-      <button type="button" class="btn btn-default editParameters">Edit Parameters</button>
-      <button type="button" class="btn btn-default viewEnvItem">Enter Observatory</button>
+      {{#if parameter}}
+        <button type="button" class="btn blue-pulse setupParameters">Setup</button>
+      {{else}}
+        <button type="button" class="btn btn-default editParameters">Edit Parameters</button>
+        <button type="button" class="btn btn-default viewEnvItem">Enter Observatory</button>
+      {{/if}}
       <button type="button" class="btn btn-danger deleteEnvironment">X</button>
   </div>
 </template>

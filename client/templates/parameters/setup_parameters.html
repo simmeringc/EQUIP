@@ -1,0 +1,19 @@
+<template name="setupParameters">
+  <div id="container" class="container-fluid top-spacer card">
+
+      <h3>
+        <button type="button" class="btn btn-default glyphicon glyphicon-arrow-left paramsGoBack"></button> Subject Parameters for Environment: {{#each environment}}{{envName}}{{/each}}
+      </h3>
+    <div class="alert-custom-info" role="alert">
+      First, add parameters for your subjects. Parameter values are separated by commas. Load defaults for examples.
+    </div>
+    <div>
+        <button type="button" id="load_default_subject_params" class="btn btn-primary">Load Defaults</button>
+        <button type="button" id="add_subject_params" class="btn btn-success">+</button>
+        <button type="button" id="save_subj_all" class="btn btn-success">Save All</button>
+    </div>
+    <br>
+    <form id="formRow">
+    </form>
+  </div>
+</template>
