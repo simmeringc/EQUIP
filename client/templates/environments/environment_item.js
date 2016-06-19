@@ -34,7 +34,8 @@ Template.environmentItem.events({
  }
 
  Template.environmentItem.helpers({
-   parameter: function() {
-     return Parameters.find({'children.envId':this._id})
+   needsSetup: function() {
+     var obj = Parameters.find({'children.envId':this._id}).fetch();
+     return $.isEmptyObject(obj);
    }
  });

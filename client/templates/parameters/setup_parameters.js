@@ -88,7 +88,7 @@ Template.setupParameters.events({
   var form = document.querySelector('#formRow');
   var obj = serialize(form, { hash: true });
   var extendObj = _.extend(obj, {
-    envId: this._id,
+    envId: Router.current().params._envId,
     parameterPairs: parameterPairs
   });
   Meteor.call('subjParameters', obj, function(error, result) {
