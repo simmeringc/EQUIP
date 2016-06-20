@@ -1,4 +1,4 @@
-Template.subjParameterItem.rendered = function() {
+Template.sequenceParameterItem.rendered = function() {
   propigateSubjectForm();
 }
 
@@ -7,7 +7,7 @@ function propigateSubjectForm() {
   var envId = Session.get('envId');
   var container = document.getElementById("parameter_select_propigration");
 
-  parametersObj = Parameters.find({'children.envId':envId}).fetch();
+  parametersObj = SequenceParameters.find({'children.envId':envId}).fetch();
   parameterPairs = parametersObj[0]["children"]["parameterPairs"]
 
   var split = []

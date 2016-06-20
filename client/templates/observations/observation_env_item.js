@@ -1,7 +1,10 @@
 Template.environmentObsItem.helpers({
   envSequence: function() {
     return Sequences.find({envId: Router.current().params._envId});
-  }
+  },
+  seqParameter: function() {
+    return SequenceParameters.find({'children.envId': Router.current().params._envId});
+  },
 });
 
 Template.environmentObsItem.events({

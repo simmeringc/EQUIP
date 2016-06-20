@@ -3,9 +3,9 @@ Template.environmentItem.events({
      e.preventDefault();
      Router.go('observationList', {_envId:this._id});
   },
-  'click .setupParameters': function(e) {
+  'click .subjectParamters': function(e) {
      e.preventDefault();
-     Router.go('setupParameters', {_envId:this._id});
+     Router.go('subjectParameters', {_envId:this._id});
   }
   });
 
@@ -35,7 +35,7 @@ Template.environmentItem.events({
 
  Template.environmentItem.helpers({
    needsSetup: function() {
-     var obj = Parameters.find({'children.envId':this._id}).fetch();
+     var obj = SubjectParameters.find({'children.envId':this._id}).fetch();
      return $.isEmptyObject(obj);
    }
  });

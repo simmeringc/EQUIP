@@ -181,7 +181,7 @@ Template.editSubjects.helpers({
     return Subjects.find({envId: this._id});
   },
   subjParameter: function() {
-    return Parameters.find({'children.envId':this._id})
+    return SubjectParameters.find({'children.envId':this._id})
   },
   _0_10: function(subjAge){
     return subjAge == 0;
