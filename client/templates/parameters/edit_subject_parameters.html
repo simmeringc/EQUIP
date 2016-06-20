@@ -1,0 +1,22 @@
+<template name="editSubjectParameters">
+  <div id="container" class="container-fluid top-spacer card">
+
+      <h3>
+        <button type="button" class="btn btn-default glyphicon glyphicon-arrow-left subjParamsGoBack"></button> Subject Parameters for Environment: {{#each environment}}{{envName}}{{/each}}
+      </h3>
+    <div class="alert-custom-info" role="alert">
+      Editing Subject Parameters
+    </div>
+    <div>
+        <button type="button" id="load_default_subject_params" class="btn btn-primary">Load Defaults</button>
+        <button type="button" id="add_subject_params" class="btn btn-success">+</button>
+    </div>
+    <br>
+    <form id="formRow">
+    </form>
+    <div class="modal-footer" onKeyPress="return checkSubmit(event)">
+      <button type="button" id="remove_all" class="btn btn-default" data-dismiss="modal">Remove All</button>
+      <button type="button" class="btn btn-primary" id="save_subj_all">Save All</button>
+    </div>
+  </div>
+</template>

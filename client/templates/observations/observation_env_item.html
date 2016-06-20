@@ -39,17 +39,20 @@
           <table class="table table-hover table-striped table-sm table-bordered ftable">
             <thead>
               <tr class="ftable_head">
-                <td>#</td>
-                <td>SubjName</td>
-                <td>WCD Type</td>
-                <td>Solicitation Method</td>
-                <td>Wait Time</td>
-                <td>Length of Talk</td>
-                <td>Student Talk</td>
-                <td>Teacher Soliciation</td>
-                <td>Explicit Evaluation</td>
-                <td>Observation</td>
-                <td></td>
+                {{#each seqParameter}}
+                  {{>sequenceParameterTableItem}}
+                  <td>#</td>
+                  <td>SubjName</td>
+                  <td>WCD Type</td>
+                  <td>Solicitation Method</td>
+                  <td>Wait Time</td>
+                  <td>Length of Talk</td>
+                  <td>Student Talk</td>
+                  <td>Teacher Soliciation</td>
+                  <td>Explicit Evaluation</td>
+                  <td>Observation</td>
+                  <td></td>
+                {{/each}}
               </tr>
             </thead>
             <tbody>
