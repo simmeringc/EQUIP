@@ -107,6 +107,19 @@ ul
     border-radius: 4px;
 }
 
+.alert-custom-sequence-params{
+    padding: 8px 35px 8px 14px;
+    width: 57%;
+    margin-bottom: 18px;
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faf2cc;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
 .alert-custom-viewData{
     padding: 8px 35px 8px 14px;
     width: 35%;
@@ -149,7 +162,7 @@ ul
 
 .alert-custom-obsItem{
     padding: 8px 35px 8px 14px;
-    width: 67.5%;
+    width: 68%;
     margin-bottom: 18px;
     color: #3c763d;
     background-color: #dff0d8;

@@ -14,6 +14,10 @@ Meteor.publish('sequences', function() {
    return Sequences.find({userId: this.userId});
 });
 
-Meteor.publish('parameters', function() {
-   return Parameters.find({userId: this.userId});
+Meteor.publish('subject_parameters', function() {
+   return SubjectParameters.find({userId: this.userId});
+});
+
+Meteor.publish('sequence_parameters', function() {
+   return SequenceParameters.find({userId: this.userId});
 });

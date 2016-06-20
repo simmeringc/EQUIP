@@ -1,12 +1,12 @@
 var serialize = require('form-serialize');
 
-Template.setupParameters.helpers({
+Template.subjectParameters.helpers({
   environment: function() {
      return Environments.find({_id:Router.current().params._envId});
   }
 });
 
-function loadDefaultParams() {
+function loadDefaultSubjParams() {
   labels = ["Name", "Age", "Race", "Gender"]
   var container = document.getElementById("formRow");
   for (i=0;i<4;i++){
@@ -43,7 +43,7 @@ function loadDefaultParams() {
     }
 }
 
-function addFields() {
+function addSubjFields() {
   var formCounter = $("#container input").length;
   var container = document.getElementById("formRow");
   var paramText = container.appendChild(document.createTextNode("Parameter " + (formCounter/2)));
@@ -66,21 +66,27 @@ function addFields() {
   container.appendChild(document.createElement("br"));
 }
 
-Template.setupParameters.events({
-'click .paramsGoBack': function(e) {
+Template.subjectParameters.events({
+'click .subjParamsGoBack': function(e) {
    e.preventDefault();
    Router.go('environmentList');
  },
 'click #add_subject_params': function(e) {
   e.preventDefault();
-  addFields();
+  addSubjFields();
  },
 'click #load_default_subject_params': function(e) {
   e.preventDefault();
-  loadDefaultParams();
+  loadDefaultSubjParams();
+},
+'click #remove_all': function(e) {
+  e.preventDefault();
+  $("#formRow").remove();
+  $("#container").append("<form id=formRow></form>");
 },
 'click .remove-button': function(e) {
   e.preventDefault();
+  alert("Not Working");
 },
 'click #save_subj_all': function(e) {
   e.preventDefault();
@@ -114,6 +120,7 @@ Template.setupParameters.events({
       }
       Command: toastr["success"]("Save Successful", "Subject Parameters")
     }
+    Router.go('sequenceParameters', {_envId:Router.current().params._envId, _subjParamsId:result._subjParamsId});
   });
 }
 });

@@ -1,3 +1,7 @@
+Template.observatory.created = function() {
+  Session.set('envId', Router.current().params._envId);
+}
+
 Template.observatory.helpers({
   subject: function() {
     return Subjects.find({envId: this.envId});
@@ -8,7 +12,10 @@ Template.observatory.helpers({
   obsName: function() {
     var observation = Observations.find({_id: Router.current().params._obsId}).fetch();
     return observation[0]["name"];
-  }
+  },
+  seqParameter: function() {
+    return SequenceParameters.find({'children.envId': this.envId})
+  },
 });
 
 Template.observatory.events({
