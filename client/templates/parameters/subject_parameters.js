@@ -27,7 +27,7 @@ function loadDefaultSubjParams() {
       inputParameters.name = "parameter" + (formCounter/2);
       inputParameters.className = "form-control"
       if (labels[i] == "Name") {
-        inputParameters.placeholder = "Leave blank to allow for text input"
+        inputParameters.placeholder = "Leave blank to allow for text input."
       }
       if (labels[i] == "Age") {
         inputParameters.value = "0 - 10,10 - 15,15 - 20,20 - 25,Unknown"
@@ -55,13 +55,13 @@ function addSubjFields() {
   inputLabel.type = "text";
   inputLabel.name = "label" + (formCounter/2);
   inputLabel.className = "form-control"
-  inputLabel.placeholder = "Enter the name of the parameter"
+  inputLabel.placeholder = "Enter the name of the parameter."
   container.appendChild(inputLabel);
   var inputParameters = document.createElement("input");
   inputParameters.type = "text";
   inputParameters.name = "parameter" + ((formCounter/2));
   inputParameters.className = "form-control"
-  inputParameters.placeholder = "Enter selection options for the parameter or leave blank to allow for text input"
+  inputParameters.placeholder = "Enter selection options for the parameter or leave blank to allow for text input."
   container.appendChild(inputParameters);
   container.appendChild(document.createElement("br"));
 }
@@ -82,7 +82,7 @@ Template.subjectParameters.events({
 'click #remove_all': function(e) {
   e.preventDefault();
   $("#formRow").remove();
-  $("#container").append("<form id=formRow></form>");
+  $("#formSection").append("<form id=formRow></form>");
 },
 'click .remove-button': function(e) {
   e.preventDefault();
