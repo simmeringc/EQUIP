@@ -1,4 +1,4 @@
-<template name="environmentObsItem">
+<template name="observationEnvironmentItem">
   <div class="modal fade" id="createObsPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -38,22 +38,7 @@
           </div>
           <table class="table table-hover table-striped table-sm table-bordered ftable">
             <thead>
-              <tr class="ftable_head">
-                {{#each seqParameter}}
-                  {{>sequenceParameterTableItem}}
-                  <td>#</td>
-                  <td>SubjName</td>
-                  <td>WCD Type</td>
-                  <td>Solicitation Method</td>
-                  <td>Wait Time</td>
-                  <td>Length of Talk</td>
-                  <td>Student Talk</td>
-                  <td>Teacher Soliciation</td>
-                  <td>Explicit Evaluation</td>
-                  <td>Observation</td>
-                  <td></td>
-                {{/each}}
-              </tr>
+              {{>sequenceEnvironmentTableItem}}
             </thead>
             <tbody>
               {{#each envSequence}}

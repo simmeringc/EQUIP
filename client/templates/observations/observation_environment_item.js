@@ -1,13 +1,10 @@
-Template.environmentObsItem.helpers({
+Template.observationEnvironmentItem.helpers({
   envSequence: function() {
     return Sequences.find({envId: Router.current().params._envId});
-  },
-  seqParameter: function() {
-    return SequenceParameters.find({'children.envId': Router.current().params._envId});
-  },
+  }
 });
 
-Template.environmentObsItem.events({
+Template.observationEnvironmentItem.events({
   'click .editObsItem': function(e) {
      e.preventDefault();
      Router.go('editSubjects', {_envId:this._id});
@@ -49,20 +46,20 @@ Template.environmentObsItem.events({
 });
 
 /*Start allSequence Delete Block, Confirmation is a package*/
-Template.environmentObsItem.rendered=function() {
+Template.observationEnvironmentItem.rendered=function() {
     $('.deleteSequence').confirmation({
       onConfirm : function(){
     }
   });
 }
 
-Template.environmentObsItem.events({
+Template.observationEnvironmentItem.events({
    'click .deleteSequence': function(e) {
      Session.set('sequenceId', this._id);
    }
  });
 
- Template.environmentObsItem.rendered=function() {
+ Template.observationEnvironmentItem.rendered=function() {
      $('.deleteSequence').confirmation({
        onConfirm : function(){
          var sequenceId = Session.get('sequenceId');

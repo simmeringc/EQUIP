@@ -1,6 +1,6 @@
 var serialize = require('form-serialize');
 
-Template.sequenceParameters.helpers({
+Template.editSequenceParameters.helpers({
   environment: function() {
      return Environments.find({_id:Router.current().params._envId});
   }
@@ -75,7 +75,7 @@ function addSeqFields() {
   container.appendChild(document.createElement("br"));
 }
 
-Template.sequenceParameters.events({
+Template.editSequenceParameters.events({
 'click .seqParamsGoBack': function(e) {
    e.preventDefault();
    Router.go('editSubjectParameters', {_envId:Router.current().params._envId});
@@ -91,13 +91,17 @@ Template.sequenceParameters.events({
 'click #remove_all': function(e) {
   e.preventDefault();
   $("#formRow").remove();
-  $("#container").append("<form id=formRow></form>");
+  $("#formSection").append("<form id=formRow></form>");
+},
+'click #load_current_sequence_params': function(e) {
+  e.preventDefault();
+  propigateEditSequenceForm();
 },
 // 'click .remove-button': function(e) {
 //   e.preventDefault();
 //   alert("Not Working");
 // },
-'click #save_seq_all': function(e) {
+'click #save_subj_all': function(e) {
   e.preventDefault();
   var parameterPairs = (($("#container input").length)/2);
   var form = document.querySelector('#formRow');
@@ -106,7 +110,7 @@ Template.sequenceParameters.events({
     envId: Router.current().params._envId,
     parameterPairs: parameterPairs
   });
-  Meteor.call('seqParameters', obj, function(error, result) {
+  Meteor.call('updateSeqParameters', obj, function(error, result) {
     if (error){
       alert(error.reason);
     } else {
@@ -127,9 +131,60 @@ Template.sequenceParameters.events({
         "showMethod": "fadeIn",
         "hideMethod": "fadeOut"
       }
-      Command: toastr["success"]("Save Successful", "Sequence Parameters")
+      Command: toastr["success"]("Save Successful", "Subject Parameters")
     }
     Router.go('environmentList');
   });
 }
 });
+
+Template.editSequenceParameters.rendered = function() {
+  propigateEditSequenceForm();
+}
+
+function propigateEditSequenceForm() {
+
+  var envId = Router.current().params._envId
+  var container = document.getElementById("formRow");
+
+  parametersObj = SequenceParameters.find({'children.envId':envId}).fetch();
+  parameterPairs = parametersObj[0]["children"]["parameterPairs"]
+
+  var split = []
+  for (i=0;i<parameterPairs;i++) {
+    if (parametersObj[0]["children"]["parameter"+i] == null) {
+      split[i] = "text";
+      continue;
+    }
+    str = parametersObj[0]["children"]["parameter"+i]
+    var strSplit = str.split(",");
+    split[i] = strSplit
+  }
+  for (i=0;i<parameterPairs;i++) {
+    var formCounter = $("#container input").length;
+    container.appendChild(document.createTextNode("Parameter " + (formCounter/2)));
+    // var remove = container.appendChild(document.createElement("BUTTON"));
+    // remove.id = "remove" + (formCounter/2);
+    // remove.innerHTML = "x";
+    // remove.className = "remove-button btn btn-xs btn-danger"
+    var inputLabel = document.createElement("input");
+    inputLabel.type = "text";
+    inputLabel.name = "label" + (formCounter/2);
+    inputLabel.className = "form-control"
+    inputLabel.value = parametersObj[0]["children"]["label"+i]
+    container.appendChild(inputLabel);
+    var inputParameters = document.createElement("input");
+    inputParameters.type = "text";
+    inputParameters.name = "parameter" + (formCounter/2);
+    inputParameters.className = "form-control"
+    if (split[i] == "text") {
+      inputParameters.placeholder = "Leave blank to allow for text input."
+    }
+    else {
+      var array = split[i]
+      inputParameters.value = array.join();
+    }
+    container.appendChild(inputParameters);
+    container.appendChild(document.createElement("br"));
+  }
+}

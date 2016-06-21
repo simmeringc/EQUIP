@@ -3,9 +3,13 @@ Template.environmentItem.events({
      e.preventDefault();
      Router.go('observationList', {_envId:this._id});
   },
-  'click .subjectParamters': function(e) {
+  'click .subjectParameters': function(e) {
      e.preventDefault();
      Router.go('subjectParameters', {_envId:this._id});
+  },
+  'click .editParameters': function(e) {
+     e.preventDefault();
+     Router.go('editSubjectParameters', {_envId:this._id});
   }
   });
 

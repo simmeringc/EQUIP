@@ -18,7 +18,6 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 twbs:bootstrap
 iron:router
 sacha:spin
-ian:accounts-ui-bootstrap-3
 ryanswapp:interactjs
 waitingkuo:slidebars
 hinas:meteor-bootstrap-confirmation
@@ -29,3 +28,7 @@ standard-minifier-css
 standard-minifier-js
 accounts-password
 chrismbeckett:toastr
+accounts-google
+accounts-facebook
+ian:accounts-ui-bootstrap-3
+email
