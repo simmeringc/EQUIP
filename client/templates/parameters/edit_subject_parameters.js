@@ -6,16 +6,42 @@ Template.editSubjectParameters.helpers({
   }
 });
 
-function loadDefaultSubjParams() {
-  labels = ["Name", "Age", "Race", "Gender"]
+function loadNameParam() {
   var container = document.getElementById("formRow");
-  for (i=0;i<4;i++){
+  var formCounter = $("#container input").length;
+  container.appendChild(document.createTextNode("Parameter " + (formCounter/2)));
+  // var remove = container.appendChild(document.createElement("BUTTON"));
+  // remove.id = "remove" + (formCounter/2);
+  // remove.innerHTML = "x";
+  // remove.className = "remove-button btn btn-xs btn-danger"
+  var inputLabel = document.createElement("input");
+  inputLabel.type = "text";
+  inputLabel.name = "label" + (formCounter/2);
+  inputLabel.className = "form-control"
+  parametersObj = SubjectParameters.find({'children.envId':Router.current().params._envId}).fetch();
+  inputNameValue = parametersObj[0]["children"]["label0"]
+  inputLabel.value = inputNameValue
+  container.appendChild(inputLabel);
+  var inputParameters = document.createElement("input");
+  inputParameters.type = "text";
+  inputParameters.name = "parameter" + (formCounter/2);
+  inputParameters.className = "form-control"
+  inputParameters.placeholder = "Leave blank to allow for text input. Name/ID parameter is required."
+  inputParameters.disabled = true;
+  container.appendChild(inputParameters);
+  container.appendChild(document.createElement("br"));
+}
+
+function loadDefaultSubjParams() {
+  labels = ["Age", "Race", "Gender"]
+  var container = document.getElementById("formRow");
+  for (i=0;i<3;i++){
       var formCounter = $("#container input").length;
       container.appendChild(document.createTextNode("Parameter " + (formCounter/2)));
-      var remove = container.appendChild(document.createElement("BUTTON"));
-      remove.id = "remove" + (formCounter/2);
-      remove.innerHTML = "x";
-      remove.className = "remove-button btn btn-xs btn-danger"
+      // var remove = container.appendChild(document.createElement("BUTTON"));
+      // remove.id = "remove" + (formCounter/2);
+      // remove.innerHTML = "x";
+      // remove.className = "remove-button btn btn-xs btn-danger"
       var inputLabel = document.createElement("input");
       inputLabel.type = "text";
       inputLabel.name = "label" + (formCounter/2);
@@ -26,9 +52,6 @@ function loadDefaultSubjParams() {
       inputParameters.type = "text";
       inputParameters.name = "parameter" + (formCounter/2);
       inputParameters.className = "form-control"
-      if (labels[i] == "Name") {
-        inputParameters.placeholder = "Leave blank to allow for text input."
-      }
       if (labels[i] == "Age") {
         inputParameters.value = "0 - 10,10 - 15,15 - 20,20 - 25,Unknown"
       }
@@ -47,10 +70,10 @@ function addSubjFields() {
   var formCounter = $("#container input").length;
   var container = document.getElementById("formRow");
   var paramText = container.appendChild(document.createTextNode("Parameter " + (formCounter/2)));
-  var remove = container.appendChild(document.createElement("BUTTON"));
-  remove.id = "remove" + (formCounter/2);
-  remove.innerHTML = "x";
-  remove.className = "remove-button btn btn-xs btn-danger"
+  // var remove = container.appendChild(document.createElement("BUTTON"));
+  // remove.id = "remove" + (formCounter/2);
+  // remove.innerHTML = "x";
+  // remove.className = "remove-button btn btn-xs btn-danger"
   var inputLabel = document.createElement("input");
   inputLabel.type = "text";
   inputLabel.name = "label" + (formCounter/2);
@@ -83,15 +106,16 @@ Template.editSubjectParameters.events({
   e.preventDefault();
   $("#formRow").remove();
   $("#formSection").append("<form id=formRow></form>");
+  loadNameParam();
 },
 'click #load_current_subject_params': function(e) {
   e.preventDefault();
   propigateEditSubjectForm();
 },
-'click .remove-button': function(e) {
-  e.preventDefault();
-  alert("Not Working");
-},
+// 'click .remove-button': function(e) {
+//   e.preventDefault();
+//   alert("Not Working");
+// },
 'click #save_subj_all': function(e) {
   e.preventDefault();
   var parameterPairs = (($("#container input").length)/2);
@@ -183,10 +207,10 @@ function propigateEditSubjectForm() {
   for (i=0;i<parameterPairs;i++) {
     var formCounter = $("#container input").length;
     container.appendChild(document.createTextNode("Parameter " + (formCounter/2)));
-    var remove = container.appendChild(document.createElement("BUTTON"));
-    remove.id = "remove" + (formCounter/2);
-    remove.innerHTML = "x";
-    remove.className = "remove-button btn btn-xs btn-danger"
+    // var remove = container.appendChild(document.createElement("BUTTON"));
+    // remove.id = "remove" + (formCounter/2);
+    // remove.innerHTML = "x";
+    // remove.className = "remove-button btn btn-xs btn-danger"
     var inputLabel = document.createElement("input");
     inputLabel.type = "text";
     inputLabel.name = "label" + (formCounter/2);
@@ -198,7 +222,8 @@ function propigateEditSubjectForm() {
     inputParameters.name = "parameter" + (formCounter/2);
     inputParameters.className = "form-control"
     if (split[i] == "text") {
-      inputParameters.placeholder = "Leave blank to allow for text input."
+      inputParameters.placeholder = "Leave blank to allow for text input. Name/ID parameter is required."
+      inputParameters.disabled = true;
     }
     else {
       var array = split[i]

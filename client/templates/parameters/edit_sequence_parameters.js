@@ -12,10 +12,10 @@ function loadDefaultSeqParams() {
   for (i=0;i<7;i++){
       var formCounter = $("#container input").length;
       container.appendChild(document.createTextNode("Parameter " + (formCounter/2)));
-      var remove = container.appendChild(document.createElement("BUTTON"));
-      remove.id = "remove" + (formCounter/2);
-      remove.innerHTML = "x";
-      remove.className = "remove-button btn btn-xs btn-danger"
+      // var remove = container.appendChild(document.createElement("BUTTON"));
+      // remove.id = "remove" + (formCounter/2);
+      // remove.innerHTML = "x";
+      // remove.className = "remove-button btn btn-xs btn-danger"
       var inputLabel = document.createElement("input");
       inputLabel.type = "text";
       inputLabel.name = "label" + (formCounter/2);
@@ -56,10 +56,10 @@ function addSeqFields() {
   var formCounter = $("#container input").length;
   var container = document.getElementById("formRow");
   var paramText = container.appendChild(document.createTextNode("Parameter " + (formCounter/2)));
-  var remove = container.appendChild(document.createElement("BUTTON"));
-  remove.id = "remove" + (formCounter/2);
-  remove.innerHTML = "x";
-  remove.className = "remove-button btn btn-xs btn-danger"
+  // var remove = container.appendChild(document.createElement("BUTTON"));
+  // remove.id = "remove" + (formCounter/2);
+  // remove.innerHTML = "x";
+  // remove.className = "remove-button btn btn-xs btn-danger"
   var inputLabel = document.createElement("input");
   inputLabel.type = "text";
   inputLabel.name = "label" + (formCounter/2);
@@ -97,10 +97,10 @@ Template.editSequenceParameters.events({
   e.preventDefault();
   propigateEditSequenceForm();
 },
-'click .remove-button': function(e) {
-  e.preventDefault();
-  alert("Not Working");
-},
+// 'click .remove-button': function(e) {
+//   e.preventDefault();
+//   alert("Not Working");
+// },
 'click #save_subj_all': function(e) {
   e.preventDefault();
   var parameterPairs = (($("#container input").length)/2);
@@ -163,10 +163,10 @@ function propigateEditSequenceForm() {
   for (i=0;i<parameterPairs;i++) {
     var formCounter = $("#container input").length;
     container.appendChild(document.createTextNode("Parameter " + (formCounter/2)));
-    var remove = container.appendChild(document.createElement("BUTTON"));
-    remove.id = "remove" + (formCounter/2);
-    remove.innerHTML = "x";
-    remove.className = "remove-button btn btn-xs btn-danger"
+    // var remove = container.appendChild(document.createElement("BUTTON"));
+    // remove.id = "remove" + (formCounter/2);
+    // remove.innerHTML = "x";
+    // remove.className = "remove-button btn btn-xs btn-danger"
     var inputLabel = document.createElement("input");
     inputLabel.type = "text";
     inputLabel.name = "label" + (formCounter/2);
