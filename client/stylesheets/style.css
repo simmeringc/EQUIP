@@ -107,6 +107,16 @@ ul
     border-radius: 4px;
 }
 
+.modal-dialog{
+    position: relative;
+    display: table;
+    overflow: scroll;
+    width: auto;
+    min-width: 600px;
+    max-width: 100%;
+    max-height: 100%;
+}
+
 .alert-custom-sequence-params{
     padding: 8px 35px 8px 14px;
     width: 57%;
