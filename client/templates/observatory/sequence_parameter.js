@@ -10,19 +10,20 @@ function propigateSubjectForm() {
   parametersObj = SequenceParameters.find({'children.envId':envId}).fetch();
   parameterPairs = parametersObj[0]["children"]["parameterPairs"]
 
-  var split = []
+  var seqSplit = []
   for (i=0;i<parameterPairs;i++) {
     if (parametersObj[0]["children"]["parameter"+i] == null) {
-      split[i] = "text";
+      seqSplit[i] = "text";
       continue;
     }
     str = parametersObj[0]["children"]["parameter"+i]
     var strSplit = str.split(",");
-    split[i] = strSplit
+    seqSplit[i] = strSplit
   }
+  Session.set('seqSplit', seqSplit);
 
   for (i=0;i<parameterPairs;i++) {
-      if (split[i] == "text") {
+      if (seqSplit[i] == "text") {
         var input = document.createElement("input");
         input.type = "text";
         input.name = parametersObj[0]["children"]["label"+i];
@@ -39,7 +40,7 @@ function propigateSubjectForm() {
       select.className = "form-control"
       select.placeholder = parametersObj[0]["children"]["label"+i];
       container.appendChild(select);
-        for(j=0;j<split[i].length;j++){
+        for(j=0;j<seqSplit[i].length;j++) {
           if (j == 0) {
             var placeholderOption = document.createElement("option");
             placeholderOption.text = parametersObj[0]["children"]["label"+i];
@@ -47,7 +48,7 @@ function propigateSubjectForm() {
             select.appendChild(placeholderOption);
           }
           var option = document.createElement("option");
-          option.text = split[i][j];
+          option.text = seqSplit[i][j];
           option.value = j;
           select.appendChild(option);
         }

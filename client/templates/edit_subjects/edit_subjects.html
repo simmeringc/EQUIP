@@ -24,43 +24,7 @@
         </div>
         <div class="modal-footer" onKeyPress="return checkSubmit(event)">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="saveName">Save Changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="createCharPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Subject Characteristics</h4>
-        </div>
-        <div class="modal-body">
-          <div class="control">
-            <ul>
-              <li>
-                <form>
-                  Characteristic Name:
-                  <input class="form-control" type="text" name="firstname">
-                  Characteristic Input:<br>
-                  <input class="form-control" type="text" name="lastname">
-                </form>
-              </li>
-              <li>
-                <form>
-                  First name:<br>
-                  <input type="text" name="firstname"><br>
-                  Last name:<br>
-                  <input type="text" name="lastname">
-                </form>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="modal-footer" onKeyPress="return checkSubmit(event)">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="saveChars">Save Changes</button>
+          <button type="button" class="btn btn-primary" id="saveSubject">Save Changes</button>
         </div>
       </div>
     </div>
@@ -76,49 +40,7 @@
           <div class="alert-danger bug" role="alert">
             Delete subject button bugged.
           </div>
-          <table class="table table-hover table-striped table-sm table-bordered ftable">
-            <thead>
-              <tr class="ftable_head">
-                <td>#</td>
-                <td>Name</td>
-                <td>Age</td>
-                <td>Gender</td>
-                <td>Race</td>
-                <td></td>
-              </tr>
-            </thead>
-            <tbody>
-              {{#each subject}}
-                <tr>
-                  <td>{{emptyChild}}</td>
-                  <td>{{subjName}}</td>
-                  <td>
-                    {{#if _0_10 subjAge}}0-10{{/if}}
-                    {{#if _10_15 subjAge}}10-15{{/if}}
-                    {{#if _15_20 subjAge}}15-20{{/if}}
-                    {{#if _20_25 subjAge}}20-25{{/if}}
-                    {{#if _ageUnknown subjAge}}Unknown{{/if}}
-                  </td>
-                  <td>
-                    {{#if _male subjGender}}Male{{/if}}
-                    {{#if _female subjGender}}Female{{/if}}
-                    {{#if _genderOther subjGender}}Other{{/if}}
-                    {{#if _genderUnknown subjGender}}Unknown{{/if}}
-                  </td>
-                  <td>
-                    {{#if _native subjRace}}American Indian or Alaska Native{{/if}}
-                    {{#if _asian subjRace}}Asian{{/if}}
-                    {{#if _black subjRace}}Black or African American{{/if}}
-                    {{#if _pacific subjRace}}Native Hawaiian or Other Pacific Islander{{/if}}
-                    {{#if _white subjRace}}White{{/if}}
-                    {{#if _latino subjRace}}Hispanic or Latino{{/if}}
-                    {{#if _raceUnknown subjRace}}Unknown{{/if}}
-                  </td>
-                  <td><button type="button" class="btn btn-xs btn-danger deleteSubject">X</button></td>
-                </tr>
-              {{/each}}
-            </tbody>
-          </table>
+          {{>subjectEditTableHead}}
         </div>
         <div class="modal-footer" onKeyPress="return checkSubmit(event)">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

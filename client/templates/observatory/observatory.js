@@ -9,10 +9,6 @@ Template.observatory.helpers({
   obsSequence: function() {
     return Sequences.find({obsId: Router.current().params._obsId});
   },
-  obsName: function() {
-    var observation = Observations.find({_id: Router.current().params._obsId}).fetch();
-    return observation[0]["name"];
-  },
   seqParameter: function() {
     return SequenceParameters.find({'children.envId': this.envId})
   },

@@ -86,8 +86,8 @@ Template.editSubjects.events({
            height=$(this).css('height');
            height=height.substring(0,height.length-2);
            var subjectPositionSize = {
-             subjXPos: $(this).attr('data-x'), //FOR EXAMPLE: $('#subjXPos').val() On some hidden field
-             subjYPos: $(this).attr('data-y'),  //FOR EXAMPLE: $('#subjYPos').val() On some hidden field
+             subjXPos: $(this).attr('data-x'),
+             subjYPos: $(this).attr('data-y'),
              subjXSize: width,
              subjYSize: height,
              _id: this.id
@@ -115,13 +115,15 @@ Template.editSubjects.events({
    })
  },
 
-  'click #saveName': function(e) {
+  'click #saveSubject': function(e) {
+
+   var subjLabels = []
+   var labelsObj = SubjectParameters.find({'children.envId':this._id}).fetch();
+   for (i=0;i<labelsObj[0]['children']['parameterPairs'];i++) {
+     subjLabels[i] = labelsObj[0]['children']['label'+i]
+   }
 
    var subject = {
-     subjName: $('#subjectName').val(),
-     subjAge: $('#subjectAge').val(),
-     subjGender: $('#subjectGender').val(),
-     subjRace: $('#SubjectRace').val(),
      subjXPos: '',
      subjYPos: '',
      subjXSize: '',
@@ -129,35 +131,44 @@ Template.editSubjects.events({
      envId: this._id
    };
 
+   var subjSplit = Session.get('subjSplit');
+   for (i=0;i<subjLabels.length;i++) {
+     label = subjLabels[i];
+     literal = subjLabels[i] + "Literal";
+     optionVal = $('#'+label).val();
+     subject[label] = optionVal
+     console.log(subjSplit[i][optionVal]);
+     if (subjSplit[i][optionVal] == undefined) {
+       subject[literal] = $('#'+label).val();
+       continue
+     }
+     subject[literal] = subjSplit[i][optionVal];
+   }
+
    Meteor.call('subjectInsert', subject, function(error, result) {
      return 0;
    });
 
+
    $('#createSubjPopup').modal('hide');
-   $('#subjectName').val('');
-   $('#subjectAge').val('');
-   $('#subjectGender').val('');
-   $('#SubjectRace').val('');
+   for (i=0;i<subjLabels.length;i++) {
+     label = subjLabels[i];
+     $('#'+label).val('');
+   }
  },
 
- 'click #editSubjects': function(e) {
+  'click #editSubjects': function(e) {
   $('#editSubjPopup').modal({
     keyboard: true,
     show: true
   });
 },
-
 'click .deleteSubject': function(e) {
   Session.set('subjId', this._id);
 },
-
 'click #saveSubjEdits': function(e) {
   $('#editSubjPopup').modal('hide');
 },
-
- 'click #saveChars': function(e) {
-   $('#createCharPopup').modal('hide');
- },
  'click .deleteSubject': function(e) {
    Session.set('subjId', this._id);
  }
@@ -182,53 +193,5 @@ Template.editSubjects.helpers({
   },
   subjParameter: function() {
     return SubjectParameters.find({'children.envId':this._id})
-  },
-  _0_10: function(subjAge){
-    return subjAge == 0;
-  },
-  _10_15: function(subjAge){
-    return subjAge == 1;
-  },
-  _15_20: function(subjAge){
-    return subjAge == 2;
-  },
-  _20_25: function(subjAge){
-    return subjAge == 3;
-  },
-  _ageUnknown: function(subjAge){
-    return subjAge == 4;
-  },
-  _male: function(subjGender){
-    return subjGender == 0;
-  },
-  _female: function(subjGender){
-    return subjGender == 1;
-  },
-  _genderOther: function(subjGender){
-    return subjGender == 2;
-  },
-  _genderUnknown: function(subjGender){
-    return subjGender == 3;
-  },
-  _native: function(subjRace){
-    return subjRace == 0;
-  },
-  _asian: function(subjRace){
-    return subjRace == 1;
-  },
-  _black: function(subjRace){
-    return subjRace == 2;
-  },
-  _pacific: function(subjRace){
-    return subjRace == 3;
-  },
-  _white: function(subjRace){
-    return subjRace == 4;
-  },
-  _latino: function(subjRace){
-    return subjRace == 5;
-  },
-  _raceUnknown: function(subjRace){
-    return subjRace == 6;
   }
 });
