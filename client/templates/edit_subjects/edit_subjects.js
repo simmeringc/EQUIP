@@ -138,7 +138,6 @@ Template.editSubjects.events({
      label = subjLabels[i];
      literal = subjLabels[i] + "Literal";
      optionVal = $('#'+label).val();
-     console.log('OPTIONVAL', optionVal)
      subject[label] = optionVal
      if (subjSplit[i][optionVal] == undefined) {
        subject[literal] = $('#'+label).val();
