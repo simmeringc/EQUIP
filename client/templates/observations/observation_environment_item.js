@@ -35,6 +35,7 @@ Template.observationEnvironmentItem.events({
     $('#observationName').val('');
   },
   'click .allSequences': function(e) {
+   propigateSequenceTableBody();
    $('#allSequencesPopup').modal({
      keyboard: true,
      show: true
@@ -70,3 +71,45 @@ Template.observationEnvironmentItem.events({
     });
  }
  /*End allSequence Delete Block*/
+ function propigateSequenceTableBody() {
+   $(".tbody").remove();
+   $(".ftable").append("<tbody class=tbody></tbody>");
+   var seqTableCounter=1;
+   var envId = Router.current().params._envId
+   var sequences = Sequences.find({envId: envId})
+   var seqEnvCount = sequences.count();
+   var parametersObj = SequenceParameters.find({'children.envId':envId}).fetch();
+   var parameterPairs = parametersObj[0]["children"]["parameterPairs"]
+   for (i=0;i<seqEnvCount;i++) {
+     sequenceObj = Sequences.find({seqEnvCount:seqTableCounter}).fetch();
+     subjName = sequenceObj[0]["subjName"]
+
+     newRowContent = "<tr class=trbody id=td"+i+"><tr>";
+     $(".tbody").append(newRowContent);
+
+     var split = []
+     for (j=0;j<parameterPairs;j++) {
+       split[j] = parametersObj[0]["children"]["label"+j].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "")
+     }
+     var literal = []
+     for (j=0;j<parameterPairs;j++) {
+       literal[j] = sequenceObj[0][split[j]+"Literal"]
+     }
+
+     $("#"+"td"+i).append("<td></td>");
+     $("#"+"td"+i).append("<td>"+subjName+"</td>");
+     for (j=0;j<literal.length;j++) {
+       $("#"+"td"+i).append("<td>"+literal[j]+"</td>");
+     }
+     date = "<td>"+sequenceObj[0]["submitted"]+"</td>"
+     $("#"+"td"+i).append(date);
+     removeButton = "<td><button id=b"+i+">X</button></td>";
+     $("#"+"td"+i).append(removeButton);
+     $("#"+"b"+i).addClass("btn btn-xs btn-danger deleteSubject");
+     console.log(seqTableCounter);
+     seqTableCounter++;
+   }
+   $('tr').each(function () {
+        if (!$.trim($(this).text())) $(this).remove();
+   });
+ }

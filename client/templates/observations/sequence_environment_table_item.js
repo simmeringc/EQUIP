@@ -1,11 +1,10 @@
 Template.sequenceEnvironmentTableItem.rendered = function() {
-  propigateSequenceTable();
+  propigateSequenceTableHead();
 }
 
-function propigateSequenceTable() {
+function propigateSequenceTableHead() {
 
   var envId = Router.current().params._envId
-  var container = document.getElementById("tdCol");
 
   parametersObj = SequenceParameters.find({'children.envId':envId}).fetch();
   parameterPairs = parametersObj[0]["children"]["parameterPairs"]
@@ -16,8 +15,10 @@ function propigateSequenceTable() {
   }
 
   $(".ftable_head").append("<td>#</td>");
+  $(".ftable_head").append("<td>Name</td>");
   for (i=0;i<split.length;i++) {
     $(".ftable_head").append("<td>"+split[i]+"</td>");
   }
+  $(".ftable_head").append("<td>Submitted</td>");
   $(".ftable_head").append("<td></td>");
 }

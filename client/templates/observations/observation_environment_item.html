@@ -36,31 +36,9 @@
           <div class="alert-danger bug" role="alert">
             Delete sequence button bugged.
           </div>
-          <table class="table table-hover table-striped table-sm table-bordered ftable">
-            <thead>
-              {{>sequenceEnvironmentTableItem}}
-            </thead>
-            <tbody>
-              {{#each envSequence}}
-                <tr>
-                  <td>{{emptyChild}}</td>
-                  <td>{{subjName}}</td>
-                  <td>{{wcdTypeLiteral}}</td>
-                  <td>{{solicitationMethodLiteral}}</td>
-                  <td>{{waitTimeLiteral}}</td>
-                  <td>{{lengthOfTalkLiteral}}</td>
-                  <td>{{studentTalkLiteral}}</td>
-                  <td>{{teacherSolicitationLiteral}}</td>
-                  <td>{{explicitEvaluationLiteral}}</td>
-                  <td>{{obsName}}</td>
-                  <td><button type="button" class="btn btn-xs btn-danger deleteSequence">X</button></td>
-                </tr>
-              {{/each}}
-            </tbody>
-          </table>
+          {{>sequenceEnvironmentTableItem}}
         </div>
         <div class="modal-footer" onKeyPress="return checkSubmit(event)">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary" id="saveAllSequences">Save Changes</button>
         </div>
       </div>
