@@ -86,8 +86,8 @@ Template.editSubjects.events({
            height=$(this).css('height');
            height=height.substring(0,height.length-2);
            var subjectPositionSize = {
-             subjXPos: $(this).attr('data-x'), //FOR EXAMPLE: $('#subjXPos').val() On some hidden field
-             subjYPos: $(this).attr('data-y'),  //FOR EXAMPLE: $('#subjYPos').val() On some hidden field
+             subjXPos: $(this).attr('data-x'),
+             subjYPos: $(this).attr('data-y'),
              subjXSize: width,
              subjYSize: height,
              _id: this.id
@@ -115,50 +115,71 @@ Template.editSubjects.events({
    })
  },
 
-  'click #saveName': function(e) {
+  'click #saveSubject': function(e) {
+
+   var subjCount = Subjects.find({envId: Router.current().params._envId}).count()+1;
+   var subjLabels = []
+   var labelsObj = SubjectParameters.find({'children.envId':this._id}).fetch();
+   for (i=0;i<labelsObj[0]['children']['parameterPairs'];i++) {
+     subjLabels[i] = labelsObj[0]['children']['label'+i].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "")
+   }
 
    var subject = {
-     subjName: $('#subjectName').val(),
-     subjAge: $('#subjectAge').val(),
-     subjGender: $('#subjectGender').val(),
-     subjRace: $('#SubjectRace').val(),
      subjXPos: '',
      subjYPos: '',
      subjXSize: '',
      subjYsize: '',
+     subjCount: subjCount,
      envId: this._id
    };
 
+   var subjSplit = Session.get('subjSplit');
+   for (i=0;i<subjLabels.length;i++) {
+     label = subjLabels[i];
+     literal = subjLabels[i] + "Literal";
+     optionVal = $('#'+label).val();
+     console.log('OPTIONVAL', optionVal)
+     subject[label] = optionVal
+     if (subjSplit[i][optionVal] == undefined) {
+       subject[literal] = $('#'+label).val();
+       continue
+     }
+     subject[literal] = subjSplit[i][optionVal];
+   }
+
+   console.log(subject);
+
    Meteor.call('subjectInsert', subject, function(error, result) {
-     return 0;
+     if (error) {
+       alert(error.reason);
+     } else {
+     propigateSubjectTableBody();
+     }
    });
 
+
    $('#createSubjPopup').modal('hide');
-   $('#subjectName').val('');
-   $('#subjectAge').val('');
-   $('#subjectGender').val('');
-   $('#SubjectRace').val('');
+   for (i=0;i<subjLabels.length;i++) {
+     label = subjLabels[i];
+     $('#'+label).val('');
+   }
  },
 
- 'click #editSubjects': function(e) {
+'click #editSubjects': function(e) {
+  propigateSubjectTableBody();
   $('#editSubjPopup').modal({
     keyboard: true,
     show: true
   });
 },
-
 'click .deleteSubject': function(e) {
   Session.set('subjId', this._id);
 },
-
 'click #saveSubjEdits': function(e) {
   $('#editSubjPopup').modal('hide');
 },
-
- 'click #saveChars': function(e) {
-   $('#createCharPopup').modal('hide');
- },
  'click .deleteSubject': function(e) {
+   console.log(this);
    Session.set('subjId', this._id);
  }
 });
@@ -182,53 +203,41 @@ Template.editSubjects.helpers({
   },
   subjParameter: function() {
     return SubjectParameters.find({'children.envId':this._id})
-  },
-  _0_10: function(subjAge){
-    return subjAge == 0;
-  },
-  _10_15: function(subjAge){
-    return subjAge == 1;
-  },
-  _15_20: function(subjAge){
-    return subjAge == 2;
-  },
-  _20_25: function(subjAge){
-    return subjAge == 3;
-  },
-  _ageUnknown: function(subjAge){
-    return subjAge == 4;
-  },
-  _male: function(subjGender){
-    return subjGender == 0;
-  },
-  _female: function(subjGender){
-    return subjGender == 1;
-  },
-  _genderOther: function(subjGender){
-    return subjGender == 2;
-  },
-  _genderUnknown: function(subjGender){
-    return subjGender == 3;
-  },
-  _native: function(subjRace){
-    return subjRace == 0;
-  },
-  _asian: function(subjRace){
-    return subjRace == 1;
-  },
-  _black: function(subjRace){
-    return subjRace == 2;
-  },
-  _pacific: function(subjRace){
-    return subjRace == 3;
-  },
-  _white: function(subjRace){
-    return subjRace == 4;
-  },
-  _latino: function(subjRace){
-    return subjRace == 5;
-  },
-  _raceUnknown: function(subjRace){
-    return subjRace == 6;
   }
 });
+
+function propigateSubjectTableBody() {
+  $(".tbody").remove();
+  $(".ftable").append("<tbody class=tbody></tbody>");
+  var envId = Router.current().params._envId
+  var subjCount = Subjects.find({envId: envId}).count();
+  var counter=1;
+  parametersObj = SubjectParameters.find({'children.envId':envId}).fetch();
+  parameterPairs = parametersObj[0]["children"]["parameterPairs"]
+  for (i=0;i<subjCount;i++) {
+    subjectObj = Subjects.find({subjCount:counter}).fetch();
+    newRowContent = "<tr class=trbody id=td"+i+"><tr>";
+    $(".tbody").append(newRowContent);
+
+    var split = []
+    for (j=0;j<parameterPairs;j++) {
+      split[j] = parametersObj[0]["children"]["label"+j].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "")
+    }
+    var literal = []
+    for (j=0;j<parameterPairs;j++) {
+      literal[j] = subjectObj[0][split[j]+"Literal"]
+    }
+
+    $("#"+"td"+i).append("<td></td>");
+    for (j=0;j<literal.length;j++) {
+      $("#"+"td"+i).append("<td>"+literal[j]+"</td>");
+    }
+    removeButton = "<td><button id=b"+i+">X</button></td>";
+    $("#"+"td"+i).append(removeButton);
+    $("#"+"b"+i).addClass("btn btn-xs btn-danger deleteSubject");
+    counter++;
+  }
+  $('tr').each(function () {
+       if (!$.trim($(this).text())) $(this).remove();
+  });
+}

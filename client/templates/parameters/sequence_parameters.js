@@ -91,7 +91,7 @@ Template.sequenceParameters.events({
 'click #remove_all': function(e) {
   e.preventDefault();
   $("#formRow").remove();
-  $("#container").append("<form id=formRow></form>");
+  $("#formSection").append("<form id=formRow></form>");
 },
 // 'click .remove-button': function(e) {
 //   e.preventDefault();

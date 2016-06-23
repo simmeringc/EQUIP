@@ -10,23 +10,25 @@ function propigateSubjectForm() {
   parametersObj = SubjectParameters.find({'children.envId':envId}).fetch();
   parameterPairs = parametersObj[0]["children"]["parameterPairs"]
 
-  var split = []
+  var subjSplit = []
   for (i=0;i<parameterPairs;i++) {
     if (parametersObj[0]["children"]["parameter"+i] == null) {
-      split[i] = "text";
+      subjSplit[i] = "text";
       continue;
     }
     str = parametersObj[0]["children"]["parameter"+i]
     var strSplit = str.split(",");
-    split[i] = strSplit
+    subjSplit[i] = strSplit
   }
+  Session.set('subjSplit', subjSplit);
 
   for (i=0;i<parameterPairs;i++) {
-      if (split[i] == "text") {
+      if (subjSplit[i] == "text") {
         var input = document.createElement("input");
         input.type = "text";
-        input.name = parametersObj[0]["children"]["label"+i];
-        input.value = "";
+        input.name = parametersObj[0]["children"]["label"+i].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "");
+        input.id = parametersObj[0]["children"]["label"+i].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "");
+        input.value = '';
         input.placeholder = parametersObj[0]["children"]["label"+i];
         input.className = "form-control"
         container.appendChild(input);
@@ -35,19 +37,21 @@ function propigateSubjectForm() {
       }
       var select = document.createElement("select");
       select.type = "text";
-      select.name = parametersObj[0]["children"]["label"+i];
+      select.name = parametersObj[0]["children"]["label"+i].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "");
+      select.id = parametersObj[0]["children"]["label"+i].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "");
       select.className = "form-control"
       select.placeholder = parametersObj[0]["children"]["label"+i];
       container.appendChild(select);
-        for(j=0;j<split[i].length;j++){
+        for(j=0;j<subjSplit[i].length;j++){
           if (j == 0) {
             var placeholderOption = document.createElement("option");
             placeholderOption.text = parametersObj[0]["children"]["label"+i];
             placeholderOption.selected = true;
+            placeholderOption.value = '';
             select.appendChild(placeholderOption);
           }
           var option = document.createElement("option");
-          option.text = split[i][j];
+          option.text = subjSplit[i][j];
           option.value = j;
           select.appendChild(option);
         }
