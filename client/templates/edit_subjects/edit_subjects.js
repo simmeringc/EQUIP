@@ -146,8 +146,6 @@ Template.editSubjects.events({
      subject[literal] = subjSplit[i][optionVal];
    }
 
-   console.log(subject);
-
    Meteor.call('subjectInsert', subject, function(error, result) {
      if (error) {
        alert(error.reason);

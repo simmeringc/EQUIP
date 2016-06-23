@@ -23,142 +23,66 @@ Template.observatory.events({
   },
   //sequence started in subject_item.js
   'click #saveSequence': function(e) {
-   var subjId = Session.get('subjId');
-   var subject = Subjects.find({"_id":subjId}).fetch();
-   var subjName = subject[0]["subjName"];
-   var wcdTypeLiteral;
-   var solicitationMethodLiteral;
-   var waitTimeLiteral;
-   var lengthOfTalkLiteral;
-   var studentTalkLiteral;
-   var teacherSolicitationLiteral;
-   var explicitEvaluationLiteral;
-   var observation=Observations.find({"_id":Router.current().params._obsId}).fetch();
-   var obsName=observation[0]["name"];
-   switch ($('#wcdType').val()) {
-    case "0":
-        wcdTypeLiteral = "Math";
-        break;
-    case "1":
-        wcdTypeLiteral = "Non-Math";
-        break;
-    case "2":
-        wcdTypeLiteral = "Unknown";
-        break;
-      };
-    switch ($('#solicitationMethod').val()) {
-     case "0":
-         solicitationMethodLiteral = "Called On";
-         break;
-     case "1":
-         solicitationMethodLiteral = "Not Called On";
-         break;
-     case "2":
-         solicitationMethodLiteral = "Unknown";
-         break;
-       };
-   switch ($('#waitTime').val()) {
-    case "0":
-        waitTimeLiteral = "Less than 3 seconds";
-        break;
-    case "1":
-        waitTimeLiteral = "3 or more seconds";
-        break;
-    case "2":
-        waitTimeLiteral = "N/A";
-        break;
-      };
-    switch ($('#lengthOfTalk').val()) {
-     case "0":
-         lengthOfTalkLiteral = "1-4 words";
-         break;
-     case "1":
-         lengthOfTalkLiteral = "5-20 words";
-         break;
-     case "2":
-         lengthOfTalkLiteral = "21 or more";
-         break;
-     case "3":
-         lengthOfTalkLiteral = "Unknown";
-         break;
-       };
-    switch ($('#studentTalk').val()) {
-      case "0":
-          studentTalkLiteral = "How";
-          break;
-      case "1":
-          studentTalkLiteral = "What";
-          break;
-      case "2":
-          studentTalkLiteral = "Why";
-          break;
-      case "3":
-          studentTalkLiteral = "Other";
-          break;
-      case "4":
-          studentTalkLiteral = "Unknown";
-          break;
-        };
-    switch ($('#teacherSolicitation').val()) {
-     case "0":
-         teacherSolicitationLiteral = "How";
-         break;
-     case "1":
-         teacherSolicitationLiteral = "What";
-         break;
-     case "2":
-         teacherSolicitationLiteral = "Why";
-         break;
-     case "3":
-         teacherSolicitationLiteral = "Other";
-         break;
-     case "4":
-         teacherSolicitationLiteral = "Unknown";
-         break;
-       };
-    switch ($('#explicitEvaluation').val()) {
-      case "0":
-          explicitEvaluationLiteral = "Yes";
-          break;
-      case "1":
-          explicitEvaluationLiteral = "No";
-          break;
-      case "2":
-          explicitEvaluationLiteral = "Unknown";
-          break;
-        };
+
+    var seqObsCount = Sequences.find({obsId: Router.current().params._obsId}).count()+1;
+    var seqEnvCount = Sequences.find({envId: Router.current().params._envId}).count()+1;
+    var seqLabels = []
+    var labelsObj = SequenceParameters.find({'children.envId':Router.current().params._envId}).fetch();
+    for (i=0;i<labelsObj[0]['children']['parameterPairs'];i++) {
+      seqLabels[i] = labelsObj[0]['children']['label'+i].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "")
+    }
+
+    var subjId = Session.get('subjId');
+    var subject = Subjects.find({"_id":subjId}).fetch();
+    var observation=Observations.find({"_id":Router.current().params._obsId}).fetch();
+    var obsName=observation[0]["name"];
+    var parametersObj = SubjectParameters.find({'children.envId':Router.current().params._envId}).fetch();
+    var subjIdParameter = parametersObj[0]["children"]["label0"]
+    var subjectObj = Subjects.find({_id:subjId}).fetch();
+    var subjName = subjectObj[0][subjIdParameter]
+
    var sequence = {
-     wcdType: $('#wcdType').val(),
-     wcdTypeLiteral: wcdTypeLiteral,
-     solicitationMethod: $('#solicitationMethod').val(),
-     solicitationMethodLiteral: solicitationMethodLiteral,
-     waitTime: $('#waitTime').val(),
-     waitTimeLiteral: waitTimeLiteral,
-     lengthOfTalk: $('#lengthOfTalk').val(),
-     lengthOfTalkLiteral: lengthOfTalkLiteral,
-     studentTalk: $('#studentTalk').val(),
-     studentTalkLiteral: studentTalkLiteral,
-     teacherSolicitation: $('#teacherSolicitation').val(),
-     teacherSolicitationLiteral: teacherSolicitationLiteral,
-     explicitEvaluation: $('#explicitEvaluation').val(),
-     explicitEvaluationLiteral: explicitEvaluationLiteral,
      subjId: subjId,
      subjName: subjName,
      envId: Router.current().params._envId,
      obsId: Router.current().params._obsId,
-     obsName: obsName
+     obsName: obsName,
+     seqObsCount: seqObsCount,
+     seqEnvCount: seqEnvCount
    };
+
+   var seqSplit = Session.get('seqSplit');
+   for (i=0;i<seqLabels.length;i++) {
+     label = seqLabels[i];
+     literal = seqLabels[i] + "Literal";
+     optionVal = $('#'+label).val();
+     sequence[label] = optionVal
+     if (seqSplit[i][optionVal] == undefined) {
+       sequence[literal] = $('#'+label).val();
+       continue
+     }
+     sequence[literal] = seqSplit[i][optionVal];
+   }
+   console.log(sequence)
+
    Meteor.call('sequenceInsert', sequence, function(error, result) {
-     return 0;
+     if (error) {
+       alert(error.reason);
+     } else {
+       propigateSequenceTableBody();
+     }
    });
    $('#createSequence').modal('hide');
   },
+
    'click .editSequences': function(e) {
+    propigateSequenceTableBody();
     $('#editSequencesPopup').modal({
       keyboard: true,
       show: true
     });
   },
+
   'click #saveSequenceEdits': function(e) {
     $('#editSequencesPopup').modal('hide');
   }
@@ -176,3 +100,46 @@ Template.observatory.events({
     });
  }
  /*End Sequence Delete Block*/
+
+ function propigateSequenceTableBody() {
+   $(".tbody").remove();
+   $(".ftable").append("<tbody class=tbody></tbody>");
+   var seqTableCounter=1;
+   var envId = Router.current().params._envId
+   var sequences = Sequences.find({obsId: Router.current().params._obsId})
+   var seqObsCount = sequences.count();
+   var parametersObj = SequenceParameters.find({'children.envId':envId}).fetch();
+   var parameterPairs = parametersObj[0]["children"]["parameterPairs"]
+   for (i=0;i<seqObsCount;i++) {
+     sequenceObj = Sequences.find({seqObsCount:seqTableCounter}).fetch();
+     subjName = sequenceObj[0]["subjName"]
+
+     newRowContent = "<tr class=trbody id=td"+i+"><tr>";
+     $(".tbody").append(newRowContent);
+
+     var split = []
+     for (j=0;j<parameterPairs;j++) {
+       split[j] = parametersObj[0]["children"]["label"+j].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "")
+     }
+     var literal = []
+     for (j=0;j<parameterPairs;j++) {
+       literal[j] = sequenceObj[0][split[j]+"Literal"]
+     }
+
+     $("#"+"td"+i).append("<td></td>");
+     $("#"+"td"+i).append("<td>"+subjName+"</td>");
+     for (j=0;j<literal.length;j++) {
+       $("#"+"td"+i).append("<td>"+literal[j]+"</td>");
+     }
+     date = "<td>"+sequenceObj[0]["submitted"]+"</td>"
+     $("#"+"td"+i).append(date);
+     removeButton = "<td><button id=b"+i+">X</button></td>";
+     $("#"+"td"+i).append(removeButton);
+     $("#"+"b"+i).addClass("btn btn-xs btn-danger deleteSubject");
+     console.log(seqTableCounter);
+     seqTableCounter++;
+   }
+   $('tr').each(function () {
+        if (!$.trim($(this).text())) $(this).remove();
+   });
+ }

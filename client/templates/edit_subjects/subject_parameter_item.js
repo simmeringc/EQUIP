@@ -28,7 +28,7 @@ function propigateSubjectForm() {
         input.type = "text";
         input.name = parametersObj[0]["children"]["label"+i].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "");
         input.id = parametersObj[0]["children"]["label"+i].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "");
-        input.value = '';
+        input.value = "";
         input.placeholder = parametersObj[0]["children"]["label"+i];
         input.className = "form-control"
         container.appendChild(input);
