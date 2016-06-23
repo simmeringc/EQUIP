@@ -117,6 +117,7 @@ Template.editSubjects.events({
 
   'click #saveSubject': function(e) {
 
+   var subjCount = Subjects.find({envId: Router.current().params._envId}).count()+1;
    var subjLabels = []
    var labelsObj = SubjectParameters.find({'children.envId':this._id}).fetch();
    for (i=0;i<labelsObj[0]['children']['parameterPairs'];i++) {
@@ -128,6 +129,7 @@ Template.editSubjects.events({
      subjYPos: '',
      subjXSize: '',
      subjYsize: '',
+     subjCount: subjCount,
      envId: this._id
    };
 
@@ -137,7 +139,6 @@ Template.editSubjects.events({
      literal = subjLabels[i] + "Literal";
      optionVal = $('#'+label).val();
      subject[label] = optionVal
-     console.log(subjSplit[i][optionVal]);
      if (subjSplit[i][optionVal] == undefined) {
        subject[literal] = $('#'+label).val();
        continue
