@@ -121,7 +121,7 @@ Template.editSubjects.events({
    var subjLabels = []
    var labelsObj = SubjectParameters.find({'children.envId':this._id}).fetch();
    for (i=0;i<labelsObj[0]['children']['parameterPairs'];i++) {
-     subjLabels[i] = labelsObj[0]['children']['label'+i]
+     subjLabels[i] = labelsObj[0]['children']['label'+i].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "")
    }
 
    var subject = {
@@ -138,6 +138,7 @@ Template.editSubjects.events({
      label = subjLabels[i];
      literal = subjLabels[i] + "Literal";
      optionVal = $('#'+label).val();
+     console.log('OPTIONVAL', optionVal)
      subject[label] = optionVal
      if (subjSplit[i][optionVal] == undefined) {
        subject[literal] = $('#'+label).val();
@@ -146,8 +147,14 @@ Template.editSubjects.events({
      subject[literal] = subjSplit[i][optionVal];
    }
 
+   console.log(subject);
+
    Meteor.call('subjectInsert', subject, function(error, result) {
-     return 0;
+     if (error) {
+       alert(error.reason);
+     } else {
+     propigateSubjectTableBody();
+     }
    });
 
 
@@ -158,7 +165,8 @@ Template.editSubjects.events({
    }
  },
 
-  'click #editSubjects': function(e) {
+'click #editSubjects': function(e) {
+  propigateSubjectTableBody();
   $('#editSubjPopup').modal({
     keyboard: true,
     show: true
@@ -171,6 +179,7 @@ Template.editSubjects.events({
   $('#editSubjPopup').modal('hide');
 },
  'click .deleteSubject': function(e) {
+   console.log(this);
    Session.set('subjId', this._id);
  }
 });
@@ -196,3 +205,39 @@ Template.editSubjects.helpers({
     return SubjectParameters.find({'children.envId':this._id})
   }
 });
+
+function propigateSubjectTableBody() {
+  $(".tbody").remove();
+  $(".ftable").append("<tbody class=tbody></tbody>");
+  var envId = Router.current().params._envId
+  var subjCount = Subjects.find({envId: envId}).count();
+  var counter=1;
+  parametersObj = SubjectParameters.find({'children.envId':envId}).fetch();
+  parameterPairs = parametersObj[0]["children"]["parameterPairs"]
+  for (i=0;i<subjCount;i++) {
+    subjectObj = Subjects.find({subjCount:counter}).fetch();
+    newRowContent = "<tr class=trbody id=td"+i+"><tr>";
+    $(".tbody").append(newRowContent);
+
+    var split = []
+    for (j=0;j<parameterPairs;j++) {
+      split[j] = parametersObj[0]["children"]["label"+j].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "")
+    }
+    var literal = []
+    for (j=0;j<parameterPairs;j++) {
+      literal[j] = subjectObj[0][split[j]+"Literal"]
+    }
+
+    $("#"+"td"+i).append("<td></td>");
+    for (j=0;j<literal.length;j++) {
+      $("#"+"td"+i).append("<td>"+literal[j]+"</td>");
+    }
+    removeButton = "<td><button id=b"+i+">X</button></td>";
+    $("#"+"td"+i).append(removeButton);
+    $("#"+"b"+i).addClass("btn btn-xs btn-danger deleteSubject");
+    counter++;
+  }
+  $('tr').each(function () {
+       if (!$.trim($(this).text())) $(this).remove();
+  });
+}

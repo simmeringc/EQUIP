@@ -26,8 +26,8 @@ function propigateSubjectForm() {
       if (subjSplit[i] == "text") {
         var input = document.createElement("input");
         input.type = "text";
-        input.name = parametersObj[0]["children"]["label"+i];
-        input.id = parametersObj[0]["children"]["label"+i];
+        input.name = parametersObj[0]["children"]["label"+i].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "");
+        input.id = parametersObj[0]["children"]["label"+i].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "");
         input.value = '';
         input.placeholder = parametersObj[0]["children"]["label"+i];
         input.className = "form-control"
@@ -37,8 +37,8 @@ function propigateSubjectForm() {
       }
       var select = document.createElement("select");
       select.type = "text";
-      select.name = parametersObj[0]["children"]["label"+i];
-      select.id = parametersObj[0]["children"]["label"+i];
+      select.name = parametersObj[0]["children"]["label"+i].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "");
+      select.id = parametersObj[0]["children"]["label"+i].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "");
       select.className = "form-control"
       select.placeholder = parametersObj[0]["children"]["label"+i];
       container.appendChild(select);

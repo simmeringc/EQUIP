@@ -20,9 +20,3 @@ function propigateSubjectTableHead() {
   }
   $(".ftable_head").append("<td></td>");
 }
-
-Template.subjectEditTableHead.helpers({
-  subject: function() {
-    return Subjects.find({envId: this._id});
-  }
-});

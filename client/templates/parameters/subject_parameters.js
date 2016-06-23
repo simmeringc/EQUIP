@@ -125,7 +125,7 @@ Template.subjectParameters.events({
     parameterPairs: parameterPairs
   });
   Meteor.call('subjParameters', obj, function(error, result) {
-    if (error){
+    if (error) {
       alert(error.reason);
     } else {
       toastr.options = {
