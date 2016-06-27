@@ -48,7 +48,9 @@ Template.observatory.events({
      obsId: Router.current().params._obsId,
      obsName: obsName,
      seqObsCount: seqObsCount,
-     seqEnvCount: seqEnvCount
+     seqEnvCount: seqEnvCount,
+     valueInput: {},
+     valueLiteral: {}
    };
 
    var seqSplit = Session.get('seqSplit');
@@ -56,14 +58,13 @@ Template.observatory.events({
      label = seqLabels[i];
      literal = seqLabels[i] + "Literal";
      optionVal = $('#'+label).val();
-     sequence[label] = optionVal
+     sequence["valueInput"][label] = optionVal
      if (seqSplit[i][optionVal] == undefined) {
-       sequence[literal] = $('#'+label).val();
+       sequence["valueLiteral"][literal] = $('#'+label).val();
        continue
      }
-     sequence[literal] = seqSplit[i][optionVal];
+     sequence["valueLiteral"][literal] = seqSplit[i][optionVal];
    }
-   console.log(sequence)
 
    Meteor.call('sequenceInsert', sequence, function(error, result) {
      if (error) {
@@ -123,7 +124,7 @@ Template.observatory.events({
      }
      var literal = []
      for (j=0;j<parameterPairs;j++) {
-       literal[j] = sequenceObj[0][split[j]+"Literal"]
+       literal[j] = sequenceObj[0]["valueLiteral"][split[j]+"Literal"]
      }
 
      $("#"+"td"+i).append("<td></td>");
@@ -136,7 +137,6 @@ Template.observatory.events({
      removeButton = "<td><button id=b"+i+">X</button></td>";
      $("#"+"td"+i).append(removeButton);
      $("#"+"b"+i).addClass("btn btn-xs btn-danger deleteSubject");
-     console.log(seqTableCounter);
      seqTableCounter++;
    }
    $('tr').each(function () {

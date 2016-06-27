@@ -93,7 +93,7 @@ Template.observationEnvironmentItem.events({
      }
      var literal = []
      for (j=0;j<parameterPairs;j++) {
-       literal[j] = sequenceObj[0][split[j]+"Literal"]
+       literal[j] = sequenceObj[0]["valueLiteral"][split[j]+"Literal"]
      }
 
      $("#"+"td"+i).append("<td></td>");

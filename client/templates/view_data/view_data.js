@@ -1,3 +1,5 @@
+var flatten = require('flat')
+
 Template.viewData.helpers({
    environment: function() {
       return Environments.find({}, {sort: {submitted: -1}});
@@ -233,9 +235,10 @@ Template.viewData.events({
         var environment=Environments.find({"envName":selectEnvironment}).fetch();
         var envId=environment[0]["_id"];
         var sequences=Sequences.find({"envId":envId}).fetch();
+        sequences[0]["valueLiteral"]["subjName"] = sequences[0]["subjName"]
+        var literalArray = [sequences[0]["valueLiteral"]]
         var csv = Papa.unparse({
-          fields: ["subjName", "wcdTypeLiteral", "solicitationMethodLiteral", "waitTimeLiteral", "lengthOfTalkLiteral", "studentTalkLiteral", "teacherSolicitationLiteral", "explicitEvaluationLiteral"],
-          data: sequences,
+          data: literalArray,
         });
         var csvData = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
         var csvURL =  null;
@@ -248,14 +251,15 @@ Template.viewData.events({
         }
         var tempLink = document.createElement('a');
         tempLink.href = csvURL;
-        tempLink.setAttribute('download', 'download.csv');
+        tempLink.setAttribute('download', selectEnvironment+'_CSV_export.csv');
         tempLink.click();
       }
       else{
         var sequences=Sequences.find({}).fetch();
+        sequences[0]["valueLiteral"]["subjName"] = sequences[0]["subjName"]
+        var literalArray = [sequences[0]["valueLiteral"]]
         var csv = Papa.unparse({
-          fields: ["subjName", "wcdTypeLiteral", "solicitationMethodLiteral", "waitTimeLiteral", "lengthOfTalkLiteral", "studentTalkLiteral", "teacherSolicitationLiteral", "explicitEvaluationliteral"],
-          data: sequences,
+          data: literalArray,
         });
         var csvData = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
         var csvURL =  null;
@@ -268,7 +272,7 @@ Template.viewData.events({
         }
         var tempLink = document.createElement('a');
         tempLink.href = csvURL;
-        tempLink.setAttribute('download', 'download.csv');
+        tempLink.setAttribute('download', selectEnvironment+'_CSV_export.csv');
         tempLink.click();
       }
     }
