@@ -24,11 +24,14 @@
   /*End table row numbering*/
 
 body {
-  background: #eee;
-  color: #666666;
+  color: black;
   /* Move down content because we have a fixed navbar that is 50px tall */
-  padding-top: 50px;
-  padding-bottom: 20px;
+}
+
+
+
+.jumbotron-landing-page {
+  margin-top: 75px;
 }
 
 .modal-large {
@@ -41,6 +44,7 @@ body {
 }
 
 .card {
+    margin-top: 75px;
   	background: #FFFFFF;
   	box-shadow: 0 0 8px rgba(0, 0, 0, .4);
 }
@@ -219,10 +223,13 @@ ul
 }
 
 .navbar {
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  background: #222222;
+}
   /* line 32, ../sass/style.scss */
   .navbar .navbar-inner {
     border-radius: 0px 0px 3px 3px; }
+
 
 #spinner {
   height: 300px; }
