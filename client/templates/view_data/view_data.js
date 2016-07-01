@@ -233,10 +233,11 @@ Template.viewData.events({
         var environment=Environments.find({"envName":selectEnvironment}).fetch();
         var envId=environment[0]["_id"];
         var sequences=Sequences.find({"envId":envId}).fetch();
-        sequences[0]["valueLiteral"]["subjName"] = sequences[0]["subjName"]
-        console.log(sequences);
-        var literalArray = [sequences[0]["valueLiteral"]]
-        console.log(literalArray);
+        var literalArray = []
+        for (i=0;i<sequences.length;i++) {
+          sequences[i]["valueLiteral"]["subjName"] = sequences[i]["subjName"]
+          literalArray[i] = sequences[i]["valueLiteral"];
+        }
         var csv = Papa.unparse({
           data: literalArray,
         });
@@ -257,10 +258,11 @@ Template.viewData.events({
       else{
         var sequences=Sequences.find({}).fetch();
         sequences[0]["valueLiteral"]["subjName"] = sequences[0]["subjName"]
-        var literalArray = [sequences[0]["valueLiteral"]]
-        var csv = Papa.unparse({
-          data: literalArray,
-        });
+        var literalArray = []
+        for (i=0;i<sequences.length;i++) {
+          sequences[i]["valueLiteral"]["subjName"] = sequences[i]["subjName"]
+          literalArray[i] = sequences[i]["valueLiteral"];
+        }
         var csvData = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
         var csvURL =  null;
         //IE download API for saving files client side
