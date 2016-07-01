@@ -29,21 +29,43 @@ Template.observatory.events({
   'click .deleteSequence': function(e) {
     Session.set('sequenceId', this._id);
   },
+  'click .input-style': function(e) {
+    var obj = {
+      envId: Router.current().params._envId,
+      inputStyle: $(e.target).val()
+    };
+    Meteor.call('updateInputStyle', obj, function(error, result) {
+      if (error) {
+        alert(error.reason);
+      } else {
+        return 0;
+      }
+    });
+  },
   'click .selectable': function(e) {
      e.preventDefault();
      eId = $(e.target).attr("aTagId");
      eValue = $(e.target).attr("aTagValue");
+     $("."+eId).each(function() {
+       if ($(this).hasClass('deselectable')) {
+         $(this).toggleClass("deselectable");
+         $(this).toggleClass("selectable");
+       }
+     });
      $(e.currentTarget).toggleClass("selectable");
      $(e.currentTarget).toggleClass("deselectable");
      aTagSelectionInsert(eId, eValue);
    },
    'click .deselectable': function(e) {
       e.preventDefault();
+      eId = $(e.target).attr("aTagId");
+      eValue = null;
       $(e.currentTarget).toggleClass("deselectable");
       $(e.currentTarget).toggleClass("selectable");
+      aTagSelectionInsert(eId, eValue);
     },
   //sequence started in subject_item.js
-  'click #saveSequenceBoxMode': function(e) {
+  'click #saveSequenceBox': function(e) {
 
     var seqObsCount = Sequences.find({obsId: Router.current().params._obsId}).count()+1;
     var seqEnvCount = Sequences.find({envId: Router.current().params._envId}).count()+1;
@@ -89,9 +111,8 @@ Template.observatory.events({
        propigateSequenceTableBody();
      }
    });
-   $('#createSequence').modal('hide');
+   $('#createSequenceBox').modal('hide');
   },
-
    'click .editSequences': function(e) {
     propigateSequenceTableBody();
     $('#editSequencesPopup').modal({
@@ -99,20 +120,13 @@ Template.observatory.events({
       show: true
     });
   },
-
   'click #saveSequenceEdits': function(e) {
     $('#editSequencesPopup').modal('hide');
   },
-  'click #saveSequence': function(e) {
+  'click #saveSequenceSelect': function(e) {
 
     var seqObsCount = Sequences.find({obsId: Router.current().params._obsId}).count()+1;
     var seqEnvCount = Sequences.find({envId: Router.current().params._envId}).count()+1;
-    var seqLabels = []
-    var labelsObj = SequenceParameters.find({'children.envId':Router.current().params._envId}).fetch();
-    for (i=0;i<labelsObj[0]['children']['parameterPairs'];i++) {
-      seqLabels[i] = labelsObj[0]['children']['label'+i].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "")
-    }
-    //REMOVE DUPES LIKE ON CREATE AND ABOVE FUNCTION ECT..
 
     var subjId = Session.get('subjId');
     var subject = Subjects.find({"_id":subjId}).fetch();
@@ -232,4 +246,5 @@ function aTagSelectionInsert(eId, eValue) {
       aTagSelectArray[i] = eValue;
     }
   }
+  // console.log('ATAGSELECTARRAY', aTagSelectArray)
 }

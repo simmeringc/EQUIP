@@ -59,7 +59,8 @@ function propigateFlexButtons() {
       aTagId = label.replace(/\s+/g, '').replace(/[^\w\s]|_/g, "");
       attr1.value = aTagId;
       attr2.value = j;
-      aTag.className = "selectable";
+      aTag.id = aTagId;
+      aTag.className = "selectable "+aTagId+"";
       aTag.innerHTML = "<span aTagId="+aTagId+" aTagValue="+j+">" + seqSplit[i][j] + "</span>"
       aTag.setAttributeNode(attr1);
       aTag.setAttributeNode(attr2);
