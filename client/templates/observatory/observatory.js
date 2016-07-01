@@ -1,5 +1,13 @@
 Template.observatory.created = function() {
   Session.set('envId', Router.current().params._envId);
+
+  var labelsObj = SequenceParameters.find({'children.envId':Router.current().params._envId}).fetch();
+  var parameterPairs = labelsObj[0]['children']['parameterPairs'];
+  seqLabels = []
+  for (i=0;i<parameterPairs;i++) {
+    seqLabels[i] = labelsObj[0]['children']['label'+i].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "")
+  }
+  aTagSelectArray = []
 }
 
 Template.observatory.helpers({
@@ -21,7 +29,80 @@ Template.observatory.events({
   'click .deleteSequence': function(e) {
     Session.set('sequenceId', this._id);
   },
+  'click .selectable': function(e) {
+     e.preventDefault();
+     eId = $(e.target).attr("aTagId");
+     eValue = $(e.target).attr("aTagValue");
+     $(e.currentTarget).toggleClass("selectable");
+     $(e.currentTarget).toggleClass("deselectable");
+     aTagSelectionInsert(eId, eValue);
+   },
+   'click .deselectable': function(e) {
+      e.preventDefault();
+      $(e.currentTarget).toggleClass("deselectable");
+      $(e.currentTarget).toggleClass("selectable");
+    },
   //sequence started in subject_item.js
+  'click #saveSequenceBoxMode': function(e) {
+
+    var seqObsCount = Sequences.find({obsId: Router.current().params._obsId}).count()+1;
+    var seqEnvCount = Sequences.find({envId: Router.current().params._envId}).count()+1;
+
+    var subjId = Session.get('subjId');
+    var subject = Subjects.find({"_id":subjId}).fetch();
+    var observation=Observations.find({"_id":Router.current().params._obsId}).fetch();
+    var obsName=observation[0]["name"];
+    var parametersObj = SubjectParameters.find({'children.envId':Router.current().params._envId}).fetch();
+    var subjIdParameter = parametersObj[0]["children"]["label0"]
+    var subjectObj = Subjects.find({_id:subjId}).fetch();
+    var subjName = subjectObj[0][subjIdParameter]
+
+   var sequence = {
+     subjId: subjId,
+     subjName: subjName,
+     envId: Router.current().params._envId,
+     obsId: Router.current().params._obsId,
+     obsName: obsName,
+     seqObsCount: seqObsCount,
+     seqEnvCount: seqEnvCount,
+     valueInput: {},
+     valueLiteral: {}
+   };
+
+   var seqSplit = Session.get('seqSplit');
+   for (i=0;i<seqLabels.length;i++) {
+     label = seqLabels[i];
+     literal = seqLabels[i] + "Literal";
+     optionVal = aTagSelectArray[i]
+     sequence["valueInput"][label] = optionVal
+     if (seqSplit[i][optionVal] == undefined) {
+       sequence["valueLiteral"][literal] = $('#'+label).val();
+       continue
+     }
+     sequence["valueLiteral"][literal] = seqSplit[i][optionVal];
+   }
+
+   Meteor.call('sequenceInsert', sequence, function(error, result) {
+     if (error) {
+       alert(error.reason);
+     } else {
+       propigateSequenceTableBody();
+     }
+   });
+   $('#createSequence').modal('hide');
+  },
+
+   'click .editSequences': function(e) {
+    propigateSequenceTableBody();
+    $('#editSequencesPopup').modal({
+      keyboard: true,
+      show: true
+    });
+  },
+
+  'click #saveSequenceEdits': function(e) {
+    $('#editSequencesPopup').modal('hide');
+  },
   'click #saveSequence': function(e) {
 
     var seqObsCount = Sequences.find({obsId: Router.current().params._obsId}).count()+1;
@@ -31,6 +112,7 @@ Template.observatory.events({
     for (i=0;i<labelsObj[0]['children']['parameterPairs'];i++) {
       seqLabels[i] = labelsObj[0]['children']['label'+i].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "")
     }
+    //REMOVE DUPES LIKE ON CREATE AND ABOVE FUNCTION ECT..
 
     var subjId = Session.get('subjId');
     var subject = Subjects.find({"_id":subjId}).fetch();
@@ -143,3 +225,11 @@ Template.observatory.events({
         if (!$.trim($(this).text())) $(this).remove();
    });
  }
+
+function aTagSelectionInsert(eId, eValue) {
+  for (i=0;i<parameterPairs;i++) {
+    if (seqLabels[i] == eId) {
+      aTagSelectArray[i] = eValue;
+    }
+  }
+}

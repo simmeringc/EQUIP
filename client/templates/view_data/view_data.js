@@ -234,7 +234,9 @@ Template.viewData.events({
         var envId=environment[0]["_id"];
         var sequences=Sequences.find({"envId":envId}).fetch();
         sequences[0]["valueLiteral"]["subjName"] = sequences[0]["subjName"]
+        console.log(sequences);
         var literalArray = [sequences[0]["valueLiteral"]]
+        console.log(literalArray);
         var csv = Papa.unparse({
           data: literalArray,
         });

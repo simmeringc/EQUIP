@@ -18,5 +18,6 @@
   "homepage": "https://github.com/simmeringc/meteor-dataObs#readme",
   "devDependencies": {
     "form-serialize": "^0.7.1"
-  }
+  },
+  "dependencies": {}
 }

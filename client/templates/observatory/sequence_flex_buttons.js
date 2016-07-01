@@ -19,7 +19,6 @@ function propigateFlexButtons() {
     var strSplit = str.split(",");
     seqSplit[i] = strSplit
   }
-  console.log(seqSplit);
   Session.set('seqSplit', seqSplit);
 
   for (i=0;i<parameterPairs;i++) {
@@ -36,8 +35,8 @@ function propigateFlexButtons() {
       //   continue;
       // }
       var aTag = document.createElement("a");
-      aTag.setAttribute = ("href", "#");
-      aTag.id = parametersObj[0]["children"]["label"+i].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "");
+      aTag.className = "seq-label"
+      aTag.id = parametersObj[0]["children"]["label"+i].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "")+"ATagLabel";
       aTag.innerHTML = "<span>" + parametersObj[0]["children"]["label"+i] + "</span>"
       labelContainer.appendChild(aTag);
     }
@@ -52,10 +51,18 @@ function propigateFlexButtons() {
       //   placeholderOption.value = '';
       //   select.appendChild(placeholderOption);
       // }
+      //Adding values to aTag and the span in the aTag so the user can click on anything and we get the same thing from either a span event click or aTag event click
       var aTag = document.createElement("a");
-      aTag.setAttribute = ("href", "#");
-      aTag.id = ""
-      aTag.innerHTML = "<span>" + seqSplit[i][j] + "</span>"
+      var attr1 = document.createAttribute("aTagId");
+      var attr2 = document.createAttribute("aTagValue");
+      var label = parametersObj[0]["children"]["label"+i];
+      aTagId = label.replace(/\s+/g, '').replace(/[^\w\s]|_/g, "");
+      attr1.value = aTagId;
+      attr2.value = j;
+      aTag.className = "selectable";
+      aTag.innerHTML = "<span aTagId="+aTagId+" aTagValue="+j+">" + seqSplit[i][j] + "</span>"
+      aTag.setAttributeNode(attr1);
+      aTag.setAttributeNode(attr2);
       inputContainer.appendChild(aTag);
     }
   }

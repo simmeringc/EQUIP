@@ -27,25 +27,25 @@ function loadDefaultSeqParams() {
       inputParameters.name = "parameter" + (formCounter/2);
       inputParameters.className = "form-control"
       if (labels[i] == "WCD Type") {
-        inputParameters.value = "Math,Non-Math,Unknown"
+        inputParameters.value = "Math,Non-Math"
       }
       if (labels[i] == "Solicitation Method") {
-        inputParameters.value = "Called On,Not Called On,Unknown"
+        inputParameters.value = "Called On,Not Called On"
       }
       if (labels[i] == "Wait Time") {
         inputParameters.value = "Less than 3 seconds,3 or more seconds,N/A"
       }
       if (labels[i] == "Length of Talk") {
-        inputParameters.value = "1-4 words,5-20,21 or more,Unknown"
+        inputParameters.value = "1-4 words,5-20 words,21 or more"
       }
       if (labels[i] == "Student Talk") {
-        inputParameters.value = "How,What,Why,Other,Unknown"
+        inputParameters.value = "How,What,Why,Other"
       }
       if (labels[i] == "Teacher Soliciation") {
-        inputParameters.value = "How,What,Why,Other,Unknown"
+        inputParameters.value = "How,What,Why,Other"
       }
       if (labels[i] == "Explicit Evaluation") {
-        inputParameters.value = "Yes,No,Unknown"
+        inputParameters.value = "Yes,No"
       }
       container.appendChild(inputParameters);
       container.appendChild(document.createElement("br"));
