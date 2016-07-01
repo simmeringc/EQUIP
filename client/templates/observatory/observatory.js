@@ -71,6 +71,7 @@ Template.observatory.events({
     var seqEnvCount = Sequences.find({envId: Router.current().params._envId}).count()+1;
 
     var subjId = Session.get('subjId');
+    console.log('SUBJID', subjId)
     var subject = Subjects.find({"_id":subjId}).fetch();
     var observation=Observations.find({"_id":Router.current().params._obsId}).fetch();
     var obsName=observation[0]["name"];
@@ -136,6 +137,7 @@ Template.observatory.events({
     var subjIdParameter = parametersObj[0]["children"]["label0"]
     var subjectObj = Subjects.find({_id:subjId}).fetch();
     var subjName = subjectObj[0][subjIdParameter]
+    console.log('SUBJNAME', subjName)
 
    var sequence = {
      subjId: subjId,
@@ -154,6 +156,7 @@ Template.observatory.events({
      label = seqLabels[i];
      literal = seqLabels[i] + "Literal";
      optionVal = $('#'+label).val();
+     console.log('OPTIONVAL', optionVal)
      sequence["valueInput"][label] = optionVal
      if (seqSplit[i][optionVal] == undefined) {
        sequence["valueLiteral"][literal] = $('#'+label).val();
@@ -169,7 +172,7 @@ Template.observatory.events({
        propigateSequenceTableBody();
      }
    });
-   $('#createSequence').modal('hide');
+   $('#createSequenceSelect').modal('hide');
   },
 
    'click .editSequences': function(e) {

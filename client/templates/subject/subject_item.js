@@ -3,6 +3,7 @@ Template.subjectItem.events({
    var envObj = Environments.find({_id:Router.current().params._envId}).fetch();
    var inputStyle = envObj[0]["inputStyle"];
    if (inputStyle == "box") {
+     Session.set('subjId', this._id);
      $('#createSequenceBox').modal({
        keyboard: true,
        show: true
@@ -14,7 +15,7 @@ Template.subjectItem.events({
        show: true
      });
      Session.set('subjId', this._id);
-     $('#createSequence').on('shown.bs.modal', function () {
+     $('#createSequenceSelect').on('shown.bs.modal', function () {
         $('#wcdType').focus();
      })
    }
