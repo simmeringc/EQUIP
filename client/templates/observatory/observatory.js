@@ -10,6 +10,16 @@ Template.observatory.created = function() {
   aTagSelectArray = []
 }
 
+Template.observatory.rendered = function() {
+  var env = Environments.find({_id: Router.current().params._envId}).fetch()
+  var inputStyle = env[0]["inputStyle"]
+  if (inputStyle == "box") {
+    $('#boxStyle').prop("checked",true);
+  } else {
+    $('#selectStyle').prop("checked",true);
+  }
+}
+
 Template.observatory.helpers({
   subject: function() {
     return Subjects.find({envId: this.envId});
@@ -20,6 +30,18 @@ Template.observatory.helpers({
   seqParameter: function() {
     return SequenceParameters.find({'children.envId': this.envId})
   },
+  inputStyleSelect: function() {
+    var env = Environments.find({_id: this.envId}).fetch()
+    if (env[0]["inputStyle"] == "box") {
+      return true;
+    }
+  },
+  inputStyleBox: function() {
+    var env = Environments.find({_id: this.envId}).fetch()
+    if (env[0]["inputStyle"] == "select") {
+      return true;
+    }
+  }
 });
 
 Template.observatory.events({
@@ -71,7 +93,6 @@ Template.observatory.events({
     var seqEnvCount = Sequences.find({envId: Router.current().params._envId}).count()+1;
 
     var subjId = Session.get('subjId');
-    console.log('SUBJID', subjId)
     var subject = Subjects.find({"_id":subjId}).fetch();
     var observation=Observations.find({"_id":Router.current().params._obsId}).fetch();
     var obsName=observation[0]["name"];
@@ -126,18 +147,17 @@ Template.observatory.events({
   },
   'click #saveSequenceSelect': function(e) {
 
-    var seqObsCount = Sequences.find({obsId: Router.current().params._obsId}).count()+1;
-    var seqEnvCount = Sequences.find({envId: Router.current().params._envId}).count()+1;
+   var seqObsCount = Sequences.find({obsId: Router.current().params._obsId}).count()+1;
+   var seqEnvCount = Sequences.find({envId: Router.current().params._envId}).count()+1;
 
-    var subjId = Session.get('subjId');
-    var subject = Subjects.find({"_id":subjId}).fetch();
-    var observation=Observations.find({"_id":Router.current().params._obsId}).fetch();
-    var obsName=observation[0]["name"];
-    var parametersObj = SubjectParameters.find({'children.envId':Router.current().params._envId}).fetch();
-    var subjIdParameter = parametersObj[0]["children"]["label0"]
-    var subjectObj = Subjects.find({_id:subjId}).fetch();
-    var subjName = subjectObj[0][subjIdParameter]
-    console.log('SUBJNAME', subjName)
+   var subjId = Session.get('subjId');
+   var subject = Subjects.find({"_id":subjId}).fetch();
+   var observation=Observations.find({"_id":Router.current().params._obsId}).fetch();
+   var obsName=observation[0]["name"];
+   var parametersObj = SubjectParameters.find({'children.envId':Router.current().params._envId}).fetch();
+   var subjIdParameter = parametersObj[0]["children"]["label0"]
+   var subjectObj = Subjects.find({_id:subjId}).fetch();
+   var subjName = subjectObj[0][subjIdParameter]
 
    var sequence = {
      subjId: subjId,
@@ -155,8 +175,7 @@ Template.observatory.events({
    for (i=0;i<seqLabels.length;i++) {
      label = seqLabels[i];
      literal = seqLabels[i] + "Literal";
-     optionVal = $('#'+label).val();
-     console.log('OPTIONVAL', optionVal)
+     optionVal = $("[name="+label+"]").val();
      sequence["valueInput"][label] = optionVal
      if (seqSplit[i][optionVal] == undefined) {
        sequence["valueLiteral"][literal] = $('#'+label).val();
@@ -187,19 +206,19 @@ Template.observatory.events({
     $('#editSequencesPopup').modal('hide');
   }
 });
-
-/*Start Sequence Delete Block, Confirmation is a package*/
- Template.observatory.rendered=function() {
-     $('.deleteSequence').confirmation({
-       onConfirm : function(){
-         var sequenceId = Session.get('sequenceId');
-       Meteor.call('sequenceDelete', sequenceId, function(error, result) {
-         return 0;
-       });
-       }
-    });
- }
- /*End Sequence Delete Block*/
+//
+// /*Start Sequence Delete Block, Confirmation is a package*/
+//  Template.observatory.rendered=function() {
+//      $('.deleteSequence').confirmation({
+//        onConfirm : function(){
+//          var sequenceId = Session.get('sequenceId');
+//        Meteor.call('sequenceDelete', sequenceId, function(error, result) {
+//          return 0;
+//        });
+//        }
+//     });
+//  }
+//  /*End Sequence Delete Block*/
 
  function propigateSequenceTableBody() {
    $(".tbody").remove();
@@ -249,5 +268,4 @@ function aTagSelectionInsert(eId, eValue) {
       aTagSelectArray[i] = eValue;
     }
   }
-  // console.log('ATAGSELECTARRAY', aTagSelectArray)
 }
