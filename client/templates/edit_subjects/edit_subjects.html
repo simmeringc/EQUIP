@@ -6,9 +6,19 @@
          <button type="button" class="btn btn-success" id="createNewSubject">+</button>
          <button type="button" class="btn btn-default" id="editSubjects">Edit Subjects</button>
          <button type="button" class="btn btn-default" id="moveSubjects">Move Subjects</button>
+         <div style="float:right;cursor:default;" class="unselectable">Input Style:<br>
+           <form>
+             <div style="float:right;font-size:12px">
+               <input id="selectStyle" class="input-style" type="radio" name="input-style" value="select"> Select<br>
+             </div>
+             <div style="float:right;font-size:12px">
+               <input id="boxStyle" class="input-style" type="radio" name="input-style" value="box"> Box <br>
+             </div>
+           </form>
+         </div>
       </h4>
   </div>
-  <div class="modal fade" id="createSubjPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal fade" id="createSelectModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -17,16 +27,34 @@
         </div>
         <div class="modal-body">
           <div class="control" id="parameter_modal">
-            {{#each subjParameter}}
-              {{> subjectParameterItem}}
-            {{/each}}
+            {{> subjectParameterItem}}
+          </div>
+        </div>
+        <div class="modal-footer" onKeyPress="return checkSubmit(event)">
+          <button type="button" class="btn btn-primary" id="saveSubjectsPositionelect">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="createBoxModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog vertical-align-center">
+     <div class="modal-dialog" role="document">
+       <div class="modal-content seq-modal">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Subject Information</h4>
+        </div>
+        <div class="modal-body">
+          <div class="control" id="parameter_modal">
+            {{> subjectFlexButtons}}
           </div>
         </div>
         <div class="modal-footer" onKeyPress="return checkSubmit(event)">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="saveSubject">Save Changes</button>
+          <button type="button" class="btn btn-primary" id="saveSubjectBox">Save Changes</button>
         </div>
       </div>
+    </div>
     </div>
   </div>
   <div class="modal fade" id="editSubjPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

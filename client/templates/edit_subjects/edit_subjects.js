@@ -1,6 +1,14 @@
 Template.editSubjects.created = function() {
 Session.set('envId', Router.current().params._envId);
 
+var labelsObj = SubjectParameters.find({'children.envId':Router.current().params._envId}).fetch();
+var parameterPairs = labelsObj[0]['children']['parameterPairs'];
+subjLabels = []
+for (i=0;i<parameterPairs;i++) {
+  subjLabels[i] = labelsObj[0]['children']['label'+i].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "")
+}
+aTagSelectArray = []
+
 /* INTERACTJS START */
 interact('.draggable')
   .draggable({
@@ -56,6 +64,16 @@ interact('.draggable')
   /* INTERACTJS END */
 };
 
+Template.editSubjects.rendered = function() {
+  var env = Environments.find({_id: Router.current().params._envId}).fetch()
+  var inputStyle = env[0]["inputStyle"]
+  if (inputStyle == "box") {
+    $('#boxStyle').prop("checked",true);
+  } else {
+    $('#selectStyle').prop("checked",true);
+  }
+}
+
 Template.editSubjects.events({
   'click #esGoBack': function(e) {
     Router.go('observationList', {_envId:Router.current().params._envId});
@@ -66,7 +84,41 @@ Template.editSubjects.events({
       return 0;
     });
   },
-
+  'click .input-style': function(e) {
+    var obj = {
+      envId: Router.current().params._envId,
+      inputStyle: $(e.target).val()
+    };
+    Meteor.call('updateInputStyle', obj, function(error, result) {
+      if (error) {
+        alert(error.reason);
+      } else {
+        return 0;
+      }
+    });
+  },
+  'click .selectable': function(e) {
+     e.preventDefault();
+     eId = $(e.target).attr("aTagId");
+     eValue = $(e.target).attr("aTagValue");
+     $("."+eId).each(function() {
+       if ($(this).hasClass('deselectable')) {
+         $(this).toggleClass("deselectable");
+         $(this).toggleClass("selectable");
+       }
+     });
+     $(e.currentTarget).toggleClass("selectable");
+     $(e.currentTarget).toggleClass("deselectable");
+     aTagSelectionInsert(eId, eValue);
+   },
+   'click .deselectable': function(e) {
+      e.preventDefault();
+      eId = $(e.target).attr("aTagId");
+      eValue = null;
+      $(e.currentTarget).toggleClass("deselectable");
+      $(e.currentTarget).toggleClass("selectable");
+      aTagSelectionInsert(eId, eValue);
+    },
   'click #moveSubjects': function(e) {
     $.each( $('.subjects'), function(i, subjects) {
        $('.subject', subjects).each(function() {
@@ -74,10 +126,9 @@ Template.editSubjects.events({
        });
      })
     $("#moveSubjects").remove();
-    $("#control_bar").append('<button type="button" id=saveSubjects class="btn btn-default">Save Subject Locations</button>')
+    $("#control_bar").append('<button type="button" id=saveSubjectsPosition class="btn btn-default">Save Subject Locations</button>')
   },
-
-   'click #saveSubjects': function(e) {
+   'click #saveSubjectsPosition': function(e) {
      $.each( $('.subjects'), function(i, subjects) {
         $('.subject', subjects).each(function() {
            $(".subject").removeClass("draggable");
@@ -99,23 +150,33 @@ Template.editSubjects.events({
 
         });
       })
-     $("#saveSubjects").remove();
+     $("#saveSubjectsPosition").remove();
      $("#control_bar").append('<button type="button" id=moveSubjects class="btn btn-default">Move Subjects</button>')
 
    },
 
 
   'click #createNewSubject': function(e) {
-   $('#createSubjPopup').modal({
-     keyboard: true,
-     show: true
-   });
-   $('#createSubjPopup').on('shown.bs.modal', function () {
-      $('#subjectName').focus();
-   })
+   var envObj = Environments.find({_id:Router.current().params._envId}).fetch();
+   var inputStyle = envObj[0]["inputStyle"];
+   if (inputStyle == "box") {
+     $('#createBoxModal').modal({
+       keyboard: true,
+       show: true
+     });
+   }
+   if (inputStyle == "select") {
+     $('#createSelectModal').modal({
+       keyboard: true,
+       show: true
+     });
+     $('#createSelectModal').on('shown.bs.modal', function () {
+       $('#wcdType').focus();
+     })
+   }
  },
 
-  'click #saveSubject': function(e) {
+  'click #saveSubjectSelect': function(e) {
 
    var subjCount = Subjects.find({envId: Router.current().params._envId}).count()+1;
    var subjLabels = []
@@ -155,12 +216,49 @@ Template.editSubjects.events({
    });
 
 
-   $('#createSubjPopup').modal('hide');
+   $('#createSelectModal').modal('hide');
    for (i=0;i<subjLabels.length;i++) {
      label = subjLabels[i];
      $('#'+label).val('');
    }
  },
+ 'click #saveSubjectBox': function(e) {
+
+  var subjCount = Subjects.find({envId: Router.current().params._envId}).count()+1;
+
+  var subject = {
+    subjXPos: '',
+    subjYPos: '',
+    subjXSize: '',
+    subjYsize: '',
+    subjCount: subjCount,
+    envId: this._id
+  };
+
+  var subjSplit = Session.get('subjSplit');
+  for (i=0;i<subjLabels.length;i++) {
+    label = subjLabels[i];
+    literal = subjLabels[i] + "Literal";
+    optionVal = aTagSelectArray[i]
+    subject[label] = optionVal
+    if (subjSplit[i][optionVal] == undefined) {
+      subject[literal] = $('#'+label).val();
+      continue
+    }
+    subject[literal] = subjSplit[i][optionVal];
+  }
+
+  Meteor.call('subjectInsert', subject, function(error, result) {
+    if (error) {
+      alert(error.reason);
+    } else {
+    propigateSubjectTableBody();
+    }
+  });
+
+
+  $('#createBoxModal').modal('hide');
+},
 
 'click #editSubjects': function(e) {
   propigateSubjectTableBody();
@@ -181,18 +279,18 @@ Template.editSubjects.events({
  }
 });
 
-/*Start Subject Delete Block, Confirmation is a package*/
- Template.editSubjects.rendered=function() {
-     $('.deleteSubject').confirmation({
-       onConfirm : function(){
-         var subjId = Session.get('subjId');
-       Meteor.call('subjectDelete', subjId, function(error, result) {
-         return 0;
-       });
-       }
-    });
- }
- /*End Subject Delete Block*/
+// /*Start Subject Delete Block, Confirmation is a package*/
+//  Template.editSubjects.rendered=function() {
+//      $('.deleteSubject').confirmation({
+//        onConfirm : function(){
+//          var subjId = Session.get('subjId');
+//        Meteor.call('subjectDelete', subjId, function(error, result) {
+//          return 0;
+//        });
+//        }
+//     });
+//  }
+//  /*End Subject Delete Block*/
 
 Template.editSubjects.helpers({
   subject: function() {
@@ -237,4 +335,12 @@ function propigateSubjectTableBody() {
   $('tr').each(function () {
        if (!$.trim($(this).text())) $(this).remove();
   });
+}
+
+function aTagSelectionInsert(eId, eValue) {
+  for (i=0;i<parameterPairs;i++) {
+    if (subjLabels[i] == eId) {
+      aTagSelectArray[i] = eValue;
+    }
+  }
 }

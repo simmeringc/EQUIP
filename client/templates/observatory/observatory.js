@@ -29,18 +29,6 @@ Template.observatory.helpers({
   },
   seqParameter: function() {
     return SequenceParameters.find({'children.envId': this.envId})
-  },
-  inputStyleSelect: function() {
-    var env = Environments.find({_id: this.envId}).fetch()
-    if (env[0]["inputStyle"] == "box") {
-      return true;
-    }
-  },
-  inputStyleBox: function() {
-    var env = Environments.find({_id: this.envId}).fetch()
-    if (env[0]["inputStyle"] == "select") {
-      return true;
-    }
   }
 });
 
@@ -133,7 +121,7 @@ Template.observatory.events({
        propigateSequenceTableBody();
      }
    });
-   $('#createSequenceBox').modal('hide');
+   $('#createBoxModal').modal('hide');
   },
    'click .editSequences': function(e) {
     propigateSequenceTableBody();
@@ -191,7 +179,7 @@ Template.observatory.events({
        propigateSequenceTableBody();
      }
    });
-   $('#createSequenceSelect').modal('hide');
+   $('#createSelectModal').modal('hide');
   },
 
    'click .editSequences': function(e) {
