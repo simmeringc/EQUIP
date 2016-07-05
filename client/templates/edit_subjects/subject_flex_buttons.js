@@ -1,4 +1,4 @@
-Template.sequenceFlexButtons.rendered = function() {
+Template.subjectFlexButtons.rendered = function() {
   propigateFlexButtons();
 }
 
@@ -6,20 +6,20 @@ function propigateFlexButtons() {
   var envId = Session.get('envId');
   var labelContainer = document.getElementById("labels");
 
-  parametersObj = SequenceParameters.find({'children.envId':envId}).fetch();
+  parametersObj = SubjectParameters.find({'children.envId':envId}).fetch();
   parameterPairs = parametersObj[0]["children"]["parameterPairs"]
 
-  var seqSplit = []
+  var subjSplit = []
   for (i=0;i<parameterPairs;i++) {
     if (parametersObj[0]["children"]["parameter"+i] == null) {
-      seqSplit[i] = "text";
+      subjSplit[i] = "text";
       continue;
     }
     str = parametersObj[0]["children"]["parameter"+i]
     var strSplit = str.split(",");
-    seqSplit[i] = strSplit
+    subjSplit[i] = strSplit
   }
-  Session.set('seqSplit', seqSplit);
+  Session.set('subjSplit', subjSplit);
 
   for (i=0;i<parameterPairs;i++) {
     var aTag = document.createElement("a");
@@ -31,8 +31,8 @@ function propigateFlexButtons() {
   for (i=0;i<parameterPairs;i++) {
     $('#input').append("<div id=column"+i+" class=column-divs></div>")
     var inputContainer = document.getElementById("column"+i);
-    for (j=0;j<seqSplit[i].length;j++) {
-      if (seqSplit[i] == "text") {
+    for (j=0;j<subjSplit[i].length;j++) {
+      if (subjSplit[i] == "text") {
         var input = document.createElement("input");
         var label = parametersObj[0]["children"]["label"+i];
         inputTagId = label.replace(/\s+/g, '').replace(/[^\w\s]|_/g, "");
@@ -53,8 +53,8 @@ function propigateFlexButtons() {
       attr1.value = aTagId;
       attr2.value = j;
       aTag.id = aTagId;
-      aTag.className = "selectable "+aTagId+" unselectable pointer-cursor";
-      aTag.innerHTML = "<span aTagId="+aTagId+" aTagValue="+j+">" + seqSplit[i][j] + "</span>"
+      aTag.className = "selectable "+aTagId+" unselectable";
+      aTag.innerHTML = "<span aTagId="+aTagId+" aTagValue="+j+">" + subjSplit[i][j] + "</span>"
       aTag.setAttributeNode(attr1);
       aTag.setAttributeNode(attr2);
       inputContainer.appendChild(aTag);
