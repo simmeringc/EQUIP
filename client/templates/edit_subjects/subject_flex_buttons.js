@@ -19,39 +19,31 @@ function propigateFlexButtons() {
     var strSplit = str.split(",");
     subjSplit[i] = strSplit
   }
-  console.log(subjSplit);
   Session.set('subjSplit', subjSplit);
 
   for (i=0;i<parameterPairs;i++) {
-      // if (subjSplit[i] == "text") {
-      //   var input = document.createElement("input");
-      //   input.type = "text";
-      //   input.id = parametersObj[0]["children"]["label"+i].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "");
-      //   input.name = parametersObj[0]["children"]["label"+i].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "");
-      //   input.value = "";
-      //   input.placeholder = parametersObj[0]["children"]["label"+i];
-      //   input.className = "form-control"
-      //   labelContainer.appendChild(input);
-      //   labelContainer.appendChild(document.createElement("br"));
-      //   continue;
-      // }
-      var aTag = document.createElement("a");
-      aTag.className = "seq-label unselectable"
-      aTag.id = parametersObj[0]["children"]["label"+i].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "")+"ATagLabel";
-      aTag.innerHTML = "<span>" + parametersObj[0]["children"]["label"+i] + "</span>"
-      labelContainer.appendChild(aTag);
-    }
+    var aTag = document.createElement("a");
+    aTag.className = "seq-label unselectable"
+    aTag.id = parametersObj[0]["children"]["label"+i].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "")+"ATagLabel";
+    aTag.innerHTML = "<span>" + parametersObj[0]["children"]["label"+i] + "</span>"
+    labelContainer.appendChild(aTag);
+  }
   for (i=0;i<parameterPairs;i++) {
     $('#input').append("<div id=column"+i+" class=column-divs></div>")
     var inputContainer = document.getElementById("column"+i);
     for (j=0;j<subjSplit[i].length;j++) {
-      // if (j == 0) {
-      //   var placeholderOption = document.createElement("option");
-      //   placeholderOption.text = parametersObj[0]["children"]["label"+i];
-      //   placeholderOption.selected = true;
-      //   placeholderOption.value = '';
-      //   select.appendChild(placeholderOption);
-      // }
+      if (subjSplit[i] == "text") {
+        var input = document.createElement("input");
+        var label = parametersObj[0]["children"]["label"+i];
+        inputTagId = label.replace(/\s+/g, '').replace(/[^\w\s]|_/g, "");
+        input.type = "text";
+        input.id = inputTagId + "ITag";
+        input.value = "";
+        input.placeholder = label;
+        input.className = "form-control"
+        inputContainer.appendChild(input);
+        break
+      }
       //Adding values to aTag and the span in the aTag so the user can click on anything and we get the same thing from either a span event click or aTag event click
       var aTag = document.createElement("a");
       var attr1 = document.createAttribute("aTagId");

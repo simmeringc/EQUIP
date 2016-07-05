@@ -201,11 +201,13 @@ Template.editSubjects.events({
      optionVal = $('#'+label).val();
      subject[label] = optionVal
      if (subjSplit[i][optionVal] == undefined) {
-       subject[literal] = $('#'+label).val();
+       subject[literal] = optionVal
+       console.log('SUBJECT[LITERAL]', subject[literal])
        continue
      }
      subject[literal] = subjSplit[i][optionVal];
    }
+   console.log(subject);
 
    Meteor.call('subjectInsert', subject, function(error, result) {
      if (error) {
@@ -242,7 +244,7 @@ Template.editSubjects.events({
     optionVal = aTagSelectArray[i]
     subject[label] = optionVal
     if (subjSplit[i][optionVal] == undefined) {
-      subject[literal] = $('#'+label).val();
+      subject[literal] = $('#'+label+"ITag").val() || "Undefined";
       continue
     }
     subject[literal] = subjSplit[i][optionVal];
@@ -343,4 +345,5 @@ function aTagSelectionInsert(eId, eValue) {
       aTagSelectArray[i] = eValue;
     }
   }
+  console.log(aTagSelectArray);
 }

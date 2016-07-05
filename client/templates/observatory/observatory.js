@@ -85,7 +85,7 @@ Template.observatory.events({
     var observation=Observations.find({"_id":Router.current().params._obsId}).fetch();
     var obsName=observation[0]["name"];
     var parametersObj = SubjectParameters.find({'children.envId':Router.current().params._envId}).fetch();
-    var subjIdParameter = parametersObj[0]["children"]["label0"]
+    var subjIdParameter = parametersObj[0]["children"]["label0"]+"Literal"
     var subjectObj = Subjects.find({_id:subjId}).fetch();
     var subjName = subjectObj[0][subjIdParameter]
 
@@ -108,11 +108,12 @@ Template.observatory.events({
      optionVal = aTagSelectArray[i]
      sequence["valueInput"][label] = optionVal
      if (seqSplit[i][optionVal] == undefined) {
-       sequence["valueLiteral"][literal] = $('#'+label).val();
+       sequence["valueLiteral"][literal] = $('#'+label+"ITag").val() || "Undefined";
        continue
      }
      sequence["valueLiteral"][literal] = seqSplit[i][optionVal];
    }
+   console.log(sequence);
 
    Meteor.call('sequenceInsert', sequence, function(error, result) {
      if (error) {
@@ -143,7 +144,7 @@ Template.observatory.events({
    var observation=Observations.find({"_id":Router.current().params._obsId}).fetch();
    var obsName=observation[0]["name"];
    var parametersObj = SubjectParameters.find({'children.envId':Router.current().params._envId}).fetch();
-   var subjIdParameter = parametersObj[0]["children"]["label0"]
+   var subjIdParameter = parametersObj[0]["children"]["label0"]+"Literal"
    var subjectObj = Subjects.find({_id:subjId}).fetch();
    var subjName = subjectObj[0][subjIdParameter]
 
@@ -166,7 +167,7 @@ Template.observatory.events({
      optionVal = $("[name="+label+"]").val();
      sequence["valueInput"][label] = optionVal
      if (seqSplit[i][optionVal] == undefined) {
-       sequence["valueLiteral"][literal] = $('#'+label).val();
+       sequence["valueLiteral"][literal] = optionVal
        continue
      }
      sequence["valueLiteral"][literal] = seqSplit[i][optionVal];
