@@ -1,6 +1,10 @@
 Template.observationEnvironmentItem.helpers({
   envSequence: function() {
     return Sequences.find({envId: Router.current().params._envId});
+  },
+  needsSetup: function() {
+    var obj = Subjects.find({envId: Router.current().params._envId}).fetch();
+    return $.isEmptyObject(obj);
   }
 });
 

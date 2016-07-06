@@ -28,10 +28,45 @@ body {
   /* Move down content because we have a fixed navbar that is 50px tall */
 }
 
+.float-edits {
+  float:right;
+}
 
+.env-delete-btn {
+  position: relative;
+  left: 34px;
+  bottom: 8px;
+  background: #d9edf7;
+}
+
+.light-blue {
+  background: #98F7FF;
+}
+
+.env-edit-btn {
+  position: relative;
+  left: 30px;
+  bottom: 6px;
+  float: right;
+}
+
+.obs-delete-btn {
+  position: relative;
+  left: 39px;
+  bottom: 32px;
+  background: #dff0d8;
+}
+
+.preform-obs-btn {
+  position: relative;
+  left: 22px;
+  bottom: 11px;
+}
 
 .jumbotron-landing-page {
   margin-top: 75px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .modal-large {
@@ -47,6 +82,15 @@ body {
     margin-top: 75px;
   	background: #FFFFFF;
   	box-shadow: 0 0 8px rgba(0, 0, 0, .4);
+}
+
+.footer-container {
+  width: 100%;
+  background: 222222;
+}
+
+.footer-image {
+  text-align: center;
 }
 
 .remove-button {
@@ -167,7 +211,7 @@ ul
     margin-bottom: 18px;
     color: #31708f;
     background-color: #d9edf7;
-    border-color: #bce8f1;
+    border-color: black;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -176,7 +220,7 @@ ul
 
 .alert-custom-obsItem{
     padding: 8px 35px 8px 14px;
-    width: 68%;
+    width: 66%;
     margin-bottom: 18px;
     color: #3c763d;
     background-color: #dff0d8;

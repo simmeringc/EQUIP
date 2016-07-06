@@ -1,33 +1,49 @@
 <template name="landingPage">
   <div class="jumbotron jumbotron-landing-page">
     <div class="container">
-      <h1>Welcome to DataObs!</h1>
-      <p>A unique data observations interface for any kind of environment you'll ever need.</p>
-      <p><a class="btn btn-primary btn-lg" href="#" data-action="signUp" type="button">Sign up &raquo;</a></p>
+      <h1>Welcome to EQUIP!</h1>
+      <p>A data observation interface for behavioral environments.</p>
+      <p><a class="btn btn-primary btn-lg" href="#" data-action="signUp" type="button">Get Started &raquo;</a></p>
     </div>
   </div>
 
   <div class="container">
     <div class="row">
       <div class="col-md-4">
-        <h2>Data Science</h2>
+        <h2>Observational Data</h2>
         <p>Computing power is a key to the future of technology and allows access to the impossible. Our interface is easily utilized by anyone who knows how to use a computer and helps to gather any data they like!</p>
-        <p><a class="btn btn-default" href="#" role="button">Computational Power &raquo;</a></p>
       </div>
       <div class="col-md-4">
-        <h2>Educational</h2>
+        <h2>EQUIP</h2>
         <p>Targeted towards observing classrooms at any school, we can help teachers gain knowledgable insights on how to improve methods of guiding their students to infinite success.</p>
-        <p><a class="btn btn-default" href="#" role="button">Learn More &raquo;</a></p>
      </div>
       <div class="col-md-4">
-        <h2>Visual Analytics</h2>
+        <h2>Analytics</h2>
         <p>Having the ability to see the results of your observations immediately is our goal! One can simply graph their findings in any way they desire, providing easy to read and visually pleasing represenations of any abstract figures. </p>
-        <p><a class="btn btn-default" href="#" role="button">See Examples &raquo;</a></p>
       </div>
     </div>
+  </div>
+  <div class="footer-container">
     <hr>
     <footer>
-      <p>&copy; 2016 DataObs </p>
+      <div class="footer-image">
+        <img src="equipBlackText.png" alt="EQUIP"  height="80" width="125">
+        <p>
+          &copy; EQUIP 2016
+          <br>
+          EQUIP is an open-source project avaliable on
+          <a href="https://github.com/simmeringc/meteor-dataObs">Github</a>
+        </p>
+      </div>
     </footer>
-  </div>
+</div>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-80377470-1', 'auto');
+ga('send', 'pageview');
+</script>
 </template>
