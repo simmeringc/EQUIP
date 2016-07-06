@@ -1,6 +1,10 @@
 Template.environmentList.helpers({
   environment: function() {
     return Environments.find({}, {sort: {submitted: -1}});
+  },
+  needsEnvironment: function() {
+    var obj = Environments.find({}).fetch();
+    return $.isEmptyObject(obj)?"green-pulse":"";
   }
 });
 

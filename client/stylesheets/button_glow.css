@@ -10,3 +10,27 @@
   -webkit-animation-iteration-count: infinite;
   color: white;
 }
+
+@-webkit-keyframes greenPulse {
+  from { background-color: #407F40; -webkit-box-shadow: 0 0 3px #333; }
+  50% { background-color: #5CB85C; -webkit-box-shadow: 0 0 5px #5CB85C; }
+  to { background-color: #407F40; -webkit-box-shadow: 0 0 3px #333; }
+}
+
+.green-pulse {
+  -webkit-animation-name: greenPulse;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes lightGreenPulse {
+  from { background-color: #DFF0D8; -webkit-box-shadow: 0 0 3px #333; }
+  50% { background-color: #5CB85C; -webkit-box-shadow: 0 0 5px #5CB85C; }
+  to { background-color: #DFF0D8; -webkit-box-shadow: 0 0 3px #333; }
+}
+
+.light-green-pulse {
+  -webkit-animation-name: lightGreenPulse;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+}

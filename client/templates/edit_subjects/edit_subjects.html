@@ -1,9 +1,8 @@
 <template name="editSubjects">
   <div id="container" class="container-fluid top-spacer card">
       <h4 id="control_bar">
-        <button type="button" class="btn btn-default glyphicon glyphicon-arrow-left" id="esGoBack"></button>
          Edit Subjects: <i>{{envName}}</i>
-         <button type="button" class="btn btn-success" id="createNewSubject">+</button>
+         <button type="button" class="btn btn-success {{needsSubjects}}" id="createNewSubject">+</button>
          <button type="button" class="btn btn-default" id="editSubjects">Edit Subjects</button>
          <button type="button" class="btn btn-default" id="moveSubjects">Move Subjects</button>
          <div style="float:right;cursor:default;" class="unselectable">Input Style:<br>
@@ -81,6 +80,11 @@
     {{#each subject}}
       {{> subjectItem}}
     {{/each}}
+  </div>
+  <div class="container bottom-card">
+    <h4>
+      <button type="button" class="btn btn-primary" id="esGoBack" style="float:right;position:relative;bottom:5px;left:10px;">Save Changes</button>
+    </h4>
   </div>
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

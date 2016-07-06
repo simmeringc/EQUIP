@@ -84,6 +84,13 @@ body {
   	box-shadow: 0 0 8px rgba(0, 0, 0, .4);
 }
 
+.bottom-card {
+  	background: #FFFFFF;
+  	box-shadow: 0 0 8px rgba(0, 0, 0, .4);
+    position: fixed;
+    bottom:0;
+}
+
 .footer-container {
   width: 100%;
   background: 222222;

@@ -3,27 +3,15 @@
     <div>
       <div>
       {{envName}}
-      {{#if needsSetup}}
-      {{else}}
       <button type="button" class="btn deleteEnvironment float-edits btn-xs env-delete-btn">X</button>
-      {{/if}}
       </div>
     </div>
     <div>Created On: {{submitted}}</div>
       {{#if needsSetup}}
         <button type="button" class="btn blue-pulse subjectParameters">Setup Parameters</button>
       {{else}}
-        <button type="button" class="btn btn-default viewEnvItem">Enter Observatory</button>
+        <button type="button" class="btn btn-default viewEnvItem {{needsSubjects}}">Enter Observatory</button>
         <button type="button" class="btn btn-default editParameters">Edit Parameters</button>
       {{/if}}
   </div>
-  <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-80377470-1', 'auto');
-  ga('send', 'pageview');
-  </script>
 </template>
