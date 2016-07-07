@@ -64,9 +64,10 @@ body {
 }
 
 .jumbotron-landing-page {
-  margin-top: 75px;
-  padding-top: 20px;
+  margin-top: 5px;
+  padding-top: 13px;
   padding-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .modal-large {
@@ -74,22 +75,17 @@ body {
     /*margin-left:-40%; /* width/2) */
 }
 
-.top-spacer{
-  margin-top: 20px;
-}
-
 .card {
-    margin-top: 75px;
   	background: #FFFFFF;
   	box-shadow: 0 0 8px rgba(0, 0, 0, .4);
 }
 
-.bottom-card {
-  	background: #FFFFFF;
-  	box-shadow: 0 0 8px rgba(0, 0, 0, .4);
-    position: fixed;
-    bottom:0;
+.center-export {
+    margin: auto;
+    width: 30%;
+    text-align: center;
 }
+
 
 .footer-container {
   width: 100%;

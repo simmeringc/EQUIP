@@ -1,8 +1,9 @@
 <template name="environmentList">
     <div id="container" class="container-fluid top-spacer card">
-        <h1>Saved Environments
-           <button type="button" class="btn btn-success {{needsEnvironment}}" id="createNewEnvironment" data-toggle="modal" data-target="#createPopup">Create</button>
-        </h1>
+        <h2>Saved Environments
+           <button type="button" class="btn btn-success {{needsEnvironment}}" id="createNewEnvironment" data-toggle="modal" data-target="#createPopup" style="position:relative;bottom:2px;">Create</button>
+        </h2>
+        <hr>
         <div class="modal fade" id="createEnvPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
             <div class="modal-content">

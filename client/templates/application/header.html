@@ -1,28 +1,22 @@
 <template name="header">
-    <!-- Bootstrap core CSS, JS dependancies included in Meteor Bootstrap package -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<!-- Bootstrap core CSS, JS dependancies included in Meteor Bootstrap package -->
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
 
-    <!-- Navbar shows up on every page -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-      <a class="navbar-brand" href="{{pathFor 'landingPage'}}">EQUIP</a>
-      <ul class="nav navbar-nav">
-        {{#if currentUser}}
-        <li class="nav-item">
-          <a class="nav-link" href="{{pathFor 'environmentList'}}">Environments</a>
-        </li>
-        <li>
-           <a class="nav-link" href="{{pathFor 'viewData'}}">View Data</a>
-        </li>
-        {{/if}}
-      </ul>
-        <ul class="nav navbar-nav navbar-right">
-          {{> loginButtons}}
-        </ul>
-      </div>
-    </nav>
+<!-- Navbar shows up on every page -->
+<div class="nav-wrapper">
+  <nav class="flex-nav nav-grad navbar-fixed-top">
+    <ul>
+      <li><a href="{{pathFor 'landingPage'}}">Home</a></li>
+      {{#if currentUser}}
+        <li><a href="{{pathFor 'environmentList'}}">Environments</a></li>
+        <li><a href="{{pathFor 'viewData'}}">View Data</a></li>
+      {{/if}}
+      <li>{{> loginButtons}}</li>
+    </ul>
+  </nav>
+</div>
 </template>
