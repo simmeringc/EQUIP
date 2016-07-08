@@ -300,6 +300,10 @@ Template.editSubjects.helpers({
   },
   subjParameter: function() {
     return SubjectParameters.find({'children.envId':this._id})
+  },
+  needsSubjects: function() {
+    var obj = Subjects.find({envId: Router.current().params._envId}).fetch();
+    return $.isEmptyObject(obj)?"green-pulse":"";
   }
 });
 

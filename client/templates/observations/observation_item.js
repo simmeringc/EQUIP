@@ -15,6 +15,13 @@ Template.observationItem.events({
    }
  });
 
+ Template.observationItem.helpers({
+   needsSequences: function() {
+     var obj = Sequences.find({envId: this._id}).fetch();
+     return $.isEmptyObject(obj)?"light-green-pulse":"";
+   }
+  });
+
  Template.observationItem.rendered=function() {
      $('.deleteObsItem').confirmation({
        onConfirm : function(){

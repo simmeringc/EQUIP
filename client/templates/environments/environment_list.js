@@ -1,6 +1,19 @@
+Template.environmentList.rendered = function() {
+  $("#navEnv").removeClass("nav-blue-pulse");
+  // var obj = Environments.find({}).fetch();
+  // if ($.isEmptyObject(obj)) {
+  //   $('#createNewEnvironment').addClass('green-pulse');
+  //   $('[data-toggle="popover"]').popover('show').on('click',function(){ $(this).popover('hide')});
+  // }
+}
+
 Template.environmentList.helpers({
   environment: function() {
     return Environments.find({}, {sort: {submitted: -1}});
+  },
+  needsEnvironment: function() {
+    var obj = Environments.find({}).fetch();
+    return $.isEmptyObject(obj)?"green-pulse":"";
   }
 });
 

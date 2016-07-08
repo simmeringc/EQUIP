@@ -1,13 +1,17 @@
 <template name="environmentItem">
   <div class="alert-custom-envItem">
-    <div>{{envName}}</div>
+    <div>
+      <div>
+      {{envName}}
+      <button type="button" class="btn deleteEnvironment float-edits btn-xs env-delete-btn">X</button>
+      </div>
+    </div>
     <div>Created On: {{submitted}}</div>
       {{#if needsSetup}}
-        <button type="button" class="btn blue-pulse subjectParameters">Setup</button>
+        <button type="button" class="btn blue-pulse subjectParameters">Setup Parameters</button>
       {{else}}
+        <button type="button" class="btn btn-default viewEnvItem {{needsSubjects}}">Enter Observatory</button>
         <button type="button" class="btn btn-default editParameters">Edit Parameters</button>
-        <button type="button" class="btn btn-default viewEnvItem">Enter Observatory</button>
       {{/if}}
-      <button type="button" class="btn btn-danger deleteEnvironment">X</button>
   </div>
 </template>

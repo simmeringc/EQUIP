@@ -1,11 +1,9 @@
 <template name="viewData">
   <div id="container" class="container-fluid top-spacer card">
     <h1 id="viewDataTitle">View Data</h1>
-    <div class="alert-custom-viewData" role="alert">
-      Visualize your data and export it as a CSV.
-    </div>
+    <hr>
     <div class="row">
-       <div class="col-md-4">
+       <div class="center-export">
         <h3>Select Environment</h3>
         <select id="selectEnvironment" class="form-control">
           {{#each environment}}
@@ -13,38 +11,18 @@
           {{/each}}
           <option value="all">All</option>
         </select>
+        <button type="button" id="export_CSV_button" class="btn btn-primary" style="margin-top:8px;">Export CSV</button>
       </div>
-      <div class="col-md-4">
-        <h3>Student Characteristic</h3>
-        <select id="studentCharSelect" class="form-control">
-          <option value="subjAge">Age</option>
-          <option value="subjGender">Gender</option>
-          <option value="subjRace">Race</option>
-        </select>
-      </div>
-      <div class="col-md-4">
-        <h3>Sequence Characteristic</h3>
-        <select id="sequenceCharSelect" class="form-control">
-          <option value="wcdType">WCD Type</option>
-          <option value="solicitationMethod">Solicitation Method</option>
-          <option value="waitTime">Wait Time</option>
-          <option value="lengthOfTalk">Length of Talk</option>
-          <option value="studentTalk">Student Talk</option>
-          <option value="teacherSolicitation">Teacher Solicitation</option>
-          <option value="explicitEvaluation">Explicit Evaluation</option>
-        </select>
-      </div>
+     <br>
     </div>
-    <br>
-    <div>
-        <button type="button" id="graph_button" class="btn btn-info">Graph</button> <button type="button" id="export_CSV_button" class="btn btn-warning">Export CSV</button>
-    </div>
-    <div class="alert-custom-viewDataGraphOptions" role="alert">
-      Select graphs to display.
-    </div>
-    <input type="checkbox" id="graph_standard" checked>Standard
-    <input type="checkbox" id="graph_demographic" checked>Demographic
-    <input type="checkbox" id="graph_equity" checked>Equity
-    <div id="graph_container"></div>
   </div>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-80377470-1', 'auto');
+  ga('send', 'pageview');
+  </script>
 </template>

@@ -1,6 +1,9 @@
 <template name="observationList">
   <div id="container" class="container-fluid top-spacer card">
-    <h3><button type="button" class="btn btn-default glyphicon glyphicon-arrow-left obsGoBack"></button> Observations for Environment: {{envName}}</h3>
+    <h2>
+      <button type="button" class="btn btn-default glyphicon glyphicon-arrow-left obsGoBack"></button>  Observations for Environment: {{envName}}
+    </h2>
+    <hr>
     <div class="alert-custom-obsInfo" role="alert">
       These are your observations for this environment. You can create, view, or delete them.
     </div>
@@ -12,5 +15,14 @@
         {{> observationItem}}
       {{/each}}
     </div>
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-80377470-1', 'auto');
+    ga('send', 'pageview');
+    </script>
   </div>
 </template>

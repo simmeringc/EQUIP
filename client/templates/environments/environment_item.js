@@ -41,5 +41,9 @@ Template.environmentItem.events({
    needsSetup: function() {
      var obj = SubjectParameters.find({'children.envId':this._id}).fetch();
      return $.isEmptyObject(obj);
+   },
+   needsSubjects: function() {
+     var obj = Subjects.find({envId: this._id}).fetch();
+     return $.isEmptyObject(obj)?"blue-pulse":"";
    }
  });

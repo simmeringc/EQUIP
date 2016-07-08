@@ -21,9 +21,13 @@
   <div class="alert-custom-envItem">
     <div>{{envName}}</div>
     <div>Created On: {{submitted}}</div>
-      <button type="button" class="btn btn-default editObsItem">Edit Subjects</button>
-      <button type="button" class="btn btn-default allSequences">All Sequences</button>
-      <button type="button" class="btn btn-success" id="createNewObservation">New Observation</button>
+      {{#if needsSetup}}
+        <button type="button" class="btn blue-pulse subjectParameters editObsItem">Add Subjects</button>
+      {{else}}
+        <button type="button" class="btn btn-success {{needsObservations}}" id="createNewObservation">New Observation</button>
+        <button type="button" class="btn btn-default allSequences">All Sequences</button>
+        <button type="button" class="btn btn-default editObsItem">Edit Subjects</button>
+      {{/if}}
   </div>
   <div class="modal fade" id="allSequencesPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-large" role="document">
