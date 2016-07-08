@@ -28,6 +28,10 @@ nav a:hover {
   color: white;
 }
 
+nav a:focus {
+  color: white;
+}
+
 .nav-wrapper {
   /*max-width: 1000px;*/
   margin: 0 auto;

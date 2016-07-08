@@ -1,7 +1,7 @@
 <template name="environmentList">
     <div id="container" class="container-fluid top-spacer card">
         <h2>Saved Environments
-           <button type="button" class="btn btn-success {{needsEnvironment}}" id="createNewEnvironment" data-toggle="modal" data-target="#createPopup" style="position:relative;bottom:2px;">Create</button>
+           <button type="button" class="btn btn-success {{needsEnvironment}}" id="createNewEnvironment" style="position:relative;bottom:2px;">Create</button>
         </h2>
         <hr>
         <div class="modal fade" id="createEnvPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -23,9 +23,6 @@
             </div>
           </div>
         </div>
-      <div class="alert-custom-info" role="alert">
-        These are your saved environments. First, set the environment parameters, then enter the observatory.
-      </div>
       <div>
         {{#each environment}}
           {{> environmentItem}}

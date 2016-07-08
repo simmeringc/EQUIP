@@ -34,3 +34,16 @@
   -webkit-animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
 }
+
+@-webkit-keyframes navBluePulse {
+  from { background-color: #1A84B0; -webkit-box-shadow: 0 0 3px #333; }
+  50% { background-color: #479BBE; -webkit-box-shadow: 0 0 5px #5bc0de; }
+  to { background-color: #1A84B0; -webkit-box-shadow: 0 0 3px #333; }
+}
+
+.nav-blue-pulse {
+  -webkit-animation-name: navBluePulse;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  color: white;
+}

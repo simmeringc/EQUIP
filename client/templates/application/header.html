@@ -12,7 +12,7 @@
     <ul>
       <li><a href="{{pathFor 'landingPage'}}">Home</a></li>
       {{#if currentUser}}
-        <li><a href="{{pathFor 'environmentList'}}">Environments</a></li>
+        <li><a href="{{pathFor 'environmentList'}}" id="navEnv" data-toggle="popover" data-content="Create and environment to get started." data-placement="bottom">Environments</a></li>
         <li><a href="{{pathFor 'viewData'}}">View Data</a></li>
       {{/if}}
       <li>{{> loginButtons}}</li>
