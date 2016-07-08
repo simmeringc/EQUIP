@@ -1,14 +1,10 @@
 <template name="sequenceParameters">
   <div id="container" class="container-fluid top-spacer card">
-
       <h3>
         <button type="button" class="btn btn-default glyphicon glyphicon-arrow-left seqParamsGoBack"></button> Sequence Parameters for Environment: {{#each environment}}{{envName}}{{/each}}
       </h3>
-    <div class="alert-custom-sequence-params" role="alert">
-      Next, add sequence parameters for your observations. Parameter values are separated by commas. Load defaults for examples.
-    </div>
     <div>
-        <button type="button" id="load_default_sequence_params" class="btn btn-primary">Load Defaults</button>
+        <button type="button" id="load_default_sequence_params" class="btn btn-primary"  data-toggle="popover4" data-content="Load defaults to see the EQUIP sequence parameters that are used for tracking classroom equity based off of a specific set of codes. Any custom code can be added depending on your experiment. For example, if you want to track who rose their hand in class on a specific day, then the sequence parameter could be titled: 'Raised Hand' with comma seperated input values as: 'yes,no'. Click the '+' add custom parameters. Click 'Done' to continue." data-placement="bottom">Load Defaults</button>
         <button type="button" id="add_sequence_params" class="btn btn-success">+</button>
     </div>
     <br>
@@ -18,7 +14,7 @@
     </div>
     <div class="modal-footer" onKeyPress="return checkSubmit(event)">
       <button type="button" id="remove_all" class="btn btn-default" data-dismiss="modal">Remove All</button>
-      <button type="button" class="btn btn-primary" id="save_seq_all">Save All</button>
+      <button type="button" class="btn btn-primary" id="save_seq_all">Done</button>
     </div>
   </div>
   <script>

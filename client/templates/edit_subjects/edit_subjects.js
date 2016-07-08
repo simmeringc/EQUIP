@@ -72,6 +72,10 @@ Template.editSubjects.rendered = function() {
   } else {
     $('#selectStyle').prop("checked",true);
   }
+  var obj = Sequences.find({}).fetch();
+  if ($.isEmptyObject(obj)) {
+    $('[data-toggle="popover5"]').popover('show').on('click',function(){ $(this).popover('hide')});
+  }
 }
 
 Template.editSubjects.events({

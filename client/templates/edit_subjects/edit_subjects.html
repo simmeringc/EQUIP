@@ -2,10 +2,10 @@
   <div id="container" class="container-fluid top-spacer card">
       <h4 id="control_bar">
          Edit Subjects: <i>{{envName}}</i>
-         <button type="button" class="btn btn-success {{needsSubjects}}" id="createNewSubject">+</button>
+         <button type="button" class="btn btn-success {{needsSubjects}}" id="createNewSubject" data-toggle="popover5" data-content="You can now add subjects to your environment based off of your custom parameters." data-placement="bottom">+</button>
          <button type="button" class="btn btn-default" id="editSubjects">Edit Subjects</button>
          <button type="button" class="btn btn-default" id="moveSubjects">Move Subjects</button>
-         <button type="button" class="btn btn-primary" id="esGoBack">Save Changes</button>
+         <button type="button" class="btn btn-primary" id="esGoBack">Done</button>
          <div style="float:right;cursor:default;" class="unselectable">Input Style:<br>
            <form>
              <div style="float:right;font-size:12px">

@@ -1,7 +1,7 @@
 <template name="environmentList">
     <div id="container" class="container-fluid top-spacer card">
         <h2>Saved Environments
-           <button type="button" class="btn btn-success {{needsEnvironment}}" id="createNewEnvironment" style="position:relative;bottom:2px;">Create</button>
+           <button type="button" class="btn btn-success {{needsEnvironment}}" id="createNewEnvironment" style="position:relative;bottom:2px;" data-toggle="popover2" data-content="Environments represent a single area of observation. Example environments include a classroom or specific class, a venue, or a specific experiment." data-placement="right">Create</button>
         </h2>
         <hr>
         <div class="modal fade" id="createEnvPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -12,7 +12,7 @@
                 <h4 class="modal-title">Environment</h4>
               </div>
               <div class="modal-body">
-                <div class="controls">
+                <div class="controls" data-toggle="popover2" data-content="              Example Environment Names: 'Fairview High School', 'UCB CSCI-1300 Fall 2016', 'Eye-contact Experiement', 'Resturant opening night'." data-placement="bottom">
                     <input name="nameOfEnvironment"  type="text" value="" id="environmentName" placeholder="Name Your Environment Here" class="form-control"/>
                 </div>
               </div>

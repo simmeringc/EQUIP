@@ -10,6 +10,6 @@ Template.landingPage.rendered = function() {
   var obj = Environments.find({}).fetch();
   if ($.isEmptyObject(obj)) {
     $('#navEnv').addClass('nav-blue-pulse');
-    $('[data-toggle="popover"]').popover('show').on('click',function(){ $(this).popover('hide')});
+    $('[data-toggle="popover1"]').popover('show').on('click',function(){ $(this).popover('hide')});
   }
 };

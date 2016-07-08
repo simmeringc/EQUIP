@@ -18,6 +18,10 @@ Template.observatory.rendered = function() {
   } else {
     $('#selectStyle').prop("checked",true);
   }
+  var obj = Sequences.find({}).fetch();
+  if (obj[0]["seqEnvCount"] == 1) {
+    $('[data-toggle="popover9"]').popover('show').on('click',function(){ $(this).popover('hide')});
+  }
 }
 
 Template.observatory.helpers({

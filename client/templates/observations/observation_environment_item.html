@@ -8,7 +8,7 @@
         </div>
         <div class="modal-body">
           <div class="controls">
-              <input name="nameOfObservation"  type="text" value="" id="obsName" placeholder="Name Your Observation Here" class="form-control"/>
+              <input name="nameOfObservation"  type="text" value="" id="obsName" placeholder="Name Your Observation Here" class="form-control" data-toggle="popover6" data-content="Example Environment Names: 'Finals Week', Substitute Teacher Day', 'Session 1'." data-placement="bottom"/>
           </div>
         </div>
         <div class="modal-footer" onKeyPress="return checkSubmit(event)">
@@ -24,7 +24,7 @@
       {{#if needsSetup}}
         <button type="button" class="btn blue-pulse subjectParameters editObsItem">Add Subjects</button>
       {{else}}
-        <button type="button" class="btn btn-success {{needsObservations}}" id="createNewObservation">New Observation</button>
+        <button type="button" class="btn btn-success {{needsObservations}}" id="createNewObservation" data-toggle="popover6" data-content="Observations represent the specific session in which an observation is taking place in an environment." data-placement="bottom">New Observation</button>
         <button type="button" class="btn btn-default allSequences">All Sequences</button>
         <button type="button" class="btn btn-default editObsItem">Edit Subjects</button>
       {{/if}}

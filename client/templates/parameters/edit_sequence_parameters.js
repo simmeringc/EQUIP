@@ -84,10 +84,6 @@ Template.editSequenceParameters.events({
   e.preventDefault();
   addSeqFields();
  },
-'click #load_default_sequence_params': function(e) {
-  e.preventDefault();
-  loadDefaultSeqParams();
-},
 'click #remove_all': function(e) {
   e.preventDefault();
   $("#formRow").remove();

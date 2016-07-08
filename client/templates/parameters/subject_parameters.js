@@ -2,6 +2,10 @@ var serialize = require('form-serialize');
 
 Template.subjectParameters.rendered = function() {
   loadNameParam();
+  var obj = SubjectParameters.find({}).fetch();
+  if ($.isEmptyObject(obj)) {
+    $('[data-toggle="popover3"]').popover('show').on('click',function(){ $(this).popover('hide')});
+  }
 }
 
 Template.subjectParameters.helpers({

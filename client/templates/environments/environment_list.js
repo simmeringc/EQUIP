@@ -1,10 +1,9 @@
 Template.environmentList.rendered = function() {
   $("#navEnv").removeClass("nav-blue-pulse");
-  // var obj = Environments.find({}).fetch();
-  // if ($.isEmptyObject(obj)) {
-  //   $('#createNewEnvironment').addClass('green-pulse');
-  //   $('[data-toggle="popover"]').popover('show').on('click',function(){ $(this).popover('hide')});
-  // }
+  var obj = Environments.find({}).fetch();
+  if ($.isEmptyObject(obj)) {
+    $('[data-toggle="popover2"]').popover('show').on('click',function(){ $(this).popover('hide')});
+  }
 }
 
 Template.environmentList.helpers({

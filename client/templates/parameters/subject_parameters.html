@@ -3,11 +3,8 @@
       <h3>
         <button type="button" class="btn btn-default glyphicon glyphicon-arrow-left subjParamsGoBack"></button> Subject Parameters for Environment: {{#each environment}}{{envName}}{{/each}}
       </h3>
-    <div class="alert-custom-info" role="alert">
-      First, add parameters for your subjects. Parameter values are separated by commas. Load defaults for examples.
-    </div>
     <div>
-        <button type="button" id="load_default_subject_params" class="btn btn-primary">Load Defaults</button>
+        <button type="button" id="load_default_subject_params" class="btn btn-primary"  data-toggle="popover3" data-content="Subject parameters allow you to track the demographics of your subjects. Load defaults to see how any subject characteristic can be added to your dataset with a parameter name, and comma separated values as possible inputs. Click the '+' add custom parameters. Click 'Next' to continue." data-placement="bottom">Load Defaults</button>
         <button type="button" id="add_subject_params" class="btn btn-success">+</button>
     </div>
     <br>
@@ -17,7 +14,7 @@
     </div>
     <div class="modal-footer" onKeyPress="return checkSubmit(event)">
       <button type="button" id="remove_all" class="btn btn-default" data-dismiss="modal">Remove All</button>
-      <button type="button" class="btn btn-primary" id="save_subj_all">Save All</button>
+      <button type="button" class="btn btn-primary" id="save_subj_all">Next</button>
     </div>
   </div>
   <script>

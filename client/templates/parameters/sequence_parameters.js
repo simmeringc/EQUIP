@@ -6,6 +6,13 @@ Template.sequenceParameters.helpers({
   }
 });
 
+Template.sequenceParameters.rendered = function() {
+  var obj = SequenceParameters.find({}).fetch();
+  if ($.isEmptyObject(obj)) {
+    $('[data-toggle="popover4"]').popover('show').on('click',function(){ $(this).popover('hide')});
+  }
+}
+
 function loadDefaultSeqParams() {
   labels = ["WCD Type", "Solicitation Method", "Wait Time", "Length of Talk", "Student Talk", "Teacher Soliciation", "Explicit Evaluation"]
   var container = document.getElementById("formRow");

@@ -4,12 +4,8 @@
       <h3>
         <button type="button" class="btn btn-default glyphicon glyphicon-arrow-left seqParamsGoBack"></button> Sequence Parameters for Environment: {{#each environment}}{{envName}}{{/each}}
       </h3>
-    <div class="alert-custom-edit-subj-params" role="alert">
-      Editing Subject Parameters.
-    </div>
     <div>
         <button type="button" id="load_default_sequence_params" class="btn btn-primary">Load Defaults</button>
-        <button type="button" id="load_current_sequence_params" class="btn btn-primary">Current Parameters</button>
         <button type="button" id="add_sequence_params" class="btn btn-success">+</button>
     </div>
     <br>
@@ -19,7 +15,7 @@
     </div>
     <div class="modal-footer" onKeyPress="return checkSubmit(event)">
       <button type="button" id="remove_all" class="btn btn-default" data-dismiss="modal">Remove All</button>
-      <button type="button" class="btn btn-primary" id="save_subj_all">Save Changes</button>
+      <button type="button" class="btn btn-primary" id="save_subj_all">Done</button>
     </div>
   </div>
   <script>

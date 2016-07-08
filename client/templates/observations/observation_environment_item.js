@@ -77,6 +77,10 @@ Template.observationEnvironmentItem.events({
        });
        }
     });
+    var obj = Sequences.find({}).fetch();
+    if ($.isEmptyObject(obj)) {
+      $('[data-toggle="popover6"]').popover('show').on('click',function(){ $(this).popover('hide')});
+    }
  }
  /*End allSequence Delete Block*/
  function propigateSequenceTableBody() {

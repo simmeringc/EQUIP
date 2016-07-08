@@ -31,4 +31,8 @@ Template.observationItem.events({
        });
       }
     });
+    var obj = Sequences.find({}).fetch();
+    if ($.isEmptyObject(obj)) {
+      $('[data-toggle="popover7"]').popover('show').on('click',function(){ $(this).popover('hide')});
+    }
  }

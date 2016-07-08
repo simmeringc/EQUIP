@@ -28,8 +28,6 @@ standard-minifier-css
 standard-minifier-js
 accounts-password
 chrismbeckett:toastr
-accounts-google
-accounts-facebook
 ian:accounts-ui-bootstrap-3
 email
 fourseven:scss

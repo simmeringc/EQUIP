@@ -108,10 +108,6 @@ Template.editSubjectParameters.events({
   $("#formSection").append("<form id=formRow></form>");
   loadNameParam();
 },
-'click #load_current_subject_params': function(e) {
-  e.preventDefault();
-  propigateEditSubjectForm();
-},
 // 'click .remove-button': function(e) {
 //   e.preventDefault();
 //   alert("Not Working");

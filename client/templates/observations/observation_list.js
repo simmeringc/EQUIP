@@ -10,3 +10,10 @@ Template.observationList.events({
    Router.go('environmentList');
  }
 });
+
+Template.observationList.rendered = function() {
+  var obj = Sequences.find({}).fetch();
+  if ($.isEmptyObject(obj)) {
+    $('[data-toggle="popover5"]').popover('show').on('click',function(){ $(this).popover('hide')});
+  }
+}
