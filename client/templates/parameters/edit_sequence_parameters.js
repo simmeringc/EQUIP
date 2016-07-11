@@ -89,9 +89,9 @@ Template.editSequenceParameters.events({
   $("#formRow").remove();
   $("#formSection").append("<form id=formRow></form>");
 },
-'click #load_current_sequence_params': function(e) {
+'click #load_default_sequence_params': function(e) {
   e.preventDefault();
-  propigateEditSequenceForm();
+  loadDefaultSeqParams();
 },
 // 'click .remove-button': function(e) {
 //   e.preventDefault();

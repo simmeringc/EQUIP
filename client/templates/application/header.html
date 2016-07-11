@@ -12,8 +12,8 @@
     <ul>
       <li><a href="{{pathFor 'landingPage'}}">Home</a></li>
       {{#if currentUser}}
-        <li><a href="{{pathFor 'environmentList'}}" id="navEnv" data-toggle="popover1" data-content="Create and environment to get started." data-placement="bottom">Environments</a></li>
-        <li><a href="{{pathFor 'viewData'}}"  data-toggle="popover9" data-content="Now that you have recorded data, you can export it as a CSV and quantify it. This is the end of the EQUIP walkthrough." data-placement="bottom">View Data</a></li>
+        <li><a href="{{pathFor 'environmentList'}}" id="navEnv" data-toggle="popover1" data-content="Create an environment to get started." data-placement="bottom">Environments</a></li>
+        <li><a href="{{pathFor 'viewData'}}"  data-toggle="popover9" data-content="Click on a subject to record your custom data. Once you've recorded data and created a sequence, you can view and delete the sequence, or click 'View Data' to export your sequences as a CSV. This is the end of the EQUIP walkthrough." data-placement="bottom">View Data</a></li>
       {{/if}}
       <li>{{> loginButtons}}</li>
     </ul>

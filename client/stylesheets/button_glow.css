@@ -11,6 +11,19 @@
   color: white;
 }
 
+@-webkit-keyframes lightBluePulse {
+  from { background-color: #d9edf7; -webkit-box-shadow: 0 0 3px #333; }
+  50% { background-color: slategrey; -webkit-box-shadow: 0 0 5px slategrey; }
+  to { background-color: #d9edf7; -webkit-box-shadow: 0 0 3px #333; }
+}
+
+.light-blue-pulse {
+  -webkit-animation-name: lightBluePulse;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+  color: white;
+}
+
 @-webkit-keyframes greenPulse {
   from { background-color: #407F40; -webkit-box-shadow: 0 0 3px #333; }
   50% { background-color: #5CB85C; -webkit-box-shadow: 0 0 5px #5CB85C; }

@@ -129,8 +129,9 @@ Template.editSubjects.events({
           $(".subject").addClass("draggable");
        });
      })
-    $("#moveSubjects").remove();
-    $("#control_bar").append('<button type="button" id=saveSubjectsPosition class="btn btn-default">Save Subject Locations</button>')
+
+     $("#moveSubjects").html("Save Subject Positions");
+     $("#moveSubjects").attr("id", "saveSubjectsPosition");
   },
    'click #saveSubjectsPosition': function(e) {
      $.each( $('.subjects'), function(i, subjects) {
@@ -154,9 +155,9 @@ Template.editSubjects.events({
 
         });
       })
-     $("#saveSubjectsPosition").remove();
-     $("#control_bar").append('<button type="button" id=moveSubjects class="btn btn-default">Move Subjects</button>')
 
+      $("#saveSubjectsPosition").html("Move Subjects");
+      $("#saveSubjectsPosition").attr("id", "moveSubjects");
    },
 
 

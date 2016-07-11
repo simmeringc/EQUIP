@@ -13,29 +13,17 @@ Template.environmentItem.events({
   }
   });
 
-Template.environmentItem.rendered=function() {
-    $('.deleteEnvironment').confirmation({
-      onConfirm : function(){
-    }
-  });
-}
-
 Template.environmentItem.events({
    'click .deleteEnvironment': function(e) {
-     Session.set('envId', this._id);
-   }
+     var result = confirm("Deleting an environment will also delete all observation, subject, and sequence data. Press 'OK' to continue.");
+     envId = this._id
+    if (result) {
+      Meteor.call('environmentDelete', envId, function(error, result) {
+        return 0;
+      });
+    }
+  }
  });
-
- Template.environmentItem.rendered=function() {
-     $('.deleteEnvironment').confirmation({
-       onConfirm : function(){
-         var envId = Session.get('envId');
-       Meteor.call('environmentDelete', envId, function(error, result) {
-         return 0;
-       });
-       }
-    });
- }
 
  Template.environmentItem.helpers({
    needsSetup: function() {

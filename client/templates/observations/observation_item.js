@@ -1,18 +1,16 @@
-Template.observationItem.rendered=function() {
-    $('.deleteObsItem').confirmation({
-      onConfirm : function(){
-    }
-  });
-}
-
 Template.observationItem.events({
-   'click .deleteObsItem': function(e) {
-     Session.set('obsId', this._id);
-   },
-
    'click .enterObsItem': function(e) {
      Router.go('observatory', {_envId: this.envId, _obsId: this._id});
-   }
+   },
+   'click .deleteObsItem': function(e) {
+     var result = confirm("Deleting an observation will also delete all sequences taken in the specific observation. Press 'OK' to continue.");
+     obsId = this._id
+    if (result) {
+      Meteor.call('observationDelete', obsId, function(error, result) {
+        return 0;
+      });
+    }
+  }
  });
 
  Template.observationItem.helpers({
@@ -23,14 +21,6 @@ Template.observationItem.events({
   });
 
  Template.observationItem.rendered=function() {
-     $('.deleteObsItem').confirmation({
-       onConfirm : function(){
-         var obsId = Session.get('obsId');
-       Meteor.call('observationDelete', obsId, function(error, result) {
-         return 0;
-       });
-      }
-    });
     var obj = Sequences.find({}).fetch();
     if ($.isEmptyObject(obj)) {
       $('[data-toggle="popover7"]').popover('show').on('click',function(){ $(this).popover('hide')});

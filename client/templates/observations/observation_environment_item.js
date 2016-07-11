@@ -77,7 +77,7 @@ Template.observationEnvironmentItem.events({
        });
        }
     });
-    var obj = Sequences.find({}).fetch();
+    var obj = Observations.find({}).fetch();
     if ($.isEmptyObject(obj)) {
       $('[data-toggle="popover6"]').popover('show').on('click',function(){ $(this).popover('hide')});
     }

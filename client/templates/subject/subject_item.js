@@ -24,3 +24,7 @@ Template.subjectItem.events({
   }
 });
 //sequence ends in observatory.js
+// 
+// Template.subjectItem.rendered = function () {
+//   console.log(this._id);
+// }

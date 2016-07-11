@@ -19,7 +19,9 @@ Template.observatory.rendered = function() {
     $('#selectStyle').prop("checked",true);
   }
   var obj = Sequences.find({}).fetch();
-  if (obj[0]["seqEnvCount"] == 1) {
+  if ($.isEmptyObject(obj)) {
+
+    $('.subject').addClass("light-blue-pulse");
     $('[data-toggle="popover9"]').popover('show').on('click',function(){ $(this).popover('hide')});
   }
 }
@@ -124,6 +126,7 @@ Template.observatory.events({
        alert(error.reason);
      } else {
        propigateSequenceTableBody();
+       $('.subject').removeClass("light-blue-pulse");
      }
    });
    $('#createBoxModal').modal('hide');
@@ -182,6 +185,7 @@ Template.observatory.events({
        alert(error.reason);
      } else {
        propigateSequenceTableBody();
+       $('.subject').removeClass("light-blue-pulse");
      }
    });
    $('#createSelectModal').modal('hide');
