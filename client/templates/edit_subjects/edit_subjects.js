@@ -306,14 +306,13 @@ function propigateSubjectTableBody() {
   $(".tbody").remove();
   $(".ftable").append("<tbody class=tbody></tbody>");
   var envId = Router.current().params._envId
-  var subjCount = Subjects.find({envId: envId}).count();
-  var counter=1;
   parametersObj = SubjectParameters.find({'children.envId':envId}).fetch();
   parameterPairs = parametersObj[0]["children"]["parameterPairs"]
-  for (i=0;i<subjCount;i++) {
-    subjectObj = Subjects.find({subjCount:counter}).fetch();
-    subjId = subjectObj[0]["_id"];
-    newRowContent = "<tr class=trbody id=td"+i+"><tr>";
+  var subjCursor = Subjects.find({envId: envId});
+  subjCursor.forEach(function(doc, index) {
+    subjId = doc["_id"];
+    console.log('SUBJID', subjId)
+    newRowContent = "<tr class=trbody id=td"+index+"><tr>";
     $(".tbody").append(newRowContent);
     var split = []
     for (j=0;j<parameterPairs;j++) {
@@ -321,22 +320,22 @@ function propigateSubjectTableBody() {
     }
     var literal = []
     for (j=0;j<parameterPairs;j++) {
-      literal[j] = subjectObj[0][split[j]+"Literal"]
+      literal[j] = doc[split[j]+"Literal"]
     }
 
-    $("#"+"td"+i).append("<td></td>");
+    $("#"+"td"+index).append("<td></td>");
     for (j=0;j<literal.length;j++) {
-      $("#"+"td"+i).append("<td>"+literal[j]+"</td>");
+      $("#"+"td"+index).append("<td>"+literal[j]+"</td>");
     }
-    removeButton = "<td><button subjId="+subjId+" id=b"+i+">X</button></td>";
-    $("#"+"td"+i).append(removeButton);
-    $("#"+"b"+i).addClass("btn btn-xs btn-danger deleteSubject");
-    counter++;
-  }
-  $('tr').each(function () {
-       if (!$.trim($(this).text())) $(this).remove();
+    removeButton = "<td><button subjId="+subjId+" id=b"+index+">X</button></td>";
+    $("#"+"td"+index).append(removeButton);
+    $("#"+"b"+index).addClass("btn btn-xs btn-danger deleteSubject");
+    $('tr').each(function () {
+         if (!$.trim($(this).text())) $(this).remove();
+    });
   });
-}
+};
+
 
 function aTagSelectionInsert(eId, eValue) {
   for (i=0;i<parameterPairs;i++) {
