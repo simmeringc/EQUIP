@@ -32,7 +32,6 @@ fastclick@1.0.11
 fourseven:scss@3.4.3
 geojson-utils@1.0.8
 harrison:papa-parse@1.1.1
-hinas:meteor-bootstrap-confirmation@0.9.0
 hot-code-push@1.0.4
 html-tools@1.0.9
 htmljs@1.0.9

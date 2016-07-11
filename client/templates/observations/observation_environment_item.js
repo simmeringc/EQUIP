@@ -54,29 +54,7 @@ Template.observationEnvironmentItem.events({
  }
 });
 
-/*Start allSequence Delete Block, Confirmation is a package*/
-Template.observationEnvironmentItem.rendered=function() {
-    $('.deleteSequence').confirmation({
-      onConfirm : function(){
-    }
-  });
-}
-
-Template.observationEnvironmentItem.events({
-   'click .deleteSequence': function(e) {
-     Session.set('sequenceId', this._id);
-   }
- });
-
  Template.observationEnvironmentItem.rendered=function() {
-     $('.deleteSequence').confirmation({
-       onConfirm : function(){
-         var sequenceId = Session.get('sequenceId');
-       Meteor.call('sequenceDelete', sequenceId, function(error, result) {
-         return 0;
-       });
-       }
-    });
     var obj = Observations.find({}).fetch();
     if ($.isEmptyObject(obj)) {
       $('[data-toggle="popover6"]').popover('show').on('click',function(){ $(this).popover('hide')});

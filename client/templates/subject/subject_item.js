@@ -11,20 +11,23 @@ Template.subjectItem.events({
        });
      }
      if (inputStyle == "select") {
+       var seqParamsObj = SequenceParameters.find({'children.envId':Router.current().params._envId}).fetch();
+       var seqIdParam = seqParamsObj[0]['children']['label0'].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "");
+       console.log(seqIdParam);
        $('#createSelectModal').modal({
          keyboard: true,
          show: true
        });
        Session.set('subjId', this._id);
        $('#createSelectModal').on('shown.bs.modal', function () {
-          $('#wcdType').focus();
+          $('#'+seqIdParam).focus();
        })
      }
     }
   }
 });
 //sequence ends in observatory.js
-// 
+//
 // Template.subjectItem.rendered = function () {
 //   console.log(this._id);
 // }

@@ -163,6 +163,8 @@ Template.editSubjects.events({
 
   'click #createNewSubject': function(e) {
    var envObj = Environments.find({_id:Router.current().params._envId}).fetch();
+   var subjParamsObj = SubjectParameters.find({'children.envId':this._id}).fetch();
+   var subjIdParam = subjParamsObj[0]['children']['label0'].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "");
    var inputStyle = envObj[0]["inputStyle"];
    if (inputStyle == "box") {
      $('#createBoxModal').modal({
@@ -176,7 +178,7 @@ Template.editSubjects.events({
        show: true
      });
      $('#createSelectModal').on('shown.bs.modal', function () {
-       $('#wcdType').focus();
+       $('#'+subjIdParam).focus();
      })
    }
  },
@@ -275,29 +277,17 @@ Template.editSubjects.events({
   });
 },
 'click .deleteSubject': function(e) {
-  Session.set('subjId', this._id);
+  var result = confirm("Press 'OK' to delete this Subject.");
+  subjId = $(e.target).attr("subjId");
+  console.log(subjId);
+  Meteor.call('subjectDelete', subjId, function(error, result) {
+    return 0;
+  });
 },
 'click #saveSubjEdits': function(e) {
   $('#editSubjPopup').modal('hide');
-},
- 'click .deleteSubject': function(e) {
-   console.log(this);
-   Session.set('subjId', this._id);
- }
+}
 });
-
-// /*Start Subject Delete Block, Confirmation is a package*/
-//  Template.editSubjects.rendered=function() {
-//      $('.deleteSubject').confirmation({
-//        onConfirm : function(){
-//          var subjId = Session.get('subjId');
-//        Meteor.call('subjectDelete', subjId, function(error, result) {
-//          return 0;
-//        });
-//        }
-//     });
-//  }
-//  /*End Subject Delete Block*/
 
 Template.editSubjects.helpers({
   subject: function() {
@@ -322,9 +312,9 @@ function propigateSubjectTableBody() {
   parameterPairs = parametersObj[0]["children"]["parameterPairs"]
   for (i=0;i<subjCount;i++) {
     subjectObj = Subjects.find({subjCount:counter}).fetch();
+    subjId = subjectObj[0]["_id"];
     newRowContent = "<tr class=trbody id=td"+i+"><tr>";
     $(".tbody").append(newRowContent);
-
     var split = []
     for (j=0;j<parameterPairs;j++) {
       split[j] = parametersObj[0]["children"]["label"+j].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "")
@@ -338,7 +328,7 @@ function propigateSubjectTableBody() {
     for (j=0;j<literal.length;j++) {
       $("#"+"td"+i).append("<td>"+literal[j]+"</td>");
     }
-    removeButton = "<td><button id=b"+i+">X</button></td>";
+    removeButton = "<td><button subjId="+subjId+" id=b"+i+">X</button></td>";
     $("#"+"td"+i).append(removeButton);
     $("#"+"b"+i).addClass("btn btn-xs btn-danger deleteSubject");
     counter++;
