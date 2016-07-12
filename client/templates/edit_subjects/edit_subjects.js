@@ -279,10 +279,10 @@ Template.editSubjects.events({
 'click .deleteSubject': function(e) {
   var result = confirm("Press 'OK' to delete this Subject.");
   subjId = $(e.target).attr("subjId");
-  console.log(subjId);
   Meteor.call('subjectDelete', subjId, function(error, result) {
     return 0;
   });
+  propigateSubjectTableBody();
 },
 'click #saveSubjEdits': function(e) {
   $('#editSubjPopup').modal('hide');
@@ -311,7 +311,6 @@ function propigateSubjectTableBody() {
   var subjCursor = Subjects.find({envId: envId});
   subjCursor.forEach(function(doc, index) {
     subjId = doc["_id"];
-    console.log('SUBJID', subjId)
     newRowContent = "<tr class=trbody id=td"+index+"><tr>";
     $(".tbody").append(newRowContent);
     var split = []

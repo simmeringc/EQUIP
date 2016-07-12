@@ -51,6 +51,14 @@ Template.observationEnvironmentItem.events({
  },
  'click #saveAllSequences': function(e) {
    $('#allSequencesPopup').modal('hide');
+ },
+ 'click .deleteSequence': function(e) {
+   var result = confirm("Press 'OK' to delete this Sequence.");
+   seqId = $(e.target).attr("seqId");
+   Meteor.call('sequenceDelete', seqId, function(error, result) {
+     return 0;
+   });
+   propigateSequenceTableBody();
  }
 });
 
@@ -66,40 +74,35 @@ Template.observationEnvironmentItem.events({
    $(".ftable").append("<tbody class=tbody></tbody>");
    var seqTableCounter=1;
    var envId = Router.current().params._envId
-   var sequences = Sequences.find({envId: envId})
-   var seqEnvCount = sequences.count();
+   var obsId = Router.current().params._obsId
    var parametersObj = SequenceParameters.find({'children.envId':envId}).fetch();
    var parameterPairs = parametersObj[0]["children"]["parameterPairs"]
-   for (i=0;i<seqEnvCount;i++) {
-     sequenceObj = Sequences.find({seqEnvCount:seqTableCounter}).fetch();
-     subjName = sequenceObj[0]["subjName"]
-
-     newRowContent = "<tr class=trbody id=td"+i+"><tr>";
+   var seqCursor = Sequences.find({envId: envId})
+   seqCursor.forEach(function(doc, index) {
+     subjName = doc["subjName"]
+     seqId = doc["_id"];
+     newRowContent = "<tr class=trbody id=td"+index+"><tr>";
      $(".tbody").append(newRowContent);
-
      var split = []
      for (j=0;j<parameterPairs;j++) {
        split[j] = parametersObj[0]["children"]["label"+j].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "")
      }
      var literal = []
      for (j=0;j<parameterPairs;j++) {
-       literal[j] = sequenceObj[0]["valueLiteral"][split[j]+"Literal"]
+       literal[j] = doc["valueLiteral"][split[j]+"Literal"]
      }
-
-     $("#"+"td"+i).append("<td></td>");
-     $("#"+"td"+i).append("<td>"+subjName+"</td>");
+     $("#"+"td"+index).append("<td></td>");
+     $("#"+"td"+index).append("<td>"+subjName+"</td>");
      for (j=0;j<literal.length;j++) {
-       $("#"+"td"+i).append("<td>"+literal[j]+"</td>");
+       $("#"+"td"+index).append("<td>"+literal[j]+"</td>");
      }
-     date = "<td>"+sequenceObj[0]["submitted"]+"</td>"
-     $("#"+"td"+i).append(date);
-     removeButton = "<td><button id=b"+i+">X</button></td>";
-     $("#"+"td"+i).append(removeButton);
-     $("#"+"b"+i).addClass("btn btn-xs btn-danger deleteSubject");
-     console.log(seqTableCounter);
-     seqTableCounter++;
-   }
-   $('tr').each(function () {
-        if (!$.trim($(this).text())) $(this).remove();
+     date = "<td>"+doc["submitted"]+"</td>"
+     $("#"+"td"+index).append(date);
+     removeButton = "<td><button seqId="+seqId+" id=b"+index+">X</button></td>";
+     $("#"+"td"+index).append(removeButton);
+     $("#"+"b"+index).addClass("btn btn-xs btn-danger deleteSequence");
+     $('tr').each(function () {
+          if (!$.trim($(this).text())) $(this).remove();
+     });
    });
- }
+ };

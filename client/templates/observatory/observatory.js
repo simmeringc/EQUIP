@@ -20,9 +20,7 @@ Template.observatory.rendered = function() {
   }
   var obj = Sequences.find({}).fetch();
   if ($.isEmptyObject(obj)) {
-
-    $('.subject').addClass("light-blue-pulse");
-    $('[data-toggle="popover9"]').popover('show').on('click',function(){ $(this).popover('hide')});
+    $('.subject').addClass("light -blue-pulse");
   }
 }
 
@@ -41,9 +39,6 @@ Template.observatory.helpers({
 Template.observatory.events({
   'click .obsDone': function(e) {
     Router.go('observationList', {_envId:Router.current().params._envId});
-  },
-  'click .deleteSequence': function(e) {
-    Session.set('sequenceId', this._id);
   },
   'click .input-style': function(e) {
     var obj = {
@@ -126,7 +121,7 @@ Template.observatory.events({
        alert(error.reason);
      } else {
        propigateSequenceTableBody();
-       $('.subject').removeClass("light-blue-pulse");
+       $('.subject').removeClass("light -blue-pulse");
      }
    });
    $('#createBoxModal').modal('hide');
@@ -185,7 +180,7 @@ Template.observatory.events({
        alert(error.reason);
      } else {
        propigateSequenceTableBody();
-       $('.subject').removeClass("light-blue-pulse");
+       $('.subject').removeClass("light -blue-pulse");
      }
    });
    $('#createSelectModal').modal('hide');
@@ -201,63 +196,54 @@ Template.observatory.events({
 
   'click #saveSequenceEdits': function(e) {
     $('#editSequencesPopup').modal('hide');
-  }
+  },
+  'click .deleteSequence': function(e) {
+    var result = confirm("Press 'OK' to delete this Sequence.");
+    seqId = $(e.target).attr("seqId");
+    Meteor.call('sequenceDelete', seqId, function(error, result) {
+      return 0;
+    });
+    propigateSequenceTableBody();
+  },
 });
-//
-// /*Start Sequence Delete Block, Confirmation is a package*/
-//  Template.observatory.rendered=function() {
-//      $('.deleteSequence').confirmation({
-//        onConfirm : function(){
-//          var sequenceId = Session.get('sequenceId');
-//        Meteor.call('sequenceDelete', sequenceId, function(error, result) {
-//          return 0;
-//        });
-//        }
-//     });
-//  }
-//  /*End Sequence Delete Block*/
 
  function propigateSequenceTableBody() {
    $(".tbody").remove();
    $(".ftable").append("<tbody class=tbody></tbody>");
    var seqTableCounter=1;
    var envId = Router.current().params._envId
-   var sequences = Sequences.find({obsId: Router.current().params._obsId})
-   var seqObsCount = sequences.count();
+   var obsId = Router.current().params._obsId
    var parametersObj = SequenceParameters.find({'children.envId':envId}).fetch();
    var parameterPairs = parametersObj[0]["children"]["parameterPairs"]
-   for (i=0;i<seqObsCount;i++) {
-     sequenceObj = Sequences.find({seqObsCount:seqTableCounter}).fetch();
-     subjName = sequenceObj[0]["subjName"]
-
-     newRowContent = "<tr class=trbody id=td"+i+"><tr>";
+   var seqCursor = Sequences.find({obsId: obsId})
+   seqCursor.forEach(function(doc, index) {
+     subjName = doc["subjName"]
+     seqId = doc["_id"];
+     newRowContent = "<tr class=trbody id=td"+index+"><tr>";
      $(".tbody").append(newRowContent);
-
      var split = []
      for (j=0;j<parameterPairs;j++) {
        split[j] = parametersObj[0]["children"]["label"+j].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "")
      }
      var literal = []
      for (j=0;j<parameterPairs;j++) {
-       literal[j] = sequenceObj[0]["valueLiteral"][split[j]+"Literal"]
+       literal[j] = doc["valueLiteral"][split[j]+"Literal"]
      }
-
-     $("#"+"td"+i).append("<td></td>");
-     $("#"+"td"+i).append("<td>"+subjName+"</td>");
+     $("#"+"td"+index).append("<td></td>");
+     $("#"+"td"+index).append("<td>"+subjName+"</td>");
      for (j=0;j<literal.length;j++) {
-       $("#"+"td"+i).append("<td>"+literal[j]+"</td>");
+       $("#"+"td"+index).append("<td>"+literal[j]+"</td>");
      }
-     date = "<td>"+sequenceObj[0]["submitted"]+"</td>"
-     $("#"+"td"+i).append(date);
-     removeButton = "<td><button id=b"+i+">X</button></td>";
-     $("#"+"td"+i).append(removeButton);
-     $("#"+"b"+i).addClass("btn btn-xs btn-danger deleteSubject");
-     seqTableCounter++;
-   }
-   $('tr').each(function () {
-        if (!$.trim($(this).text())) $(this).remove();
+     date = "<td>"+doc["submitted"]+"</td>"
+     $("#"+"td"+index).append(date);
+     removeButton = "<td><button seqId="+seqId+" id=b"+index+">X</button></td>";
+     $("#"+"td"+index).append(removeButton);
+     $("#"+"b"+index).addClass("btn btn-xs btn-danger deleteSequence");
+     $('tr').each(function () {
+          if (!$.trim($(this).text())) $(this).remove();
+     });
    });
- }
+ };
 
 function aTagSelectionInsert(eId, eValue) {
   for (i=0;i<parameterPairs;i++) {
