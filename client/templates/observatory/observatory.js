@@ -33,6 +33,14 @@ Template.observatory.helpers({
   },
   seqParameter: function() {
     return SequenceParameters.find({'children.envId': this.envId})
+  },
+  subjName: function() {
+    var subjId = Session.get('subjId');
+    var parametersObj = SubjectParameters.find({'children.envId':Router.current().params._envId}).fetch();
+    var subjIdParameter = parametersObj[0]["children"]["label0"]+"Literal"
+    var subjectObj = Subjects.find({_id:subjId}).fetch();
+    var subjName = subjectObj[0][subjIdParameter]
+    return subjName;
   }
 });
 
@@ -77,18 +85,14 @@ Template.observatory.events({
     },
   //sequence started in subject_item.js
   'click #saveSequenceBox': function(e) {
-
-    var seqObsCount = Sequences.find({obsId: Router.current().params._obsId}).count()+1;
-    var seqEnvCount = Sequences.find({envId: Router.current().params._envId}).count()+1;
-
     var subjId = Session.get('subjId');
-    var subject = Subjects.find({"_id":subjId}).fetch();
     var observation=Observations.find({"_id":Router.current().params._obsId}).fetch();
     var obsName=observation[0]["name"];
     var parametersObj = SubjectParameters.find({'children.envId':Router.current().params._envId}).fetch();
     var subjIdParameter = parametersObj[0]["children"]["label0"]+"Literal"
     var subjectObj = Subjects.find({_id:subjId}).fetch();
     var subjName = subjectObj[0][subjIdParameter]
+    Session.set("subjName", subjName);
 
    var sequence = {
      subjId: subjId,
@@ -96,8 +100,6 @@ Template.observatory.events({
      envId: Router.current().params._envId,
      obsId: Router.current().params._obsId,
      obsName: obsName,
-     seqObsCount: seqObsCount,
-     seqEnvCount: seqEnvCount,
      valueInput: {},
      valueLiteral: {}
    };
@@ -114,7 +116,6 @@ Template.observatory.events({
      }
      sequence["valueLiteral"][literal] = seqSplit[i][optionVal];
    }
-   console.log(sequence);
 
    Meteor.call('sequenceInsert', sequence, function(error, result) {
      if (error) {
@@ -138,17 +139,14 @@ Template.observatory.events({
   },
   'click #saveSequenceSelect': function(e) {
 
-   var seqObsCount = Sequences.find({obsId: Router.current().params._obsId}).count()+1;
-   var seqEnvCount = Sequences.find({envId: Router.current().params._envId}).count()+1;
-
    var subjId = Session.get('subjId');
-   var subject = Subjects.find({"_id":subjId}).fetch();
    var observation=Observations.find({"_id":Router.current().params._obsId}).fetch();
    var obsName=observation[0]["name"];
    var parametersObj = SubjectParameters.find({'children.envId':Router.current().params._envId}).fetch();
    var subjIdParameter = parametersObj[0]["children"]["label0"]+"Literal"
    var subjectObj = Subjects.find({_id:subjId}).fetch();
    var subjName = subjectObj[0][subjIdParameter]
+   Session.set(subjName, subjName);
 
    var sequence = {
      subjId: subjId,
@@ -156,8 +154,6 @@ Template.observatory.events({
      envId: Router.current().params._envId,
      obsId: Router.current().params._obsId,
      obsName: obsName,
-     seqObsCount: seqObsCount,
-     seqEnvCount: seqEnvCount,
      valueInput: {},
      valueLiteral: {}
    };
@@ -204,7 +200,7 @@ Template.observatory.events({
       return 0;
     });
     propigateSequenceTableBody();
-  },
+  }
 });
 
  function propigateSequenceTableBody() {

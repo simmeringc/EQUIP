@@ -33,6 +33,13 @@ Template.environmentList.events({
       envName: $('#environmentName').val()
     };
 
+    if ($('#environmentName').val() == "") {
+      $('#environmentName').addClass("requiredValidation")
+      alert("Environment name required.");
+      return;
+    }
+    $('#environmentName').removeClass("requiredValidation")
+
     Meteor.call('environmentInsert', environment, function(error, result) {
       return 0;
     });

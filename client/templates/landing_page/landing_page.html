@@ -3,7 +3,34 @@
     <div class="container">
       <h1>Welcome to EQUIP!</h1>
       <p>A data observation interface for behavioral environments.</p>
-      <p><a class="btn btn-primary btn-lg" href="#" data-action="signUp" type="button">Get Started &raquo;</a></p>
+      <p><a class="btn btn-primary btn-lg" href="#" id="feedbackBtn" type="button" disabled="true">Contact <i class="fa fa-send-o" aria-hidden="true"></i></a> <a class="btn btn-primary btn-lg" href="#" data-action="signUp" type="button">Get Started <i class="fa fa-angle-double-right" aria-hidden="true"></i></a></p>
+    </div>
+  </div>
+  <div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Contact Us</h4>
+        </div>
+        <div class="modal-body modal-cf-center">
+          <div class="control" id="parameter_modal">
+            <form class="feedback-form" method="POST" action="#" accept-charset="UTF-8">
+              <p><label>Your Name<strong>*</strong><br>
+              <input type="text" autofocus required size="48" id="nameCF" name="name" value=""></label></p>
+              <p><label>Email Address<strong>*</strong><br>
+              <input type="email" id="emailCF" required title="Please enter a valid email address" size="48" name="email" value=""></label></p>
+              <p><label>Subject<br>
+              <input type="text" size="48" id="subjectCF" name="subject" value=""></label></p>
+              <p><label>Enquiry / Feedback<strong>*</strong><br>
+              <textarea required name="message" id="textCF" cols="48" rows="8"></textarea></label></p>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer" onKeyPress="return checkSubmit(event)">
+          <button type="button" class="btn btn-primary" id="sendFeedback">Send</button>
+        </div>
+      </div>
     </div>
   </div>
   <div class="container">

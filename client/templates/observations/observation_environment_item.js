@@ -35,6 +35,13 @@ Template.observationEnvironmentItem.events({
       envId: this._id
     };
 
+    if ($('#obsName').val() == "") {
+      $('#obsName').addClass("requiredValidation")
+      alert("Observation name required.")
+      return;
+    }
+    $('#obsName').removeClass("requiredValidation")
+
     Meteor.call('observationInsert', observation, function(error, result) {
       return 0;
     });
