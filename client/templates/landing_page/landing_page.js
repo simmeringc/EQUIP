@@ -4,12 +4,12 @@ Template.landingPage.events({
     $('#login-dropdown-list').addClass('open');
     $('#login-username-or-email').focus();
   },
-  'click #feedbackBtn': function(e) {
-    $('#feedbackModal').modal({
-      keyboard: true,
-      show: true
-    });
-  },
+  // 'click #feedbackBtn': function(e) {
+  //   $('#feedbackModal').modal({
+  //     keyboard: true,
+  //     show: true
+  //   });
+  // },
   'click #sendFeedback': function(e) {
     if($('#nameCF').val() == "") {
       alert("Please enter your Name");
