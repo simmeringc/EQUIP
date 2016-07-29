@@ -128,9 +128,9 @@ Template.editSubjects.events({
     $("#moveSubjects").attr("id", "saveSubjectsPosition");
   },
    'click #saveSubjectsPosition': function(e) {
-    //  $('.subject').each(function() {
-    //
-    //  });
+     $('.subject').each(function() {
+
+     });
      $(".subject").removeClass("draggable");
      $("#saveSubjectsPosition").html("Move Subjects");
      $("#saveSubjectsPosition").attr("id", "moveSubjects");
