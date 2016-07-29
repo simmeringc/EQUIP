@@ -130,7 +130,6 @@ Template.viewData.events({
             labels: subject_info[options["student_char"]],
             series: graph_data
          };
-         console.log(data);
          var options = {
            seriesBarDistance: 10
          }*
@@ -192,7 +191,6 @@ Template.viewData.events({
            labels: sequence_info[options["sequence_val"]],
            series: graph_data
          };
-         console.log(data);
          var options = {
            seriesBarDistance: 10
          }*

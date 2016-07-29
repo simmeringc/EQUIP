@@ -1,10 +1,11 @@
-Template.environmentList.rendered = function() {
-  $("#navEnv").removeClass("nav-blue-pulse");
-  var obj = Environments.find({}).fetch();
-  if ($.isEmptyObject(obj)) {
-    $('[data-toggle="popover2"]').popover('show').on('click',function(){ $(this).popover('hide')});
-  }
-}
+//Name tutorial popover covers input but
+// Template.environmentList.rendered = function() {
+//   $("#navEnv").removeClass("nav-blue-pulse");
+//   var obj = Environments.find({}).fetch();
+//   if ($.isEmptyObject(obj)) {
+//     $('[data-toggle="popover2"]').popover('show').on('click',function(){ $(this).popover('hide')});
+//   }
+// }
 
 Template.environmentList.helpers({
   environment: function() {

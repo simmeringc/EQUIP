@@ -10,37 +10,35 @@ for (i=0;i<parameterPairs;i++) {
 aTagSelectArray = []
 
 /* INTERACTJS START */
+// target elements with the "draggable" class
 interact('.draggable')
   .draggable({
-    onmove: window.dragMoveListener,
-	// enable inertial throwing
-       inertia: true,
-       // keep the element within the area of it's parent
-       // enable autoScroll
-       autoScroll: true,
+    // enable inertial throwing
+    inertia: true,
+    // keep the element within the area of it's parent
+    // restrict: {
+    //   restriction: "parent",
+    //   endOnly: true,
+    //   elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
+    // },
+    // enable autoScroll
+    autoScroll: true,
 
-       // call this function on every dragmove event
-       onmove: dragMoveListener,
-       // call this function on every dragend event
-       onend: function (event) {
-         var textEl = event.target.querySelector('p');
+    // call this function on every dragmove event
+    onmove: dragMoveListener,
+    // call this function on every dragend event
+    onend: function (e) {
+      var textEl = event.target.querySelector('p');
 
-         textEl && (textEl.textContent =
-           'moved a distance of '
-           + (Math.sqrt(event.dx * event.dx +
-                        event.dy * event.dy)|0) + 'px');
-       }
-  })
-  .resizable({
-    preserveAspectRatio: true,
-    edges: { left: true, right: true, bottom: true, top: true }
-  })
-  .on('resizemove', function (event) {
-    // update the element's style
-    $('.subject').each(function(index){
-      this.style.width  = event.rect.width + 'px';
-      this.style.height = event.rect.height + 'px';
-      });
+      textEl && (textEl.textContent =
+        'moved a distance of '
+        + (Math.sqrt(event.dx * event.dx +
+                     event.dy * event.dy)|0) + 'px');
+     console.log("test")
+    //  Meteor.call('subjectPositionUpdate', subjectPositionSize, function(error, result) {
+    //    return 0;
+    //  });
+    }
   });
 
   function dragMoveListener (event) {
@@ -62,6 +60,7 @@ interact('.draggable')
   // this is used later in the resizing and gesture demos
   window.dragMoveListener = dragMoveListener;
   /* INTERACTJS END */
+
 };
 
 Template.editSubjects.rendered = function() {
@@ -72,7 +71,7 @@ Template.editSubjects.rendered = function() {
   } else {
     $('#selectStyle').prop("checked",true);
   }
-  var obj = Sequences.find({}).fetch();
+  var obj = Subjects.find({}).fetch();
   if ($.isEmptyObject(obj)) {
     $('[data-toggle="popover5"]').popover('show').on('click',function(){ $(this).popover('hide')});
   }
@@ -124,40 +123,17 @@ Template.editSubjects.events({
       aTagSelectionInsert(eId, eValue);
     },
   'click #moveSubjects': function(e) {
-    $.each( $('.subjects'), function(i, subjects) {
-       $('.subject', subjects).each(function() {
-          $(".subject").addClass("draggable");
-       });
-     })
-
-     $("#moveSubjects").html("Save Subject Positions");
-     $("#moveSubjects").attr("id", "saveSubjectsPosition");
+    $(".subject").addClass("draggable");
+    $("#moveSubjects").html("Save Subject Positions");
+    $("#moveSubjects").attr("id", "saveSubjectsPosition");
   },
    'click #saveSubjectsPosition': function(e) {
-     $.each( $('.subjects'), function(i, subjects) {
-        $('.subject', subjects).each(function() {
-           $(".subject").removeClass("draggable");
-           width=$(this).css('width');
-           width=width.substring(0,width.length-2);
-           height=$(this).css('height');
-           height=height.substring(0,height.length-2);
-           var subjectPositionSize = {
-             subjXPos: $(this).attr('data-x'),
-             subjYPos: $(this).attr('data-y'),
-             subjXSize: width,
-             subjYSize: height,
-             _id: this.id
-           };
-
-           Meteor.call('subjectPositionUpdate', subjectPositionSize, function(error, result) {
-             return 0;
-           });
-
-        });
-      })
-
-      $("#saveSubjectsPosition").html("Move Subjects");
-      $("#saveSubjectsPosition").attr("id", "moveSubjects");
+    //  $('.subject').each(function() {
+    //
+    //  });
+     $(".subject").removeClass("draggable");
+     $("#saveSubjectsPosition").html("Move Subjects");
+     $("#saveSubjectsPosition").attr("id", "moveSubjects");
    },
 
 
@@ -207,12 +183,10 @@ Template.editSubjects.events({
      subject[label] = optionVal
      if (subjSplit[i][optionVal] == undefined) {
        subject[literal] = optionVal
-       console.log('SUBJECT[LITERAL]', subject[literal])
        continue
      }
      subject[literal] = subjSplit[i][optionVal];
    }
-   console.log(subject);
 
    Meteor.call('subjectInsert', subject, function(error, result) {
      if (error) {
@@ -337,5 +311,4 @@ function aTagSelectionInsert(eId, eValue) {
       aTagSelectArray[i] = eValue;
     }
   }
-  console.log(aTagSelectArray);
 }
