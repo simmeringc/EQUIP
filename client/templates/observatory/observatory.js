@@ -125,6 +125,13 @@ Template.observatory.events({
        $('.subject').removeClass("light -blue-pulse");
      }
    });
+   //toggle deselect
+   $('a').each(function() {
+     if ($(this).hasClass('deselectable')) {
+       $(this).toggleClass("deselectable");
+       $(this).toggleClass("selectable");
+     }
+   });
    $('#createBoxModal').modal('hide');
   },
    'click .editSequences': function(e) {

@@ -27,25 +27,22 @@ interact('.draggable')
     // call this function on every dragmove event
     onmove: dragMoveListener,
     // call this function on every dragend event
-    onend: function (e) {
-      var textEl = event.target.querySelector('p');
-
-      textEl && (textEl.textContent =
-        'moved a distance of '
-        + (Math.sqrt(event.dx * event.dx +
-                     event.dy * event.dy)|0) + 'px');
-     console.log("test")
-    //  Meteor.call('subjectPositionUpdate', subjectPositionSize, function(error, result) {
-    //    return 0;
-    //  });
-    }
+    // onend: function (e) {
+    //   var textEl = event.target.querySelector('p');
+    //
+    //   textEl && (textEl.textContent =
+    //     'moved a distance of '
+    //     + (Math.sqrt(event.dx * event.dx +
+    //                  event.dy * event.dy)|0) + 'px');
+    //
+    // }
   });
 
   function dragMoveListener (event) {
     var target = event.target,
-        // keep the dragged position in the data-x/data-y attributes
-        x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
-        y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+        // keep the dragged position in the data_x/data_y attributes
+        x = (parseFloat(target.getAttribute('data_x')) || 0) + event.dx,
+        y = (parseFloat(target.getAttribute('data_y')) || 0) + event.dy;
 
     // translate the element
     target.style.webkitTransform =
@@ -53,9 +50,10 @@ interact('.draggable')
       'translate(' + x + 'px, ' + y + 'px)';
 
     // update the posiion attributes
-    target.setAttribute('data-x', x);
-    target.setAttribute('data-y', y);
+    target.setAttribute('data_x', x);
+    target.setAttribute('data_y', y);
   }
+
 
   // this is used later in the resizing and gesture demos
   window.dragMoveListener = dragMoveListener;
@@ -129,8 +127,35 @@ Template.editSubjects.events({
   },
    'click #saveSubjectsPosition': function(e) {
      $('.subject').each(function() {
-
+       console.log($(this).attr('data_x'));
+       var subjectPosition = {
+         data_x: $(this).attr('data_x'),
+         data_y: $(this).attr('data_y'),
+         _id: this.id
+       };
+       console.log(subjectPosition);
+       Meteor.call('subjectPositionUpdate', subjectPosition, function(error, result) {
+         return 0;
+       });
      });
+     toastr.options = {
+       "closeButton": false,
+       "debug": false,
+       "newestOnTop": false,
+       "progressBar": false,
+       "positionClass": "toast-top-right",
+       "preventDuplicates": false,
+       "onclick": null,
+       "showDuration": "300",
+       "hideDuration": "1000",
+       "timeOut": "2000",
+       "extendedTimeOut": "1000",
+       "showEasing": "swing",
+       "hideEasing": "linear",
+       "showMethod": "fadeIn",
+       "hideMethod": "fadeOut"
+     }
+     Command: toastr["success"]("Save Successful", "Subject Parameters")
      $(".subject").removeClass("draggable");
      $("#saveSubjectsPosition").html("Move Subjects");
      $("#saveSubjectsPosition").attr("id", "moveSubjects");
@@ -168,10 +193,8 @@ Template.editSubjects.events({
    }
 
    var subject = {
-     subjXPos: '',
-     subjYPos: '',
-     subjXSize: '',
-     subjYsize: '',
+     data_x: '',
+     data_y: '',
      envId: this._id
    };
 
@@ -206,10 +229,8 @@ Template.editSubjects.events({
  'click #saveSubjectBox': function(e) {
 
   var subject = {
-    subjXPos: '',
-    subjYPos: '',
-    subjXSize: '',
-    subjYsize: '',
+    data_x: '',
+    data_y: '',
     envId: this._id
   };
 
@@ -234,7 +255,13 @@ Template.editSubjects.events({
     }
   });
 
-
+  //toggle deselect
+  $('a').each(function() {
+    if ($(this).hasClass('deselectable')) {
+      $(this).toggleClass("deselectable");
+      $(this).toggleClass("selectable");
+    }
+  });
   $('#createBoxModal').modal('hide');
 },
 
