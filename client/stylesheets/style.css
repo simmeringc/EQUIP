@@ -144,23 +144,13 @@ ul
 
 /* interactJS Start */
 .subject {
-      border: 3px solid slategrey;
-      margin:25px 25px 25px 25px;
-      background-color:#d9edf7;
-      height:75px;
-      width:75px;
-      text-align: center;
-      }
-#drag-1, #drag-2 {
-      min-height: 6.5em;
-      border-radius: 0.75em;
--webkit-transform: translate(0px, 0px);
-          transform: translate(0px, 0px);
-      }
- #drag-me::before {
-      content: "#" attr(id);
-      font-weight: bold;
-   }
+  border: 3px solid slategrey;
+  margin:25px 25px 25px 25px;
+  background-color:#d9edf7;
+  height:75px;
+  width:75px;
+  text-align: center;
+    }
 /* interactJS End */
 
 

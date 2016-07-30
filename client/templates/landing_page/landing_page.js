@@ -55,11 +55,3 @@ Template.landingPage.events({
     Command: toastr["success"]("Thanks for contacting us.", "Success")
   }
 });
-
-Template.landingPage.rendered = function() {
-  var obj = Environments.find({}).fetch();
-  if ($.isEmptyObject(obj)) {
-    $('#navEnv').addClass('nav-blue-pulse');
-    $('[data-toggle="popover1"]').popover('show').on('click',function(){ $(this).popover('hide')});
-  }
-};

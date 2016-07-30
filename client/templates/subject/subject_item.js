@@ -13,7 +13,6 @@ Template.subjectItem.events({
      if (inputStyle == "select") {
        var seqParamsObj = SequenceParameters.find({'children.envId':Router.current().params._envId}).fetch();
        var seqIdParam = seqParamsObj[0]['children']['label0'].replace(/\s+/g, '').replace(/[^\w\s]|_/g, "");
-       console.log(seqIdParam);
        $('#createSelectModal').modal({
          keyboard: true,
          show: true
