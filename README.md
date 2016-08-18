@@ -1,5 +1,7 @@
-# DataObs: http://www.equip.ninja
-Conner and Justin helping Daniel to make EQUIP Observation App
+## DataObs: http://www.equip.ninja
+## DataObs Docs: http://docs.equip.ninja
+
+EQUIP Observation App
 
 ## Installing and running from the terminal:
 
