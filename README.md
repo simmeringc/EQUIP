@@ -1,13 +1,5 @@
-# http://www.equip.ninja
-
 ## Introduction
-EQUIP is live at
-<a href="http://www.equip.ninja">www.equip.ninja</a>
-
-EQUIP is an open-source project avaliable on
-<a href="https://github.com/simmeringc/meteor-dataObs">Github</a>
-
-EQUIP project docs are generated with <a href="https://www.npmjs.com/package/meteor-jsdoc">meteor-jsdoc</a>
+EQUIP is live at <a href="http://www.equip.ninja">www.equip.ninja</a>
 
 <a href="mailto:equipappdevelopers@gmail.com">Contact us</a> for more information on EQUIP development.
 
