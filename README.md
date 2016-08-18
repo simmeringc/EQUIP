@@ -1,6 +1,6 @@
 # EQUIP Observation Web Application
 
-### DataObs: http://www.equip.ninja
+### Visit the application: http://www.equip.ninja
 ### See the documentation: http://docs.equip.ninja
 
 ## Run EQUIP locally:
