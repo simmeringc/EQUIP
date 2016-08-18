@@ -1,8 +1,5 @@
 # http://www.equip.ninja
 
-# EQUIP Project Docs
-*****
-
 ## Introduction
 EQUIP is live at
 <a href="http://www.equip.ninja">www.equip.ninja</a>
