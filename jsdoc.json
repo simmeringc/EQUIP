@@ -1,0 +1,16 @@
+{
+  "debug": false,
+  "nodePath": "",
+  "docsPath": "~/Dropbox/projects/dataObs/meteor-dataObs-docs",
+  "meteorPort": 3333,
+  "initMeteor": false,
+  "updateMeteor": true,
+  "preamble": true,
+  "projectRepo": "https://github.com/simmeringc/meteor-dataObs/tree/master",
+  "docsConfig": {
+    "title": "EQUIP Project Docs",
+    "metas": {
+      "description": "Documentation for EQUIP APP."
+    }
+  }
+}
