@@ -1,3 +1,8 @@
+/*
+* JS file for subject_edit_table_head.html
+* Initial view table propigation
+*/
+
 Template.subjectEditTableHead.rendered = function() {
   propigateSubjectTableHead();
 }

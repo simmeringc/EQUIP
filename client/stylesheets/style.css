@@ -1,3 +1,7 @@
+/*
+* Unorganized CSS for many elements of the application
+*/
+
 .grid-block, .main, .post, .comments li, .comment-form {
   background: #fff;
   border-radius: 3px;

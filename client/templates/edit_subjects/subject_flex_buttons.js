@@ -1,3 +1,8 @@
+/*
+* JS file for subject_flex_button.html
+* Anchor tag propigation
+*/
+
 Template.subjectFlexButtons.rendered = function() {
   propigateFlexButtons();
 }

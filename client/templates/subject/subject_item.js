@@ -1,3 +1,7 @@
+/*
+* JS file for subject_item.html
+*/
+
 Template.subjectItem.events({
   'click .subject': function(e) {
   if (Router.current().params._obsId) {

@@ -1,3 +1,5 @@
+<!-- HTML for a navbar that shows up on every page -->
+
 <template name="header">
 <!-- Bootstrap core CSS, JS dependancies included in Meteor Bootstrap package -->
 <meta charset="utf-8">
@@ -6,20 +8,14 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<!-- Navbar shows up on every page -->
+<!-- Navbar  -->
 <div class="nav-wrapper">
   <nav class="flex-nav nav-grad navbar-fixed-top">
     <ul>
       <li><a href="{{pathFor 'landingPage'}}" id="navHome">Home</a></li>
       {{#if currentUser}}
-        <li><a href="{{pathFor 'environmentList'}}" id="navEnv" data-toggle="popover1" data-content="Create an environment to get started." data-placement="bottom" class={{popover1}}>Environments</a></li>
-        <li><a href="{{pathFor 'viewData'}}"  data-toggle="popover9" data-content="Click on a subject to record your custom data. Once you've recorded data and created a sequence, you can view and delete the sequence, or click 'View Data' to export your sequences as a CSV. This is the end of the EQUIP walkthrough." data-placement="bottom">View Data</a></li>
-        <script>
-          var obj = Environments.find({}).fetch();
-          if ($.isEmptyObject(obj)) {
-            $('[data-toggle="popover1"]').popover('show').on('click',function(){ $(this).popover('hide')});
-          }
-        </script>
+        <li><a href="{{pathFor 'environmentList'}}" id="navEnv" class={{popover1}}>Environments</a></li>
+        <li><a href="{{pathFor 'viewData'}}" >Analysis</a></li>
       {{/if}}
       <li>{{> loginButtons}}</li>
     </ul>

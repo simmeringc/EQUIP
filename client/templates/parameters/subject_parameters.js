@@ -1,3 +1,7 @@
+/*
+* JS file for subject_parameters.html
+*/
+
 var serialize = require('form-serialize');
 
 Template.subjectParameters.rendered = function() {

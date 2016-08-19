@@ -1,3 +1,8 @@
+/*
+* JS file for sequence_edit_table_head.html
+* Initial view table propigation
+*/
+
 Template.sequenceObservatoryTableItem.rendered = function() {
   propigateSequenceTableHead();
 }

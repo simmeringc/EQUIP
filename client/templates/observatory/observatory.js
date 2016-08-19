@@ -1,3 +1,7 @@
+/*
+* JS file for observatory.js
+*/
+
 Template.observatory.created = function() {
   Session.set('envId', Router.current().params._envId);
 

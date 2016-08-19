@@ -1,9 +1,11 @@
+<!-- Homepage HTML -->
+
 <template name="landingPage">
   <div class="jumbotron jumbotron-landing-page">
     <div class="container">
       <h1>Welcome to EQUIP!</h1>
       <p>A data observation interface for behavioral environments.</p>
-      <p><a class="btn btn-primary btn-lg" href="#" id="feedbackBtn" type="button">Contact <i class="fa fa-send-o" aria-hidden="true"></i></a> <a class="btn btn-primary btn-lg" href="#" data-action="signUp" type="button">Get Started <i class="fa fa-angle-double-right" aria-hidden="true"></i></a></p>
+      <p><a class="btn btn-primary btn-lg" href="#" id="feedbackBtn" type="button" disabled>Contact Us <i class="fa fa-send-o" aria-hidden="true"></i></a> <a class="btn btn-primary btn-lg" href="#" data-action="signUp" type="button">Get Started <i class="fa fa-angle-double-right" aria-hidden="true"></i></a></p>
     </div>
   </div>
   <div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -64,7 +66,10 @@
           &copy; EQUIP 2016
           <br>
           EQUIP is an open-source project avaliable on
-          <a href="https://github.com/simmeringc/meteor-dataObs">Github</a>
+          <a href="https://github.com/simmeringc/meteor-dataObs">Github</a>.
+          <br>
+          View the documentation
+          <a href="http://docs.equip.ninja">here</a>.
         </p>
       </div>
     </footer>

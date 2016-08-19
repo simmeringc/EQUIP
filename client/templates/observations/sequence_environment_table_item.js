@@ -1,3 +1,8 @@
+/*
+* JS file for sequence_environment_table_item.html
+* Initial view table propigation
+*/
+
 Template.sequenceEnvironmentTableItem.rendered = function() {
   propigateSequenceTableHead();
 }

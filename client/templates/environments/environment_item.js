@@ -1,3 +1,7 @@
+/*
+* JS file for environment_item.html
+*/
+
 Template.environmentItem.events({
   'click .viewEnvItem': function(e) {
      e.preventDefault();

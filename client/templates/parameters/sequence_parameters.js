@@ -1,3 +1,8 @@
+/*
+* JS file for sequence_parameters.html
+*/
+
+
 var serialize = require('form-serialize');
 
 Template.sequenceParameters.helpers({
