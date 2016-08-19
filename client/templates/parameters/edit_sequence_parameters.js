@@ -1,3 +1,8 @@
+/*
+* JS file for edit_sequence_parameters.html
+* Propigates current sequence parameters
+*/
+
 var serialize = require('form-serialize');
 
 Template.editSequenceParameters.helpers({

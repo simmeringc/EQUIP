@@ -1,3 +1,8 @@
+/*
+* JS file for subject_parameter.html
+* Select form propigation
+*/
+
 Template.subjectParameterItem.rendered = function() {
   propigateSubjectForm();
 }

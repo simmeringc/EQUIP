@@ -1,3 +1,7 @@
+/*
+* JS file for observation_environment_item.html
+*/
+
 Template.observationItem.events({
    'click .enterObsItem': function(e) {
      Router.go('observatory', {_envId: this.envId, _obsId: this._id});

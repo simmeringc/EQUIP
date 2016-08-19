@@ -1,3 +1,7 @@
+/*
+* JS file for observation_environment_item.html
+*/
+
 Template.observationEnvironmentItem.helpers({
   envSequence: function() {
     return Sequences.find({envId: Router.current().params._envId});

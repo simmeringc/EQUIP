@@ -1,3 +1,7 @@
+/*
+* JS file for environment_list.html
+*/
+
 Template.environmentList.rendered = function() {
   $("#navEnv").removeClass("nav-blue-pulse");
   var obj = Environments.find({}).fetch();

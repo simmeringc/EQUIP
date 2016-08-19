@@ -1,3 +1,8 @@
+/*
+* JS file for edit_subject_parameters.html
+* Propigates current subject parameters
+*/
+
 var serialize = require('form-serialize');
 
 Template.editSubjectParameters.helpers({

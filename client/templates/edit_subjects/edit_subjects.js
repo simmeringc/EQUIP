@@ -1,3 +1,7 @@
+/*
+* JS file for edit_subjects.html
+*/
+
 Template.editSubjects.created = function() {
 Session.set('envId', Router.current().params._envId);
 

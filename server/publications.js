@@ -1,3 +1,10 @@
+/*
+* JS file for meteor publications
+* All collections must be published in order to be avaliable to the user
+* Once a collection is published with a set of restricting parameters, the subset of data is sent to the user, where the user must be subscribed in the router.js file in order to gain access
+* Subscriptions are handled in ../lib/router.js
+*/
+
 Meteor.publish('environments', function() {
   return Environments.find({userId: this.userId});
 });

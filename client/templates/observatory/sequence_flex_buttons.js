@@ -1,3 +1,8 @@
+/*
+* JS file for sequence_flex_button.html
+* Anchor tag propigation
+*/
+
 Template.sequenceFlexButtons.rendered = function() {
   propigateFlexButtons();
 }

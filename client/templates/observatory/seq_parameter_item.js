@@ -1,3 +1,8 @@
+/*
+* JS file for sequence_parameter.html
+* Select form propigation
+*/
+
 Template.sequenceParameterItem.rendered = function() {
   propigateSubjectForm();
 }

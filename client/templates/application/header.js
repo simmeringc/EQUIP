@@ -1,3 +1,7 @@
+/*
+* JS file for header.html
+*/
+
 Template.header.helpers({
   popover1: function() {
     var obj = Environments.find({}).fetch();
