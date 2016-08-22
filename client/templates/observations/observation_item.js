@@ -19,7 +19,9 @@ Template.observationItem.events({
 
  Template.observationItem.helpers({
    needsSequences: function() {
-     var obj = Sequences.find({envId: this._id}).fetch();
+     var obj = Sequences.find({envId: Router.current().params._envId}).fetch();
+     console.log(this._id);
+     console.log(obj);
      return $.isEmptyObject(obj)?"light-green-pulse":"";
    }
   });

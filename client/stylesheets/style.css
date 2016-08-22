@@ -56,15 +56,14 @@ body {
 
 .obs-delete-btn {
   position: relative;
-  left: 39px;
-  bottom: 32px;
+  left: 560px;
+  bottom: 60px;
   background: #dff0d8;
 }
 
 .preform-obs-btn {
   position: relative;
   left: 22px;
-  bottom: 11px;
 }
 
 .jumbotron-landing-page {
