@@ -2,6 +2,16 @@
 * JS file for subject_item.html
 */
 
+Template.subjectItem.helpers({
+  subjIdField: function() {
+    subject = Subjects.find({_id:this._id}).fetch();
+    subjParametersObj = SubjectParameters.find({'children.envId':Router.current().params._envId}).fetch();
+    subjIdField = subjParametersObj[0]["children"]["label0"];
+    subjNameField = subject[0][subjIdField+"Literal"]
+    return subjNameField
+  }
+});
+
 Template.subjectItem.events({
   'click .subject': function(e) {
   if (Router.current().params._obsId) {
@@ -30,7 +40,3 @@ Template.subjectItem.events({
   }
 });
 //sequence ends in observatory.js
-//
-// Template.subjectItem.rendered = function () {
-//   console.log(this._id);
-// }
