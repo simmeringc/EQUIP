@@ -5,11 +5,6 @@
 
 ## Run EQUIP locally:
 
-Install meteor:
-```
-curl https://install.meteor.com/ | sh
-```
-Run in the project directiory:
-```
-meteor
-```
+* Install NPM
+* Run 'npm install'
+* Run 'gulp'
