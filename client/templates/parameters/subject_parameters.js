@@ -44,10 +44,10 @@ function loadDefaultSubjParams() {
   for (i=0;i<3;i++){
       var formCounter = $("#container input").length;
       container.appendChild(document.createTextNode("Parameter " + (formCounter/2)));
-      var remove = container.appendChild(document.createElement("BUTTON"));
-      remove.id = "remove" + (formCounter/2);
-      remove.innerHTML = "x";
-      remove.className = "remove-button btn btn-xs btn-danger btn-param-x"
+      // var remove = container.appendChild(document.createElement("BUTTON"));
+      // remove.id = "remove" + (formCounter/2);
+      // remove.innerHTML = "x";
+      // remove.className = "remove-button btn btn-xs btn-danger btn-param-x"
       var inputLabel = document.createElement("input");
       inputLabel.type = "text";
       inputLabel.name = "label" + (formCounter/2);
