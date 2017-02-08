@@ -1,6 +1,7 @@
 ## EQUIP Observation Web Application
 
-* Visit the application: http://www.equip.ninja
+* The application is being developed at: http://www.equip.ninja
+* See this repositories version of the app at http://simmeringc.com/equip
 * See the documentation: https://github.com/simmeringc/dataObs-docs
 
 ## Run EQUIP locally:
