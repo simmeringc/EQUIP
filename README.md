@@ -6,7 +6,7 @@ The tool was created to give Ph.D researchers observing a classroom the Universi
 
 See the documentation: https://github.com/simmeringc/equip-docs
 
-## Run EQUIP locally:
+## Run EQUIP locally
 
 Install meteor:
 ```
@@ -16,9 +16,9 @@ Run in the project directiory:
 ```
 meteor
 ```
-## Demo:
+## Demo
 
 * View demo images under /demo_images/ or view the video tour below
 
-[![IMAGE ALT TEXT](https://github.com/simmeringc/EQUIP/blob/master/demo_images/Screenshot%2B2016-09-10%2B22.31.50.png)](http://www.youtube.com/watch?v=6RVLFzmDr1g "EQUIP App Version 1.3 Tour")
+[![link to video tour]()](http://www.youtube.com/watch?v=6RVLFzmDr1g "EQUIP App Version 1.3 Tour")
 
