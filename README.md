@@ -18,7 +18,7 @@ meteor
 ```
 ## Demo
 
-* View demo images under /demo_images/ or view the video tour below
+View demo images under /demo_images/ or view the video tour below:
 
-[![link to video tour]()](http://www.youtube.com/watch?v=6RVLFzmDr1g "EQUIP App Version 1.3 Tour")
+[![Link to video tour]()](http://www.youtube.com/watch?v=6RVLFzmDr1g "EQUIP App Version 1.3 Tour")
 
